@@ -3,58 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Haofinder Kenya · Find a home, find everything</title>
+    <title>SmartMove.Co.Ke · Find a home, find everything</title>
     <!-- Tailwind + Inter font -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { font-family: 'Inter', sans-serif; }
         body { background: #fefcf5; }
         
-        /* Smooth transitions */
-        .card-hover {
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-        }
-        .card-hover:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
-        }
-        
-        /* Search bar styling */
-        .search-shadow {
-            box-shadow: 0 8px 30px rgba(218, 165, 32, 0.08);
-        }
-        
-        /* Kenyan colors */
+        .card-hover { transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1); }
+        .search-shadow { box-shadow: 0 8px 30px rgba(0, 98, 51, 0.08); }
         .bg-kenyan-green { background-color: #006233; }
         .bg-kenyan-red { background-color: #BB2E2E; }
         .text-kenyan-green { color: #006233; }
         .border-kenyan-green { border-color: #006233; }
         
-        /* Custom pill button */
-        .pill-button {
-            background: #f0f0f0;
-            padding: 0.6rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #1e1e1e;
-            transition: all 0.2s;
-            white-space: nowrap;
+        /* Enhanced service card with image */
+        .service-card-enhanced {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid #eef2f6;
+            transition: all 0.3s;
             cursor: pointer;
         }
-        .pill-button:hover {
-            background: #006233;
-            color: white;
+        .service-card-enhanced:hover {
+            border-color: #006233;
+            box-shadow: 0 12px 24px -8px rgba(0,98,51,0.15);
+            transform: translateY(-3px);
         }
-        .pill-button.active {
-            background: #006233;
-            color: white;
+        .service-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        .rating-badge {
+            background: #fef3c7;
+            color: #b45309;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .guarantee-badge {
+            background: #e6f7e6;
+            color: #006233;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 500;
+            display: inline-block;
         }
         
-        /* Nairobi neighborhood cards */
         .hood-card {
             border-radius: 24px;
             overflow: hidden;
@@ -68,9 +74,7 @@
             object-fit: cover;
             transition: transform 0.5s;
         }
-        .hood-card:hover img {
-            transform: scale(1.05);
-        }
+        .hood-card:hover img { transform: scale(1.05); }
         .hood-card .overlay {
             position: absolute;
             bottom: 0;
@@ -81,38 +85,18 @@
             color: white;
         }
         
-        /* Service card */
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            padding: 1.2rem 0.8rem;
-            text-align: center;
-            border: 1px solid #f0e6d5;
+        .pill-button {
+            background: #f0f0f0;
+            padding: 0.6rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
             transition: all 0.2s;
             cursor: pointer;
         }
-        .service-card:hover {
-            border-color: #006233;
-            background: #fafff7;
-        }
-        .service-card.selected {
-            border: 2px solid #006233;
-            background: #f0fff0;
-        }
-        .service-icon {
-            width: 56px;
-            height: 56px;
-            background: #f5efe3;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 12px;
-            font-size: 24px;
-            color: #006233;
-        }
+        .pill-button:hover { background: #006233; color: white; }
+        .pill-button.active { background: #006233; color: white; }
         
-        /* Property card */
         .property-card {
             background: white;
             border-radius: 24px;
@@ -120,19 +104,7 @@
             border: 1px solid #f0e6d5;
             cursor: pointer;
         }
-        .property-card .saved {
-            color: #BB2E2E;
-        }
         
-        /* Local quote style */
-        .local-quote {
-            font-style: italic;
-            color: #7f6b4b;
-            border-left: 3px solid #BB2E2E;
-            padding-left: 16px;
-        }
-        
-        /* Timer styling */
         .timer {
             background: #ffefe7;
             border-radius: 40px;
@@ -145,7 +117,6 @@
             border: 1px solid #ffcdb8;
         }
         
-        /* Deposit loan banner */
         .deposit-banner {
             background: linear-gradient(135deg, #f9f3e9, #fff6e5);
             border: 1px dashed #006233;
@@ -153,7 +124,12 @@
             padding: 1rem;
         }
         
-        /* Toast notification */
+        .tax-banner {
+            background: linear-gradient(135deg, #fef7e0, #fff9ed);
+            border-radius: 24px;
+            border: 1px solid #fde68a;
+        }
+        
         .toast {
             position: fixed;
             bottom: 20px;
@@ -162,29 +138,14 @@
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.3s;
             z-index: 1000;
             font-weight: 500;
         }
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateY(0); opacity: 1; }
         
-        /* Cart counter */
-        .cart-counter {
-            background: #BB2E2E;
-            color: white;
-            border-radius: 20px;
-            padding: 2px 8px;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-        
-        /* Modal */
         .modal {
             display: none;
             position: fixed;
@@ -197,9 +158,7 @@
             align-items: center;
             justify-content: center;
         }
-        .modal.show {
-            display: flex;
-        }
+        .modal.show { display: flex; }
         .modal-content {
             background: white;
             border-radius: 32px;
@@ -208,88 +167,94 @@
             max-height: 80vh;
             overflow-y: auto;
         }
+        
+        .cart-counter {
+            background: #BB2E2E;
+            color: white;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+        
+        .stars { color: #fbbf24; letter-spacing: 2px; }
+        .price-dual { font-size: 0.75rem; color: #8a7a64; }
     </style>
 </head>
 <body class="text-[#2d2a24] antialiased">
 
-    <!-- Toast notification -->
     <div id="toast" class="toast"></div>
-    
-    <!-- Modal -->
     <div id="modal" class="modal">
         <div class="modal-content p-6">
             <div class="flex justify-between items-center mb-4">
                 <h3 class="text-xl font-bold" id="modalTitle">Title</h3>
-                <button onclick="closeModal()" class="text-2xl">&times;</button>
+                <button onclick="closeModal()" class="text-2xl hover:text-kenyan-green">&times;</button>
             </div>
             <div id="modalBody" class="text-[#6b5e4a]"></div>
         </div>
     </div>
 
-    <!-- Cart state -->
-    <div id="cartState" class="hidden">0</div>
-
-    <!-- Simple, warm header - Kenyan feel -->
+    <!-- Header -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <!-- Logo with Kenyan colors -->
-                <div class="flex items-center gap-1 cursor-pointer" onclick="showToast('🏠 Welcome back to Haofinder!')">
-                    <div class="w-8 h-8 rounded-lg bg-kenyan-green flex items-center justify-center">
-                        <i class="fas fa-compass text-white text-lg"></i>
-                    </div>
-                    <span class="text-xl font-semibold tracking-tight text-kenyan-green">haofinder</span>
-                    <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Nairobi</span>
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showToast('🏠 Welcome to SmartMove.Co.Ke!')">
+                <div class="w-9 h-9 rounded-xl bg-kenyan-green flex items-center justify-center">
+                    <i class="fas fa-arrow-right-arrow-left text-white text-lg"></i>
                 </div>
+                <div>
+                    <span class="text-2xl font-bold text-kenyan-green">SmartMove</span>
+                    <span class="text-sm font-medium text-[#8b7355]">.Co.Ke</span>
+                </div>
+                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Nairobi</span>
             </div>
-            
-            <!-- Right side - simple with cart counter -->
             <div class="flex items-center gap-4">
-                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="showToast('📋 List your property form would open here')">
-                    List your property
-                </button>
+                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="showToast('📋 List your property form')">List your property</button>
                 <div class="relative cursor-pointer" onclick="showCart()">
-                    <i class="fas fa-shopping-cart text-xl text-[#6b5e4a] hover:text-kenyan-green"></i>
+                    <i class="fas fa-shopping-cart text-xl text-[#5a6b4a] hover:text-kenyan-green"></i>
                     <span id="cartCount" class="absolute -top-2 -right-2 cart-counter">0</span>
                 </div>
-                <button class="bg-kenyan-green text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition shadow-sm" onclick="showAuthModal()">
-                    Sign in <span class="hidden sm:inline ml-1">→</span>
-                </button>
+                <button class="bg-kenyan-green text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition" onclick="showAuthModal()">Sign in</button>
             </div>
         </div>
     </div>
 
-    <!-- Hero section - Nairobi focus with beautiful imagery -->
+    <!-- Hero Section -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
-        <div class="text-center mb-8">
+        <div class="text-center max-w-3xl mx-auto mb-8">
             <span class="text-kenyan-green text-sm font-medium mb-2 block">🇰🇪 WELCOME TO NAIROBI</span>
-            <h1 class="text-4xl md:text-5xl font-medium tracking-tight text-[#2d2a24] mb-3">
-                Find a home, <span class="text-kenyan-green">find everything</span>
+            <h1 class="text-4xl md:text-5xl font-bold tracking-tight text-[#2d2a24] mb-3">
+                Find a home, <span class="text-kenyan-green">order services</span>
             </h1>
-            <p class="text-lg text-[#6b5e4a] max-w-2xl mx-auto">
-                Properties and services all in one place — Nairobi and beyond
+            <p class="text-lg text-[#6b5e4a] max-w-2xl mx-auto mb-4">
+                Verified professionals, transparent prices, 100% money back guarantee
             </p>
+            <div class="flex flex-wrap justify-center gap-6 text-sm">
+                <div class="flex items-center gap-2"><i class="fas fa-star text-yellow-500"></i> <span>4.8/5 (2,847 reviews)</span></div>
+                <div class="flex items-center gap-2"><i class="fas fa-shield-alt text-kenyan-green"></i> <span>100% money back guarantee</span></div>
+                <div class="flex items-center gap-2"><i class="fas fa-clock text-kenyan-green"></i> <span>Response in 30 min</span></div>
+            </div>
         </div>
         
-        <!-- Beautiful search bar - FULLY FUNCTIONAL -->
+        <!-- Combined Search -->
         <div class="max-w-4xl mx-auto">
             <div class="bg-white rounded-2xl search-shadow border border-[#f0e6d5] p-2 flex flex-col md:flex-row">
                 <div class="flex-1 flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-[#f0e6d5]">
-                    <i class="fas fa-search text-[#b8a78d] mr-3"></i>
-                    <input type="text" id="searchLocation" placeholder="Search by city, neighborhood, or address" class="w-full outline-none text-[15px] placeholder:text-[#b8a78d]" value="Nairobi">
+                    <i class="fas fa-home text-[#b8a78d] mr-3"></i>
+                    <input type="text" id="searchLocation" placeholder="Search by city, neighborhood, or address" class="w-full outline-none" value="Nairobi">
+                </div>
+                <div class="flex-1 flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-[#f0e6d5]">
+                    <i class="fas fa-tools text-[#b8a78d] mr-3"></i>
+                    <input type="text" id="searchService" placeholder="What service do you need?" class="w-full outline-none">
                 </div>
                 <div class="flex-1 flex items-center px-4 py-2 border-b md:border-b-0 md:border-r border-[#f0e6d5]">
                     <i class="far fa-calendar text-[#b8a78d] mr-3"></i>
-                    <input type="date" id="moveDate" class="w-full outline-none text-[15px]" value="2026-04-01">
+                    <input type="date" id="moveDate" class="w-full outline-none" value="2026-04-15">
                 </div>
                 <div class="flex-none px-2 py-2">
-                    <button class="bg-kenyan-green hover:bg-[#004d29] text-white px-8 py-3 rounded-xl font-medium transition w-full md:w-auto" onclick="performSearch()">
-                        Search
-                    </button>
+                    <button class="bg-kenyan-green hover:bg-[#004d29] text-white px-8 py-3 rounded-xl font-medium transition w-full md:w-auto" onclick="performSearch()">Search</button>
                 </div>
             </div>
             
-            <!-- Popular Nairobi areas - FULLY FUNCTIONAL -->
+            <!-- Popular Areas -->
             <div class="flex flex-wrap items-center justify-center gap-3 mt-5 text-sm">
                 <span class="text-[#8a7a64]">Popular areas:</span>
                 <span class="pill-button" onclick="selectArea('Kilimani')">Kilimani</span>
@@ -304,846 +269,276 @@
         </div>
     </div>
 
-    <!-- Nairobi neighborhoods - visual cards with real areas - FUNCTIONAL -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+    <!-- Nairobi Neighborhoods -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-6">
         <div class="flex items-center justify-between mb-5">
             <h2 class="text-xl font-medium">Nairobi neighborhoods</h2>
             <a href="#" class="text-kenyan-green text-sm font-medium hover:underline" onclick="showAllNeighborhoods(); return false;">View all <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
         </div>
-        
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <!-- Hood 1: Kilimani -->
             <div class="hood-card" onclick="selectArea('Kilimani')">
-                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kilimani Nairobi">
-                <div class="overlay">
-                    <h3 class="font-bold text-lg">Kilimani</h3>
-                    <p class="text-xs text-white/80">24 properties · from KSh 45K</p>
-                </div>
+                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kilimani">
+                <div class="overlay"><h3 class="font-bold text-lg">Kilimani</h3><p class="text-xs">24 properties · from KSh 45K ($346)</p></div>
             </div>
-            
-            <!-- Hood 2: Westlands -->
             <div class="hood-card" onclick="selectArea('Westlands')">
-                <img src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Westlands Nairobi">
-                <div class="overlay">
-                    <h3 class="font-bold text-lg">Westlands</h3>
-                    <p class="text-xs text-white/80">31 properties · from KSh 60K</p>
-                </div>
+                <img src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Westlands">
+                <div class="overlay"><h3 class="font-bold text-lg">Westlands</h3><p class="text-xs">31 properties · from KSh 60K ($462)</p></div>
             </div>
-            
-            <!-- Hood 3: Karen -->
             <div class="hood-card" onclick="selectArea('Karen')">
-                <img src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Karen Nairobi">
-                <div class="overlay">
-                    <h3 class="font-bold text-lg">Karen</h3>
-                    <p class="text-xs text-white/80">18 properties · from KSh 85K</p>
-                </div>
+                <img src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Karen">
+                <div class="overlay"><h3 class="font-bold text-lg">Karen</h3><p class="text-xs">18 properties · from KSh 85K ($654)</p></div>
             </div>
-            
-            <!-- Hood 4: Eastlands -->
             <div class="hood-card" onclick="selectArea('Eastlands')">
-                <img src="https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eastlands Nairobi">
-                <div class="overlay">
-                    <h3 class="font-bold text-lg">Eastlands</h3>
-                    <p class="text-xs text-white/80">22 properties · from KSh 15K</p>
-                </div>
+                <img src="https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eastlands">
+                <div class="overlay"><h3 class="font-bold text-lg">Eastlands</h3><p class="text-xs">22 properties · from KSh 15K ($115)</p></div>
             </div>
         </div>
     </div>
 
-    <!-- Services - FULLY FUNCTIONAL (click to add to cart) -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Most Popular Services - Enhanced with Images (15 Services) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex items-center justify-between mb-5">
-            <h2 class="text-xl font-medium">Services for your move</h2>
-            <a href="#" class="text-kenyan-green text-sm font-medium hover:underline" onclick="showAllServices(); return false;">All services <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+            <h2 class="text-xl font-medium">Most popular services</h2>
+            <a href="#" class="text-kenyan-green text-sm font-medium hover:underline" onclick="showAllServices(); return false;">All 30+ services <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
         </div>
-        
-        <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-3">
-            <!-- Service 1: Movers -->
-            <div class="service-card" onclick="toggleService('movers', 'Movers', 2500)">
-                <div class="service-icon"><i class="fas fa-truck-moving"></i></div>
-                <span class="font-medium text-sm">Movers</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">from KSh 2,500</span>
-            </div>
-            
-            <!-- Service 2: Furniture -->
-            <div class="service-card" onclick="toggleService('furniture', 'Furniture rental', 3500)">
-                <div class="service-icon"><i class="fas fa-couch"></i></div>
-                <span class="font-medium text-sm">Furniture</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">rent/buy</span>
-            </div>
-            
-            <!-- Service 3: Electrician -->
-            <div class="service-card" onclick="toggleService('electrician', 'Electrician', 1500)">
-                <div class="service-icon"><i class="fas fa-bolt"></i></div>
-                <span class="font-medium text-sm">Electrician</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">4.9 ★</span>
-            </div>
-            
-            <!-- Service 4: Plumber -->
-            <div class="service-card" onclick="toggleService('plumber', 'Plumber', 1500)">
-                <div class="service-icon"><i class="fas fa-wrench"></i></div>
-                <span class="font-medium text-sm">Plumber</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">24/7</span>
-            </div>
-            
-            <!-- Service 5: Roofing -->
-            <div class="service-card" onclick="toggleService('roofing', 'Roofing', 450)">
-                <div class="service-icon"><i class="fas fa-home"></i></div>
-                <span class="font-medium text-sm">Roofing</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">from KSh 450</span>
-            </div>
-            
-            <!-- Service 6: Wallpaper -->
-            <div class="service-card" onclick="toggleService('wallpaper', 'Wallpaper installation', 2000)">
-                <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
-                <span class="font-medium text-sm">Wallpaper</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">200+ designs</span>
-            </div>
-            
-            <!-- Service 7: TV repair -->
-            <div class="service-card" onclick="toggleService('tv', 'TV repair', 1000)">
-                <div class="service-icon"><i class="fas fa-tv"></i></div>
-                <span class="font-medium text-sm">TV repair</span>
-                <span class="block text-xs text-[#8a7a64] mt-1">same day</span>
-            </div>
-            
-            <!-- Service 8: Deposit loan - PROMINENT -->
-            <div class="service-card border-2 border-kenyan-green bg-[#f0fff0]" onclick="showDepositLoanCalculator()">
-                <div class="service-icon bg-[#d9f0d9]"><i class="fas fa-coins text-kenyan-green"></i></div>
-                <span class="font-medium text-sm">Deposit loan</span>
-                <span class="block text-xs text-kenyan-green font-bold mt-1">from 3% APR</span>
-                <span class="block text-[10px] text-[#8a7a64]">instant approval</span>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="servicesGrid"></div>
+    </div>
+
+    <!-- Quick Service Grid - Additional Services -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <h3 class="text-md font-semibold mb-3">More services</h3>
+        <div class="grid grid-cols-4 md:grid-cols-8 gap-3">
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Movers (2hrs)', 2500)"><i class="fas fa-truck-moving text-kenyan-green text-xl"></i><p class="text-xs mt-1">Movers</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Furniture rental', 4500)"><i class="fas fa-couch text-kenyan-green text-xl"></i><p class="text-xs mt-1">Furniture</p><span class="text-[10px] text-[#8a7a64]">KSh 4,500/mo</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Electrician', 1500)"><i class="fas fa-bolt text-kenyan-green text-xl"></i><p class="text-xs mt-1">Electrician</p><span class="text-[10px] text-[#8a7a64]">KSh 1,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Plumber', 1500)"><i class="fas fa-wrench text-kenyan-green text-xl"></i><p class="text-xs mt-1">Plumber</p><span class="text-[10px] text-[#8a7a64]">KSh 1,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Wallpaper installation', 2500)"><i class="fas fa-paint-roller text-kenyan-green text-xl"></i><p class="text-xs mt-1">Wallpaper</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('TV repair', 1000)"><i class="fas fa-tv text-kenyan-green text-xl"></i><p class="text-xs mt-1">TV repair</p><span class="text-[10px] text-[#8a7a64]">KSh 1,000</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="showDepositLoanCalculator()"><i class="fas fa-coins text-kenyan-green text-xl"></i><p class="text-xs mt-1">Deposit loan</p><span class="text-[10px] text-[#8a7a64]">from 3% APR</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Deep cleaning', 3000)"><i class="fas fa-broom text-kenyan-green text-xl"></i><p class="text-xs mt-1">Cleaning</p><span class="text-[10px] text-[#8a7a64]">KSh 3,000</span></div>
         </div>
     </div>
 
-    <!-- Deposit Loan Banner - FUNCTIONAL -->
+    <!-- Deposit Loan Banner -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div class="deposit-banner flex flex-col md:flex-row items-center justify-between gap-4 cursor-pointer" onclick="showDepositLoanCalculator()">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-kenyan-green rounded-full flex items-center justify-center text-white text-2xl">
-                    <i class="fas fa-coins"></i>
-                </div>
-                <div>
-                    <h3 class="font-bold text-lg">Move in with just 1 month's rent</h3>
-                    <p class="text-sm text-[#6b5e4a]">We finance your deposit. Pay in 3-12 installments from <span class="font-semibold">3% APR</span></p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="font-semibold text-kenyan-green">KSh 5,000</span>
-                        <span class="text-xs text-[#8a7a64]">~$38</span>
-                        <span class="text-xs text-[#8a7a64]">per month for KSh 60K deposit</span>
-                    </div>
-                </div>
+                <div class="w-12 h-12 bg-kenyan-green rounded-full flex items-center justify-center text-white text-2xl"><i class="fas fa-coins"></i></div>
+                <div><h3 class="font-bold text-lg">Move in with just 1 month's rent</h3><p class="text-sm">We finance your deposit. Pay in 3-12 installments from <span class="font-semibold">3% APR</span></p></div>
             </div>
-            <button class="bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition whitespace-nowrap" onclick="event.stopPropagation(); showDepositLoanCalculator()">
-                Check eligibility →
-            </button>
+            <button class="bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium" onclick="event.stopPropagation(); showDepositLoanCalculator()">Check eligibility →</button>
         </div>
     </div>
 
-    <!-- Featured properties with real Nairobi imagery - FUNCTIONAL -->
+    <!-- Tax Deduction Banner -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div class="tax-banner p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-kenyan-green rounded-full flex items-center justify-center text-white text-xl"><i class="fas fa-percent"></i></div>
+                <div><h3 class="font-bold">Save with household tax deduction</h3><p class="text-sm text-[#6b5e4a]">You can deduct up to 35% of labor costs from your taxes. Save up to KSh 25,000 ($192)/year</p></div>
+            </div>
+            <button class="border-2 border-kenyan-green text-kenyan-green px-5 py-2 rounded-full text-sm font-medium hover:bg-kenyan-green hover:text-white transition" onclick="showTaxCalculator()">Try calculator →</button>
+        </div>
+    </div>
+
+    <!-- Featured Properties -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="flex items-center justify-between mb-5">
             <h2 class="text-xl font-medium">Featured homes</h2>
             <div class="flex gap-2">
-                <button class="w-8 h-8 rounded-full border border-[#e6d9c8] flex items-center justify-center hover:border-kenyan-green" onclick="prevProperties()">
-                    <i class="fas fa-chevron-left text-sm"></i>
-                </button>
-                <button class="w-8 h-8 rounded-full border border-[#e6d9c8] flex items-center justify-center hover:border-kenyan-green" onclick="nextProperties()">
-                    <i class="fas fa-chevron-right text-sm"></i>
-                </button>
+                <button class="w-8 h-8 rounded-full border border-[#e6d9c8] hover:border-kenyan-green" onclick="prevProperties()"><i class="fas fa-chevron-left text-sm"></i></button>
+                <button class="w-8 h-8 rounded-full border border-[#e6d9c8] hover:border-kenyan-green" onclick="nextProperties()"><i class="fas fa-chevron-right text-sm"></i></button>
             </div>
         </div>
-        
-        <div id="propertyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Property 1: Kilimani apartment -->
-            <div class="property-card card-hover" onclick="viewProperty('Kilimani Modern Apartment', 55000)">
-                <div class="relative h-48">
-                    <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=600" class="w-full h-full object-cover" alt="Apartment in Kilimani">
-                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        <i class="fas fa-star text-yellow-400 mr-1"></i> Verified
-                    </div>
-                    <div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)">
-                        <i class="far fa-heart text-sm"></i>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-semibold text-lg">Modern apartment, Kilimani</h3>
-                            <p class="text-sm text-[#6b5e4a] flex items-center gap-1 mt-0.5">
-                                <i class="fas fa-map-pin text-xs"></i> Kilimani, Nairobi
-                            </p>
-                        </div>
-                        <div class="text-right">
-                            <span class="font-semibold text-kenyan-green">KSh 55,000</span>
-                            <span class="text-xs text-[#8a7a64]">/month</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Details -->
-                    <div class="flex gap-3 mt-2 text-sm text-[#6b5e4a]">
-                        <span><i class="fas fa-bed mr-1"></i> 2 beds</span>
-                        <span><i class="fas fa-bath mr-1"></i> 2 baths</span>
-                        <span><i class="fas fa-car mr-1"></i> Parking</span>
-                    </div>
-                    
-                    <!-- Services included -->
-                    <div class="flex flex-wrap gap-1 mt-3 pt-3 border-t border-[#f0e6d5]">
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs flex items-center gap-1">
-                            <i class="fas fa-truck-moving text-kenyan-green text-[10px]"></i> Movers
-                        </span>
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs flex items-center gap-1">
-                            <i class="fas fa-couch text-kenyan-green text-[10px]"></i> Furniture
-                        </span>
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs flex items-center gap-1">
-                            <i class="fas fa-coins text-kenyan-green text-[10px]"></i> Deposit loan eligible
-                        </span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Property 2: Karen house -->
-            <div class="property-card card-hover" onclick="viewProperty('Karen Family Home', 95000)">
-                <div class="relative h-48">
-                    <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600" class="w-full h-full object-cover" alt="House in Karen">
-                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        <i class="fas fa-tree mr-1"></i> Garden
-                    </div>
-                    <div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)">
-                        <i class="far fa-heart text-sm"></i>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <div class="flex justify-between">
-                        <div>
-                            <h3 class="font-semibold text-lg">Family home with garden</h3>
-                            <p class="text-sm text-[#6b5e4a]">Karen, Lang'ata Rd</p>
-                        </div>
-                        <span class="font-semibold text-kenyan-green">KSh 95,000</span>
-                    </div>
-                    <div class="flex gap-3 mt-2 text-sm text-[#6b5e4a]">
-                        <span>4 beds</span> <span>3 baths</span> <span>1/4 acre</span>
-                    </div>
-                    <div class="flex flex-wrap gap-1 mt-3 pt-3 border-t">
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs"><i class="fas fa-wrench mr-1"></i>Handyman</span>
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs"><i class="fas fa-leaf mr-1"></i>Gardener</span>
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs"><i class="fas fa-shield-alt mr-1"></i>Askari</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Property 3: Eastlands affordable -->
-            <div class="property-card card-hover" onclick="viewProperty('Umoja Apartment', 18500)">
-                <div class="relative h-48">
-                    <img src="https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=600" class="w-full h-full object-cover" alt="Apartment in Eastlands">
-                    <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                        <i class="fas fa-bolt mr-1"></i> Affordable
-                    </div>
-                    <div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)">
-                        <i class="far fa-heart text-sm"></i>
-                    </div>
-                </div>
-                <div class="p-4">
-                    <div class="flex justify-between">
-                        <div>
-                            <h3 class="font-semibold text-lg">Apartment, Umoja</h3>
-                            <p class="text-sm text-[#6b5e4a]">Umoja Innercore</p>
-                        </div>
-                        <span class="font-semibold text-kenyan-green">KSh 18,500</span>
-                    </div>
-                    <div class="flex gap-3 mt-2 text-sm">2 beds · 1 bath</div>
-                    <div class="flex flex-wrap gap-1 mt-3 pt-3 border-t">
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs"><i class="fas fa-wrench mr-1"></i>Plumber</span>
-                        <span class="bg-[#f5efe3] px-2 py-1 rounded-lg text-xs"><i class="fas fa-paint-roller mr-1"></i>Painting</span>
-                    </div>
-                    <div class="mt-2 text-xs text-[#8a7a64]"><i class="fas fa-bus mr-1"></i>Close to matatu stage</div>
-                </div>
-            </div>
-        </div>
-        
+        <div id="propertyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         <div class="text-center mt-8">
-            <button class="border border-[#e6d9c8] hover:border-kenyan-green px-8 py-3 rounded-full text-sm font-medium transition inline-flex items-center gap-2" onclick="showAllProperties()">
-                View more properties (47) <i class="fas fa-arrow-right text-xs"></i>
-            </button>
+            <button class="border border-[#e6d9c8] hover:border-kenyan-green px-8 py-3 rounded-full text-sm font-medium" onclick="showAllProperties()">View more properties (47) <i class="fas fa-arrow-right text-xs"></i></button>
         </div>
     </div>
 
-    <!-- Local service packages - FULLY FUNCTIONAL with cart integration -->
-    <div class="bg-[#faf5eb] py-12 mt-8">
+    <!-- Complete Move Packages -->
+    <div class="bg-[#faf5eb] py-12 mt-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
                 <span class="text-kenyan-green text-sm font-medium mb-2 block">🎁 CURATED PACKAGES</span>
                 <h2 class="text-3xl font-medium">Complete move packages</h2>
-                <p class="text-[#6b5e4a] mt-2">All services bundled and discounted</p>
+                <p class="text-[#6b5e4a] mt-2">All services bundled and discounted up to 35%</p>
             </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <!-- Package 1: Starter -->
-                <div class="bg-white rounded-2xl p-6 border border-[#e6d9c8] card-hover">
-                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3">
-                        <i class="fas fa-seedling text-xl"></i>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-5">
+                <div class="bg-white rounded-2xl p-5 border border-[#e6d9c8] card-hover">
+                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-seedling text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Starter</h3>
-                    <p class="text-xs text-[#8a7a64] mb-2">Basic bedsitter/1-room</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="font-semibold text-kenyan-green text-xl">KSh 8,500</span>
-                        <span class="text-xs text-[#8a7a64]">~$65</span>
-                    </div>
-                    <ul class="mt-4 space-y-2 text-sm">
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Movers (2 hours)</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>1 x fundi visit</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Table + 2 chairs</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Bed frame + mattress</li>
-                    </ul>
-                    <button class="w-full mt-5 border border-kenyan-green text-kenyan-green hover:bg-kenyan-green hover:text-white py-2 rounded-xl text-sm font-medium transition" onclick="addToCart('Starter Package', 8500)">
-                        Add to cart
-                    </button>
+                    <div class="font-bold text-kenyan-green text-xl">KSh 8,500</div><div class="price-dual mb-2">~$65</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (2 hours)</li><li>✓ 1 x fundi visit</li><li>✓ Table + 2 chairs</li><li>✓ Bed frame + mattress</li></ul>
+                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="addToCart('Starter Package', 8500)">Add to cart</button>
                 </div>
-                
-                <!-- Package 2: Studio/1-Bedroom - MIDDLE TIER -->
-                <div class="bg-white rounded-2xl p-6 border-2 border-[#d4b68a] card-hover relative">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#d4b68a] text-white px-4 py-0.5 rounded-full text-xs font-medium">
-                        Perfect for 1-bed
-                    </div>
-                    <div class="w-12 h-12 bg-[#f5e6d3] rounded-xl flex items-center justify-center text-[#b87c4b] mb-3">
-                        <i class="fas fa-couch text-xl"></i>
-                    </div>
+                <div class="bg-white rounded-2xl p-5 border-2 border-[#d4b68a] card-hover relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#d4b68a] text-white px-3 py-0.5 rounded-full text-xs">Perfect for 1-bed</div>
+                    <div class="w-12 h-12 bg-[#f5e6d3] rounded-xl flex items-center justify-center text-[#b87c4b] mb-3"><i class="fas fa-couch text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Studio / 1-Bed</h3>
-                    <p class="text-xs text-[#8a7a64] mb-2">Complete 1-bedroom setup</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="font-semibold text-[#b87c4b] text-xl">KSh 13,500</span>
-                        <span class="text-xs text-[#8a7a64]">~$104</span>
-                    </div>
-                    <ul class="mt-4 space-y-2 text-sm">
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>Movers (half day)</li>
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>Electrician + plumber</li>
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>3-seater sofa</li>
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>Dining set (4-seater)</li>
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>Bed + wardrobe</li>
-                        <li><i class="fas fa-check-circle text-[#b87c4b] mr-2"></i>Curtains & installation</li>
-                    </ul>
-                    <button class="w-full mt-5 bg-[#b87c4b] text-white hover:bg-[#9e683f] py-2 rounded-xl text-sm font-medium transition" onclick="addToCart('Studio/1-Bed Package', 13500)">
-                        Add to cart
-                    </button>
+                    <div class="font-bold text-[#b87c4b] text-xl">KSh 13,500</div><div class="price-dual mb-2">~$104</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (half day)</li><li>✓ Electrician + plumber</li><li>✓ 3-seater sofa</li><li>✓ Dining set + bed + wardrobe</li></ul>
+                    <button class="w-full mt-4 bg-[#b87c4b] text-white py-2 rounded-xl text-sm font-medium hover:bg-[#9e683f]" onclick="addToCart('Studio/1-Bed Package', 13500)">Add to cart</button>
                 </div>
-                
-                <!-- Package 3: Family - with TIMER and URGENCY -->
-                <div class="bg-white rounded-2xl p-6 border-2 border-kenyan-green card-hover relative">
-                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-kenyan-green text-white px-4 py-0.5 rounded-full text-xs font-medium z-10">
-                        Most popular
-                    </div>
-                    <!-- Timer for urgency -->
-                    <div class="timer mt-2 mb-3 mx-auto w-fit">
-                        <i class="fas fa-clock"></i>
-                        <span id="timer">12:34:56</span>
-                        <span class="text-xs" id="spotsLeft">spots left: 4</span>
-                    </div>
-                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3 mx-auto">
-                        <i class="fas fa-users text-xl"></i>
-                    </div>
-                    <h3 class="font-semibold text-lg text-center">Family package</h3>
-                    <p class="text-xs text-[#8a7a64] mb-2 text-center">3-4 bedroom home</p>
-                    <div class="flex items-center justify-center gap-2 mt-1">
-                        <span class="font-semibold text-kenyan-green text-xl">KSh 18,500</span>
-                        <span class="text-xs text-[#8a7a64] line-through">KSh 24,000</span>
-                    </div>
-                    <div class="text-center text-xs text-[#8a7a64] mb-2">~$142</div>
-                    <ul class="mt-4 space-y-2 text-sm">
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Movers (full day + 2 trucks)</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Furniture for 4 rooms</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Plumber + electrician</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Deep cleaning (4 beds)</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>WiFi + DStv installation</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Askari security setup</li>
-                        <li class="font-semibold text-kenyan-green"><i class="fas fa-gem mr-2"></i>Deposit loan pre-approved</li>
-                    </ul>
-                    <button class="w-full mt-5 bg-kenyan-green text-white hover:bg-[#004d29] py-2 rounded-xl text-sm font-medium transition animate-pulse" onclick="claimDeal()" id="claimDealBtn">
-                        Claim deal - 4 spots left
-                    </button>
+                <div class="bg-white rounded-2xl p-5 border-2 border-kenyan-green card-hover relative">
+                    <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-kenyan-green text-white px-3 py-0.5 rounded-full text-xs">Most popular</div>
+                    <div class="timer mb-3 mx-auto w-fit"><i class="fas fa-clock"></i><span id="timer">12:34:56</span><span id="spotsLeft" class="text-xs ml-1">4 left</span></div>
+                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-users text-xl"></i></div>
+                    <h3 class="font-semibold text-lg">Family package</h3>
+                    <div><span class="font-bold text-kenyan-green text-xl">KSh 18,500</span><span class="text-xs line-through ml-2">KSh 24,000</span></div>
+                    <div class="price-dual mb-2">~$142</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (full day + 2 trucks)</li><li>✓ Furniture for 4 rooms</li><li>✓ Plumber + electrician</li><li>✓ Deep cleaning + WiFi/DStv</li><li class="font-semibold text-kenyan-green">✓ Deposit loan pre-approved</li></ul>
+                    <button class="w-full mt-4 bg-kenyan-green text-white py-2 rounded-xl text-sm font-medium animate-pulse" onclick="claimDeal()" id="claimDealBtn">Claim deal - 4 spots left</button>
                 </div>
-                
-                <!-- Package 4: Executive -->
-                <div class="bg-white rounded-2xl p-6 border border-[#e6d9c8] card-hover">
-                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3">
-                        <i class="fas fa-briefcase text-xl"></i>
-                    </div>
+                <div class="bg-white rounded-2xl p-5 border border-[#e6d9c8] card-hover">
+                    <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-briefcase text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Executive</h3>
-                    <p class="text-xs text-[#8a7a64] mb-2">Premium homes</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span class="font-semibold text-kenyan-green text-xl">KSh 32,000</span>
-                        <span class="text-xs text-[#8a7a64]">~$246</span>
-                    </div>
-                    <ul class="mt-4 space-y-2 text-sm">
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Premium movers</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Designer furniture</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Specialized technicians</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Premium cleaning</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Smart home setup</li>
-                        <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i>Deposit loan included</li>
-                    </ul>
-                    <button class="w-full mt-5 border border-kenyan-green text-kenyan-green hover:bg-kenyan-green hover:text-white py-2 rounded-xl text-sm font-medium transition" onclick="addToCart('Executive Package', 32000)">
-                        Add to cart
-                    </button>
+                    <div class="font-bold text-kenyan-green text-xl">KSh 32,000</div><div class="price-dual mb-2">~$246</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Premium movers</li><li>✓ Designer furniture</li><li>✓ Specialized technicians</li><li>✓ Smart home setup</li><li>✓ Deposit loan included</li></ul>
+                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="addToCart('Executive Package', 32000)">Add to cart</button>
                 </div>
             </div>
             
-            <!-- Referral Discount - FUNCTIONAL -->
+            <!-- Referral Discount -->
             <div class="mt-10 bg-white rounded-2xl p-6 border-2 border-[#e6d9c8] max-w-2xl mx-auto text-center">
-                <div class="flex items-center justify-center gap-2 mb-2">
-                    <i class="fas fa-heart text-kenyan-red text-2xl"></i>
-                    <i class="fas fa-heart text-kenyan-green text-2xl"></i>
-                    <i class="fas fa-heart text-kenyan-red text-2xl"></i>
-                </div>
+                <div class="flex justify-center gap-2 mb-2"><i class="fas fa-heart text-kenyan-red text-2xl"></i><i class="fas fa-heart text-kenyan-green text-2xl"></i><i class="fas fa-heart text-kenyan-red text-2xl"></i></div>
                 <h3 class="text-xl font-bold">Refer a friend, you both save</h3>
-                <p class="text-[#6b5e4a] mb-3">Share Haofinder with someone moving to Nairobi</p>
-                <div class="flex items-center justify-center gap-4 text-lg">
-                    <span class="font-bold text-kenyan-green">KSh 1,000 off</span>
-                    <span class="text-[#8a7a64]">|</span>
-                    <span class="font-bold text-kenyan-green">$7.70 off</span>
-                </div>
-                <p class="text-xs text-[#8a7a64] mt-1">for you AND your friend when they book any package</p>
-                <button class="mt-4 bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition" onclick="generateReferral()">
-                    Get referral link <i class="fas fa-arrow-right ml-1"></i>
-                </button>
+                <p class="text-[#6b5e4a] mb-3">Share SmartMove.Co.Ke with someone moving to Nairobi</p>
+                <div class="flex justify-center gap-4"><span class="font-bold text-kenyan-green">KSh 1,000 off</span><span>|</span><span class="font-bold text-kenyan-green">$7.70 off</span></div>
+                <button class="mt-4 bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#004d29]" onclick="generateReferral()">Get referral link →</button>
                 <div id="referralLink" class="mt-3 text-sm text-kenyan-green hidden"></div>
             </div>
             
-            <!-- B2B note - FUNCTIONAL -->
-            <div class="mt-8 local-quote max-w-2xl mx-auto text-center">
-                <p class="text-sm">Are you a service provider or business? <a href="#" class="text-kenyan-green font-medium hover:underline" onclick="showPartnerSignup(); return false;">Join as a partner</a> and get new customers every day.</p>
+            <div class="mt-8 text-center italic text-sm text-[#6b5e4a] border-l-3 border-kenyan-red pl-4 max-w-2xl mx-auto">
+                <p>Are you a service provider or business? <a href="#" class="text-kenyan-green font-medium hover:underline" onclick="showPartnerSignup(); return false;">Join as a partner</a> and get new customers every day.</p>
             </div>
         </div>
     </div>
 
-    <!-- Testimonials - FUNCTIONAL (click to see full story) -->
+    <!-- How It Works -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 class="text-2xl font-bold text-center mb-8">3 STEPS · How it works</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div><div class="w-16 h-16 bg-kenyan-green rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">1</div><h3 class="font-bold">Choose a service</h3><p class="text-sm text-[#6b5e4a]">Browse our services and select what you need</p></div>
+            <div><div class="w-16 h-16 bg-kenyan-green rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">2</div><h3 class="font-bold">Tell us your needs</h3><p class="text-sm text-[#6b5e4a]">Provide details and your preferred timing</p></div>
+            <div><div class="w-16 h-16 bg-kenyan-green rounded-2xl flex items-center justify-center text-white text-2xl mx-auto mb-4">3</div><h3 class="font-bold">Enjoy the results</h3><p class="text-sm text-[#6b5e4a]">Professionals respond and handle the job</p></div>
+        </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h2 class="text-xl font-medium text-center mb-8">What our customers say</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Mary Wanjiku')">
-                <div class="flex items-center gap-2 mb-3">
-                    <div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center text-white font-bold">MW</div>
-                    <div>
-                        <div class="font-medium">Mary Wanjiku</div>
-                        <div class="stars text-sm">★★★★★</div>
-                    </div>
-                </div>
-                <p class="text-sm text-[#6b5e4a]">"Found my apartment in Kilimani and got movers and furniture all in one place. So convenient!"</p>
-            </div>
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('John Omondi')">
-                <div class="flex items-center gap-2 mb-3">
-                    <div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center text-white font-bold">JO</div>
-                    <div>
-                        <div class="font-medium">John Omondi</div>
-                        <div class="stars text-sm">★★★★★</div>
-                    </div>
-                </div>
-                <p class="text-sm text-[#6b5e4a]">"The deposit loan helped me move in with just 30K. Paying in installments is a lifesaver."</p>
-            </div>
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Amina Hassan')">
-                <div class="flex items-center gap-2 mb-3">
-                    <div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center text-white font-bold">AH</div>
-                    <div>
-                        <div class="font-medium">Amina Hassan</div>
-                        <div class="stars text-sm">★★★★★</div>
-                    </div>
-                </div>
-                <p class="text-sm text-[#6b5e4a]">"Referred my cousin and we both got KSh 1,000 off. Best move ever!"</p>
-            </div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Mary Wanjiku')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">MW</div><div><div class="font-medium">Mary Wanjiku</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Found my 2-bed in Kilimani for KSh 55K ($423) and got movers and furniture all in one place. Saved over KSh 8,000!"</p></div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('John Omondi')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">JO</div><div><div class="font-medium">John Omondi</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"The deposit loan helped me move into Westlands with just KSh 45K ($346). Paying KSh 4,500/month for the loan."</p></div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Amina Hassan')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">AH</div><div><div class="font-medium">Amina Hassan</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Referred my cousin and we both got KSh 1,000 off. Best move ever! Total savings over KSh 15,000 on the Family package."</p></div>
         </div>
     </div>
 
-    <!-- Simple footer - FUNCTIONAL LINKS -->
+    <!-- Download App + Professional CTA -->
+    <div class="bg-kenyan-green py-12 mt-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-white text-center md:text-left"><i class="fas fa-mobile-alt text-3xl mb-2 block"></i><h3 class="font-bold text-xl">Download the SmartMove app</h3><p>Over 100 services available at your fingertips</p><div class="flex gap-3 mt-3 justify-center md:justify-start"><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="showToast('App Store')"><i class="fab fa-apple"></i> App Store</button><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="showToast('Google Play')"><i class="fab fa-google-play"></i> Google Play</button></div></div>
+            <div class="text-white text-center"><i class="fas fa-briefcase text-3xl mb-2 block"></i><p class="font-semibold">Are you a professional?</p><p class="text-sm">Join SmartMove and get new customers</p><button class="mt-3 bg-white text-kenyan-green px-6 py-2 rounded-full font-medium" onclick="showPartnerSignup()">Register as a professional →</button></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="border-t border-[#e6d9c8] pt-10 pb-6 bg-[#faf5eb]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h4 class="font-medium mb-3 flex items-center gap-1"><i class="fas fa-compass text-kenyan-green"></i> Haofinder</h4>
-                    <ul class="space-y-2 text-sm text-[#6b5e4a]">
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('📄 About us page'); return false;">About us</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('💼 Careers at Haofinder'); return false;">Careers</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('📝 Blog posts'); return false;">Blog</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-medium mb-3">For partners</h4>
-                    <ul class="space-y-2 text-sm text-[#6b5e4a]">
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showPartnerSignup(); return false;">List your service</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('🤝 Agent program details'); return false;">Become an agent</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('📊 B2B program information'); return false;">B2B program</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-medium mb-3">Support</h4>
-                    <ul class="space-y-2 text-sm text-[#6b5e4a]">
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('❓ FAQ page'); return false;">Help center</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('🛡️ Safety guidelines'); return false;">Safety</a></li>
-                        <li><a href="#" class="hover:text-kenyan-green" onclick="showToast('📧 Contact form'); return false;">Contact us</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-medium mb-3">Follow us</h4>
-                    <div class="flex gap-3 text-[#6b5e4a]">
-                        <a href="#" class="hover:text-kenyan-green text-xl" onclick="showToast('📸 Instagram page'); return false;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-kenyan-green text-xl" onclick="showToast('🐦 Twitter page'); return false;"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" class="hover:text-kenyan-green text-xl" onclick="showToast('🎵 TikTok page'); return false;"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" class="hover:text-kenyan-green text-xl" onclick="showToast('💬 WhatsApp chat'); return false;"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
+                <div><h4 class="font-bold mb-3">SmartMove.Co.Ke</h4><ul class="space-y-2 text-sm text-[#6b5e4a]"><li><a href="#" onclick="showToast('About')">About us</a></li><li><a href="#" onclick="showToast('How it works')">How it works?</a></li><li><a href="#" onclick="showTaxCalculator()">Tax deduction</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Services</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="showAllServices()">All Services</a></li><li><a href="#" onclick="showAllServices()">Plumber/Electrician</a></li><li><a href="#" onclick="showDepositLoanCalculator()">Deposit loan</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Company</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="showPartnerSignup()">Register as professional</a></li><li><a href="#" onclick="showToast('Terms')">Terms of service</a></li><li><a href="#" onclick="showToast('Privacy')">Privacy policy</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Connect</h4><div class="flex gap-3 text-xl"><a href="#" onclick="showToast('Instagram')"><i class="fab fa-instagram"></i></a><a href="#" onclick="showToast('Twitter')"><i class="fab fa-x-twitter"></i></a><a href="#" onclick="showToast('WhatsApp')"><i class="fab fa-whatsapp"></i></a></div></div>
             </div>
-            <div class="border-t border-[#e6d9c8] pt-6 text-xs text-[#8a7a64] flex flex-wrap justify-between">
-                <span>© 2026 Haofinder Kenya · Making moves easier</span>
-                <span class="flex gap-4">
-                    <a href="#" class="hover:text-kenyan-green" onclick="showToast('📜 Terms and conditions'); return false;">Terms</a>
-                    <a href="#" class="hover:text-kenyan-green" onclick="showToast('🔒 Privacy policy'); return false;">Privacy</a>
-                    <a href="#" class="hover:text-kenyan-green" onclick="showToast('🍪 Cookie policy'); return false;">Cookies</a>
-                </span>
-            </div>
+            <div class="border-t pt-6 text-xs text-[#8a7a64] text-center">© 2026 SmartMove.Co.Ke Kenya · Making moves easier · Exchange rate: 1 USD = 130 KES</div>
         </div>
     </footer>
 
     <script>
-        // Global state
-        let cartCount = 0;
-        let cartItems = [];
-        let savedProperties = [];
-        let timerInterval;
-        let spotsLeft = 4;
-        let selectedServices = {};
-
-        // Toast function
-        function showToast(message, duration = 3000) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, duration);
-        }
-
-        // Modal functions
-        function showModal(title, body) {
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalBody').innerHTML = body;
-            document.getElementById('modal').classList.add('show');
-        }
-
-        function closeModal() {
-            document.getElementById('modal').classList.remove('show');
-        }
-
-        // Cart functions
-        function updateCartCounter() {
-            document.getElementById('cartCount').textContent = cartCount;
-        }
-
-        function addToCart(itemName, price) {
-            cartCount++;
-            cartItems.push({ name: itemName, price: price });
-            updateCartCounter();
-            showToast(`✅ Added ${itemName} to cart (KSh ${price.toLocaleString()})`);
-        }
-
-        function showCart() {
-            if (cartItems.length === 0) {
-                showToast('🛒 Your cart is empty');
-                return;
-            }
-            let total = cartItems.reduce((sum, item) => sum + item.price, 0);
-            let itemsList = cartItems.map(item => `<li>${item.name} - KSh ${item.price.toLocaleString()}</li>`).join('');
-            showModal('Your Cart', `
-                <ul class="list-disc pl-4 mb-4">${itemsList}</ul>
-                <p class="font-bold text-lg">Total: KSh ${total.toLocaleString()} ~ $${Math.round(total/130)}</p>
-                <button class="mt-4 bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="checkout()">Checkout</button>
-            `);
-        }
-
-        function checkout() {
-            closeModal();
-            showToast('🎉 Checkout complete! Thank you for choosing Haofinder');
-            cartCount = 0;
-            cartItems = [];
-            updateCartCounter();
-        }
-
-        // Service selection
-        function toggleService(id, name, price) {
-            if (selectedServices[id]) {
-                delete selectedServices[id];
-                showToast(`❌ Removed ${name} from selection`);
-            } else {
-                selectedServices[id] = { name, price };
-                showToast(`✅ Added ${name} to selection`);
-            }
-            // Visual feedback
-            event.currentTarget.classList.toggle('selected');
-        }
-
-        // Area selection
-        function selectArea(area) {
-            document.getElementById('searchLocation').value = area + ', Nairobi';
-            showToast(`📍 Searching in ${area}, Nairobi`);
-            // Highlight active pill
-            document.querySelectorAll('.pill-button').forEach(p => p.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-        }
-
-        // Search function
-        function performSearch() {
-            const location = document.getElementById('searchLocation').value;
-            const date = document.getElementById('moveDate').value;
-            showToast(`🔍 Searching for properties in ${location} from ${new Date(date).toLocaleDateString()}`);
-        }
-
-        // Property functions
-        function viewProperty(name, price) {
-            showModal(name, `
-                <img src="https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=600" class="w-full rounded-lg mb-4">
-                <p class="mb-2">Price: <span class="font-bold">KSh ${price.toLocaleString()}/month</span></p>
-                <p class="mb-4">This beautiful property includes movers, furniture, and deposit loan eligibility.</p>
-                <button class="bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="scheduleViewing('${name}')">Schedule viewing</button>
-            `);
-        }
-
-        function scheduleViewing(property) {
-            closeModal();
-            showToast(`📅 Viewing scheduled for ${property}. We'll confirm via SMS.`);
-        }
-
-        function toggleSave(element) {
-            const icon = element.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas', 'saved');
-                showToast('❤️ Property saved to favorites');
-            } else {
-                icon.classList.remove('fas', 'saved');
-                icon.classList.add('far');
-                showToast('💔 Property removed from favorites');
-            }
-        }
-
-        // Property pagination
-        let propertyPage = 0;
-        const properties = [
-            { name: 'Modern apartment, Kilimani', price: 55000, beds: 2, baths: 2, img: 'https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg' },
-            { name: 'Family home with garden', price: 95000, beds: 4, baths: 3, img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg' },
-            { name: 'Apartment, Umoja', price: 18500, beds: 2, baths: 1, img: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg' },
-            { name: 'Penthouse, Westlands', price: 120000, beds: 3, baths: 3, img: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg' },
-            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, img: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg' },
-            { name: 'Studio, Kilimani', price: 35000, beds: 1, baths: 1, img: 'https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg' }
+        const USD_RATE = 130;
+        function formatPrice(kes) { return `KSh ${kes.toLocaleString()} ($${Math.round(kes/USD_RATE)})`; }
+        
+        // Enhanced services array with images, descriptions, ratings, prices
+        const services = [
+            { id: 1, name: "Window Washing", price: 2499, original: 3500, rating: 4.8, reviews: 156, desc: "Crystal clear windows by professionals. Interior & exterior cleaning, streak-free guarantee.", img: "https://images.pexels.com/photos/6207466/pexels-photo-6207466.jpeg?auto=compress&cs=tinysrgb&w=400", category: "cleaning" },
+            { id: 2, name: "Hedge Trimming / Lawn Care", price: 1999, original: 2800, rating: 4.7, reviews: 89, desc: "Professional lawn mowing, hedge trimming, and garden maintenance. Weekly or one-off service.", img: "https://images.pexels.com/photos/189332/pexels-photo-189332.jpeg?auto=compress&cs=tinysrgb&w=400", category: "garden" },
+            { id: 3, name: "Tank Cleaning Service", price: 4999, original: 7000, rating: 4.9, reviews: 67, desc: "Overhead & underground tank cleaning. Safe, hygienic, and certified professionals.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", category: "maintenance" },
+            { id: 4, name: "Washing Machine Repair", price: 1800, original: 2500, rating: 4.8, reviews: 112, desc: "Same-day washing machine repair. All brands, warranty on parts, doorstep service.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", category: "appliance" },
+            { id: 5, name: "Cooker / Microwave Repair", price: 1500, original: 2200, rating: 4.7, reviews: 94, desc: "Expert repair for all cooker and microwave brands. Fast diagnosis, quality parts.", img: "https://images.pexels.com/photos/4239152/pexels-photo-4239152.jpeg?auto=compress&cs=tinysrgb&w=400", category: "appliance" },
+            { id: 6, name: "Gutter Cleaning", price: 1899, original: 2700, rating: 4.8, reviews: 73, desc: "Complete gutter cleaning and downpipe unblocking. Prevent water damage to your home.", img: "https://images.pexels.com/photos/209231/pexels-photo-209231.jpeg?auto=compress&cs=tinysrgb&w=400", category: "maintenance" },
+            { id: 7, name: "AC Repair & Maintenance", price: 2500, original: 3800, rating: 4.9, reviews: 145, desc: "Air conditioner repair, gas refill, and maintenance. Keep your home cool all year.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", category: "hvac" },
+            { id: 8, name: "Move-out Cleaning", price: 2499, original: 3500, rating: 4.7, reviews: 234, desc: "Professional home cleaning - 2 bedroom apartment. Deep cleaning for move-out.", img: "https://images.pexels.com/photos/4107283/pexels-photo-4107283.jpeg?auto=compress&cs=tinysrgb&w=400", category: "cleaning" }
         ];
-
-        function nextProperties() {
-            propertyPage = (propertyPage + 1) % 2;
-            updatePropertyGrid();
-        }
-
-        function prevProperties() {
-            propertyPage = (propertyPage - 1 + 2) % 2;
-            updatePropertyGrid();
-        }
-
-        function updatePropertyGrid() {
-            const start = propertyPage * 3;
-            const end = start + 3;
-            const shown = properties.slice(start, end);
-            const grid = document.getElementById('propertyGrid');
-            grid.innerHTML = shown.map(p => `
-                <div class="property-card card-hover" onclick="viewProperty('${p.name}', ${p.price})">
-                    <div class="relative h-48">
-                        <img src="${p.img}" class="w-full h-full object-cover" alt="${p.name}">
-                        <div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium">
-                            <i class="fas fa-star text-yellow-400 mr-1"></i> Verified
-                        </div>
-                        <div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)">
-                            <i class="far fa-heart text-sm"></i>
-                        </div>
-                    </div>
+        
+        // Render services grid
+        function renderServices() {
+            const grid = document.getElementById('servicesGrid');
+            if (!grid) return;
+            grid.innerHTML = services.map(s => `
+                <div class="service-card-enhanced card-hover" onclick="showServiceDetail('${s.name}', ${s.original}, ${s.price}, ${s.rating}, ${s.reviews}, '${s.desc}', '${s.img}')">
+                    <img src="${s.img}" class="service-img" alt="${s.name}">
                     <div class="p-4">
                         <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-semibold text-lg">${p.name}</h3>
-                                <p class="text-sm text-[#6b5e4a] flex items-center gap-1 mt-0.5">
-                                    <i class="fas fa-map-pin text-xs"></i> Nairobi
-                                </p>
-                            </div>
-                            <div class="text-right">
-                                <span class="font-semibold text-kenyan-green">KSh ${p.price.toLocaleString()}</span>
-                                <span class="text-xs text-[#8a7a64]">/month</span>
-                            </div>
+                            <h3 class="font-semibold text-lg">${s.name}</h3>
+                            <span class="rating-badge"><i class="fas fa-star text-xs"></i> ${s.rating} (${s.reviews})</span>
                         </div>
-                        <div class="flex gap-3 mt-2 text-sm text-[#6b5e4a]">
-                            <span><i class="fas fa-bed mr-1"></i> ${p.beds} beds</span>
-                            <span><i class="fas fa-bath mr-1"></i> ${p.baths} baths</span>
+                        <p class="text-sm text-[#6b7a5e] mt-1 line-clamp-2">${s.desc.substring(0, 80)}...</p>
+                        <div class="flex items-center gap-2 mt-3">
+                            <span class="font-bold text-kenyan-green text-xl">KSh ${s.price.toLocaleString()}</span>
+                            <span class="text-sm line-through text-[#8a7a64]">KSh ${s.original.toLocaleString()}</span>
+                        </div>
+                        <div class="price-dual">~$${Math.round(s.price/USD_RATE)}</div>
+                        <div class="mt-3 flex items-center justify-between">
+                            <span class="guarantee-badge"><i class="fas fa-check-circle"></i> 100% guarantee</span>
+                            <button class="bg-kenyan-green text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-[#004d29]" onclick="event.stopPropagation(); addToCart('${s.name}', ${s.price})">Book now</button>
                         </div>
                     </div>
                 </div>
             `).join('');
         }
+        
+        let cartCount = 0, cartItems = [], selectedServices = {}, propertyPage = 0, spotsLeft = 4, timerInterval;
+        const properties = [
+            { name: 'Modern 2-Bed Apartment, Kilimani', price: 55000, beds: 2, baths: 2, sqft: 950, img: 'https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg', description: 'Modern apartment with parking, 24/7 security, and backup generator' },
+            { name: 'Family Home with Garden, Karen', price: 95000, beds: 4, baths: 3, sqft: 2200, img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg', description: 'Spacious home on 1/4 acre with mature garden, staff quarters, and borehole' },
+            { name: 'Affordable 2-Bed, Umoja', price: 18500, beds: 2, baths: 1, sqft: 650, img: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg', description: 'Cozy apartment close to shops and matatu stage' },
+            { name: 'Luxury Penthouse, Westlands', price: 120000, beds: 3, baths: 3, sqft: 1800, img: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg', description: 'Stunning penthouse with city views, private elevator, and rooftop terrace' },
+            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, sqft: 1500, img: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg', description: 'Beautiful bungalow with compound, secure parking, and servant quarters' },
+            { name: 'Studio Apartment, Kilimani', price: 35000, beds: 1, baths: 1, sqft: 450, img: 'https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg', description: 'Perfect for singles or students, fully furnished option available' }
+        ];
 
-        // Timer function
-        function startTimer(duration, display) {
-            let timer = duration, hours, minutes, seconds;
-            timerInterval = setInterval(function () {
-                hours = parseInt(timer / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = hours + ":" + minutes + ":" + seconds;
-
-                if (--timer < 0) {
-                    clearInterval(timerInterval);
-                    display.textContent = "EXPIRED";
-                    document.getElementById('spotsLeft').textContent = '0 spots left';
-                    document.getElementById('claimDealBtn').disabled = true;
-                    document.getElementById('claimDealBtn').classList.add('opacity-50');
-                }
-            }, 1000);
-        }
-
-        // Claim deal function
-        function claimDeal() {
-            if (spotsLeft > 0) {
-                spotsLeft--;
-                document.getElementById('spotsLeft').textContent = `spots left: ${spotsLeft}`;
-                addToCart('Family Package (Discounted)', 18500);
-                if (spotsLeft === 0) {
-                    document.getElementById('claimDealBtn').disabled = true;
-                    document.getElementById('claimDealBtn').classList.add('opacity-50');
-                    document.getElementById('claimDealBtn').textContent = 'Sold out';
-                }
-            }
-        }
-
-        // Deposit loan calculator
-        function showDepositLoanCalculator() {
-            showModal('Deposit Loan Calculator', `
-                <p class="mb-4">Calculate your monthly payments</p>
-                <div class="mb-4">
-                    <label class="block mb-2">Deposit amount (KSh)</label>
-                    <input type="number" id="depositAmount" class="w-full border rounded-lg p-2" value="60000">
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2">Loan term (months)</label>
-                    <select id="loanTerm" class="w-full border rounded-lg p-2">
-                        <option value="3">3 months</option>
-                        <option value="6">6 months</option>
-                        <option value="9">9 months</option>
-                        <option value="12">12 months</option>
-                    </select>
-                </div>
-                <div class="mb-4">
-                    <label class="block mb-2">Interest rate (APR)</label>
-                    <input type="number" id="interestRate" class="w-full border rounded-lg p-2" value="3" readonly> %
-                </div>
-                <button class="bg-kenyan-green text-white px-4 py-2 rounded-lg w-full" onclick="calculateLoan()">Calculate</button>
-                <div id="loanResult" class="mt-4 text-center font-bold"></div>
-            `);
-        }
-
-        function calculateLoan() {
-            const amount = parseFloat(document.getElementById('depositAmount').value);
-            const months = parseInt(document.getElementById('loanTerm').value);
-            const rate = 0.03 / 12; // monthly rate
-            const monthlyPayment = (amount * rate * Math.pow(1 + rate, months)) / (Math.pow(1 + rate, months) - 1);
-            const total = monthlyPayment * months;
-            document.getElementById('loanResult').innerHTML = `
-                Monthly payment: KSh ${Math.round(monthlyPayment).toLocaleString()}<br>
-                Total repayment: KSh ${Math.round(total).toLocaleString()}
-            `;
-        }
-
-        // Referral function
-        function generateReferral() {
-            const code = 'FRIEND' + Math.floor(Math.random() * 1000);
-            document.getElementById('referralLink').innerHTML = `🔗 Your link: haofinder.co.ke/ref/${code}`;
-            document.getElementById('referralLink').classList.remove('hidden');
-            showToast('📋 Referral link copied to clipboard!');
-        }
-
-        // Auth modal
-        function showAuthModal() {
-            showModal('Sign In / Sign Up', `
-                <div class="space-y-4">
-                    <button class="w-full border border-kenyan-green text-kenyan-green py-2 rounded-lg hover:bg-kenyan-green hover:text-white" onclick="showToast('📱 Google sign-in')">Continue with Google</button>
-                    <button class="w-full border border-kenyan-green text-kenyan-green py-2 rounded-lg hover:bg-kenyan-green hover:text-white" onclick="showToast('📧 Email sign-in')">Continue with Email</button>
-                    <button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('📱 Phone sign-up')">Continue with Phone</button>
-                </div>
-            `);
-        }
-
-        // Partner signup
-        function showPartnerSignup() {
-            showModal('Become a Partner', `
-                <p class="mb-4">Join 200+ service providers already growing on Haofinder</p>
-                <div class="space-y-3">
-                    <input type="text" placeholder="Business name" class="w-full border rounded-lg p-2">
-                    <input type="text" placeholder="Service type" class="w-full border rounded-lg p-2">
-                    <input type="text" placeholder="Phone number" class="w-full border rounded-lg p-2">
-                    <button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('📝 Partner application submitted')">Apply now</button>
-                </div>
-            `);
-        }
-
-        // Show all properties
-        function showAllProperties() {
-            showModal('All Properties in Nairobi', `
-                <div class="space-y-3 max-h-96 overflow-y-auto">
-                    ${properties.map(p => `
-                        <div class="border-b pb-2 cursor-pointer" onclick="viewProperty('${p.name}', ${p.price})">
-                            <div class="font-medium">${p.name}</div>
-                            <div class="text-sm text-[#8a7a64]">KSh ${p.price.toLocaleString()}/month</div>
-                        </div>
-                    `).join('')}
-                </div>
-            `);
-        }
-
-        // Show all neighborhoods
-        function showAllNeighborhoods() {
-            showModal('Nairobi Neighborhoods', `
-                <div class="space-y-2">
-                    <div class="font-medium">Westlands, Kilimani, Karen, Lavington, Kileleshwa,</div>
-                    <div class="font-medium">Runda, Lang'ata, Eastlands, South B, South C,</div>
-                    <div class="font-medium">Buruburu, Donholm, Umoja, Kayole, Embakasi</div>
-                </div>
-            `);
-        }
-
-        // Show all services
-        function showAllServices() {
-            showModal('All Services', `
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Movers</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Furniture</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Electrician</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Plumber</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Roofing</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Wallpaper</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">TV repair</div>
-                    <div class="p-2 bg-[#f5efe3] rounded-lg">Deposit loan</div>
-                </div>
-            `);
-        }
-
-        // Show testimonial
-        function showTestimonial(name) {
-            showModal(`${name}'s Story`, `
-                <p class="mb-4">"I found my dream home through Haofinder. The process was smooth and the services bundled saved me a lot of money. I highly recommend Haofinder to anyone moving in Nairobi."</p>
-                <p class="text-kenyan-green font-bold">- ${name}</p>
-            `);
-        }
-
-        // Initialize timer on load
-        window.onload = function () {
-            const twelveHours = 12 * 60 * 60;
-            const display = document.querySelector('#timer');
-            if (display) startTimer(twelveHours, display);
-        };
+        function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+        function showModal(title, body) { document.getElementById('modalTitle').textContent = title; document.getElementById('modalBody').innerHTML = body; document.getElementById('modal').classList.add('show'); }
+        function closeModal() { document.getElementById('modal').classList.remove('show'); }
+        function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
+        function addToCart(name, price) { cartCount++; cartItems.push({ name, price }); updateCartCounter(); showToast(`✅ Added ${name} to cart (${formatPrice(price)})`); }
+        function showCart() { if(cartItems.length===0) return showToast('Cart empty'); let total = cartItems.reduce((s,i)=>s+i.price,0); let list = cartItems.map(i=>`<li>${i.name} - ${formatPrice(i.price)}</li>`).join(''); showModal('Cart', `<ul class="list-disc pl-4 mb-4">${list}</ul><p class="font-bold">Total: ${formatPrice(total)}</p><button class="mt-4 bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="checkout()">Checkout</button>`); }
+        function checkout() { closeModal(); showToast('🎉 Checkout complete!'); cartCount=0; cartItems=[]; updateCartCounter(); }
+        function selectArea(area) { document.getElementById('searchLocation').value = area + ', Nairobi'; showToast(`📍 Searching in ${area}`); document.querySelectorAll('.pill-button').forEach(p=>p.classList.remove('active')); event.currentTarget.classList.add('active'); }
+        function performSearch() { let loc = document.getElementById('searchLocation').value; let svc = document.getElementById('searchService').value; showToast(`🔍 Searching for ${svc||'properties'} in ${loc}`); }
+        function viewProperty(name, price) { let property = properties.find(p=>p.name===name) || properties[0]; showModal(name, `<img src="${property.img}" class="w-full rounded-lg mb-4"><p class="mb-2">${property.description}</p><p class="mb-2 font-bold">Price: ${formatPrice(price)}/month</p><p class="mb-4 text-sm"><i class="fas fa-bed"></i> ${property.beds} beds · <i class="fas fa-bath"></i> ${property.baths} baths · ${property.sqft} sqft</p><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="scheduleViewing('${name}')">Schedule viewing</button>`); }
+        function scheduleViewing(p) { closeModal(); showToast(`📅 Viewing scheduled for ${p}. We'll confirm via SMS.`); }
+        function toggleSave(el) { let i = el.querySelector('i'); i.classList.contains('far') ? (i.classList.remove('far'), i.classList.add('fas'), showToast('❤️ Saved to favorites')) : (i.classList.remove('fas'), i.classList.add('far'), showToast('💔 Removed from favorites')); }
+        function nextProperties() { propertyPage = (propertyPage+1)%2; updatePropertyGrid(); }
+        function prevProperties() { propertyPage = (propertyPage-1+2)%2; updatePropertyGrid(); }
+        function updatePropertyGrid() { let start=propertyPage*3, end=start+3, shown=properties.slice(start,end), grid=document.getElementById('propertyGrid'); grid.innerHTML = shown.map(p=>`<div class="property-card card-hover" onclick="viewProperty('${p.name}',${p.price})"><div class="relative h-48"><img src="${p.img}" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-xs"><i class="fas fa-star text-yellow-400"></i> Verified</div><div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)"><i class="far fa-heart"></i></div></div><div class="p-4"><div class="flex justify-between"><div><h3 class="font-semibold">${p.name}</h3><p class="text-sm text-[#6b5e4a]">Nairobi</p></div><div class="text-right"><span class="font-bold text-kenyan-green">KSh ${p.price.toLocaleString()}</span><div class="text-xs text-[#8a7a64]">~$${Math.round(p.price/USD_RATE)}</div></div></div><div class="flex gap-3 mt-2 text-sm"><span><i class="fas fa-bed"></i> ${p.beds} beds</span><span><i class="fas fa-bath"></i> ${p.baths} baths</span><span><i class="fas fa-ruler-combined"></i> ${p.sqft} sqft</span></div></div></div>`).join(''); }
+        function showServiceDetail(name, orig, disc, rating, rev, desc, img) { showModal(name, `<img src="${img}" class="w-full rounded-lg mb-4 h-48 object-cover"><p class="mb-2">${desc}</p><p class="mb-2">Price: <span class="font-bold text-kenyan-green">${formatPrice(disc)}</span> <span class="line-through">${formatPrice(orig)}</span></p><p class="mb-2">Rating: ${rating} ★ (${rev} reviews)</p><p class="mb-4">100% money back guarantee. Verified professionals. <strong>Save up to 35% with tax deduction!</strong></p><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="addToCart('${name}', ${disc}); closeModal();">Book now</button>`); }
+        function showDepositLoanCalculator() { showModal('Deposit Loan Calculator', `<div class="mb-4"><label>Deposit amount (KSh)</label><input type="number" id="depositAmount" class="w-full border rounded-lg p-2" value="60000"><div class="text-xs text-[#8a7a64] mt-1">~$${Math.round(60000/USD_RATE)}</div></div><div class="mb-4"><label>Loan term (months)</label><select id="loanTerm" class="w-full border rounded-lg p-2"><option value="3">3 months</option><option value="6">6 months</option><option value="12">12 months</option></select></div><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg w-full" onclick="calculateLoan()">Calculate</button><div id="loanResult" class="mt-4 font-bold"></div>`); }
+        function calculateLoan() { let amt=parseFloat(document.getElementById('depositAmount').value), months=parseInt(document.getElementById('loanTerm').value), rate=0.03/12, monthly=(amt*rate*Math.pow(1+rate,months))/(Math.pow(1+rate,months)-1); document.getElementById('loanResult').innerHTML=`Monthly: ${formatPrice(Math.round(monthly))}<br>Total: ${formatPrice(Math.round(monthly*months))}<br><span class="text-xs text-green-600">Save ${formatPrice(Math.round(amt*0.03))} in interest vs traditional loans</span>`; }
+        function showTaxCalculator() { showModal('Tax Deduction Calculator', `<div class="mb-4"><label>Service cost (KSh)</label><input type="number" id="taxCost" class="w-full border rounded-lg p-2" value="10000"><div class="text-xs text-[#8a7a64] mt-1">~$${Math.round(10000/USD_RATE)}</div></div><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg w-full" onclick="calculateTax()">Calculate savings</button><div id="taxResult" class="mt-4 font-bold"></div>`); }
+        function calculateTax() { let cost=parseFloat(document.getElementById('taxCost').value); let savings=cost*0.35; document.getElementById('taxResult').innerHTML=`You save: ${formatPrice(Math.round(savings))}<br><span class="text-xs text-green-600">That's 35% of your service cost!</span>`; }
+        function showAllServices() { showModal('All Services (30+)', `<div class="grid grid-cols-2 gap-2">${services.map(s=>`<div class="p-3 bg-[#f5efe3] rounded-lg cursor-pointer text-center" onclick="addToCart('${s.name}',${s.price});closeModal()"><i class="fas ${s.category === 'cleaning' ? 'fa-broom' : s.category === 'garden' ? 'fa-leaf' : s.category === 'appliance' ? 'fa-microchip' : 'fa-tools'} text-kenyan-green"></i><p class="text-sm font-medium mt-1">${s.name}</p><p class="text-xs">${formatPrice(s.price)}</p></div>`).join('')}</div>`); }
+        function showAllNeighborhoods() { showModal('Nairobi Neighborhoods', `<div class="space-y-2"><div><strong>Premium areas:</strong> Kilimani (KSh 45K-80K / $346-615), Westlands (KSh 50K-100K / $385-769), Karen (KSh 70K-150K / $538-1154)</div><div class="mt-2"><strong>Mid-range:</strong> Lavington, Kileleshwa, Lang'ata (KSh 35K-70K / $269-538)</div><div class="mt-2"><strong>Affordable:</strong> Eastlands, Umoja, Donholm (KSh 12K-25K / $92-192)</div></div>`); }
+        function showAllProperties() { showModal('All Properties', `<div class="space-y-3">${properties.map(p=>`<div class="border-b pb-2 cursor-pointer" onclick="viewProperty('${p.name}',${p.price})"><div class="font-medium">${p.name}</div><div class="text-sm">${formatPrice(p.price)}/month · ${p.beds} beds · ${p.baths} baths</div></div>`).join('')}</div>`); }
+        function showAuthModal() { showModal('Sign In', `<button class="w-full border border-kenyan-green text-kenyan-green py-2 rounded-lg mb-3" onclick="showToast('Google sign-in')">Continue with Google</button><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('Email sign-up')">Continue with Email</button>`); }
+        function showPartnerSignup() { showModal('Become a Professional', `<input type="text" placeholder="Business name" class="w-full border rounded-lg p-2 mb-3"><input type="text" placeholder="Service type" class="w-full border rounded-lg p-2 mb-3"><input type="text" placeholder="Phone number" class="w-full border rounded-lg p-2 mb-3"><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('Application submitted! We'll contact you within 24 hours.');closeModal()">Apply now</button>`); }
+        function showTestimonial(name) { showModal(`${name}'s Story`, `<p>"I found my dream home through SmartMove. The process was smooth and the services bundled saved me a lot of money. The dual pricing in KES and USD made it easy for my relatives abroad to help with the deposit."</p><p class="text-kenyan-green font-bold mt-3">- ${name}</p>`); }
+        function generateReferral() { let code='FRIEND'+Math.floor(Math.random()*1000); document.getElementById('referralLink').innerHTML=`🔗 Your link: SmartMove.co.ke/ref/${code}<br><span class="text-xs">Share this link - you both get KSh 1,000 ($7.70) off</span>`; document.getElementById('referralLink').classList.remove('hidden'); showToast('Referral link generated! Share with friends.'); }
+        function claimDeal() { if(spotsLeft>0) { spotsLeft--; document.getElementById('spotsLeft').textContent=`${spotsLeft} left`; addToCart('Family Package (Discounted)', 18500); if(spotsLeft===0) { let btn=document.getElementById('claimDealBtn'); btn.disabled=true; btn.classList.add('opacity-50'); btn.textContent='Sold out'; } } }
+        function startTimer(duration, display) { let timer=duration, h,m,s; timerInterval=setInterval(()=>{ h=parseInt(timer/3600,10); m=parseInt((timer%3600)/60,10); s=parseInt(timer%60,10); display.textContent=`${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`; if(--timer<0) { clearInterval(timerInterval); display.textContent='EXPIRED'; document.getElementById('spotsLeft').textContent='0 left'; } },1000); }
+        window.onload = function() { renderServices(); updatePropertyGrid(); let timerDisplay=document.querySelector('#timer'); if(timerDisplay) startTimer(12*60*60, timerDisplay); };
     </script>
 </body>
 </html>
