@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartMove.Co.Ke · Find a home, find everything</title>
-    <!-- Tailwind + Inter font -->
+    <link rel="icon" type="image/png" href="img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { font-family: 'Inter', sans-serif; }
         body { background: #fefcf5; }
-        
         .card-hover { transition: all 0.3s cubic-bezier(0.2, 0, 0, 1); }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.1); }
         .search-shadow { box-shadow: 0 8px 30px rgba(0, 98, 51, 0.08); }
@@ -21,7 +19,6 @@
         .text-kenyan-green { color: #006233; }
         .border-kenyan-green { border-color: #006233; }
         
-        /* Enhanced service card with image */
         .service-card-enhanced {
             background: white;
             border-radius: 24px;
@@ -37,8 +34,9 @@
         }
         .service-img {
             width: 100%;
-            height: 160px;
+            height: 180px;
             object-fit: cover;
+            background: #e8f0e8;
         }
         .rating-badge {
             background: #fef3c7;
@@ -68,12 +66,7 @@
             height: 180px;
             cursor: pointer;
         }
-        .hood-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
+        .hood-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; background: #d0d9c0; }
         .hood-card:hover img { transform: scale(1.05); }
         .hood-card .overlay {
             position: absolute;
@@ -178,6 +171,22 @@
         
         .stars { color: #fbbf24; letter-spacing: 2px; }
         .price-dual { font-size: 0.75rem; color: #8a7a64; }
+        
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+        }
+        .collapsible-content.open {
+            max-height: 2000px;
+            transition: max-height 0.6s ease-in;
+        }
+        .rotate-icon {
+            transition: transform 0.3s ease;
+        }
+        .rotate-icon.open {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="text-[#2d2a24] antialiased">
@@ -193,12 +202,12 @@
         </div>
     </div>
 
-    <!-- Header -->
+    <!-- Header with Logo -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="showToast('🏠 Welcome to SmartMove.Co.Ke!')">
-                <div class="w-9 h-9 rounded-xl bg-kenyan-green flex items-center justify-center">
-                    <i class="fas fa-arrow-right-arrow-left text-white text-lg"></i>
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='/'">
+                <div class="w-10 h-10 rounded-xl bg-kenyan-green flex items-center justify-center">
+                    <i class="fas fa-home text-white text-xl"></i>
                 </div>
                 <div>
                     <span class="text-2xl font-bold text-kenyan-green">SmartMove</span>
@@ -207,7 +216,7 @@
                 <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Nairobi</span>
             </div>
             <div class="flex items-center gap-4">
-                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="showToast('📋 List your property form')">List your property</button>
+                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="openWhatsAppForm('List Property Inquiry')">List your property</button>
                 <div class="relative cursor-pointer" onclick="showCart()">
                     <i class="fas fa-shopping-cart text-xl text-[#5a6b4a] hover:text-kenyan-green"></i>
                     <span id="cartCount" class="absolute -top-2 -right-2 cart-counter">0</span>
@@ -250,7 +259,7 @@
                     <input type="date" id="moveDate" class="w-full outline-none" value="2026-04-15">
                 </div>
                 <div class="flex-none px-2 py-2">
-                    <button class="bg-kenyan-green hover:bg-[#004d29] text-white px-8 py-3 rounded-xl font-medium transition w-full md:w-auto" onclick="performSearch()">Search</button>
+                    <button class="bg-kenyan-green hover:bg-[#004d29] text-white px-8 py-3 rounded-xl font-medium transition w-full md:w-auto" onclick="submitSearchToWhatsApp()">Search</button>
                 </div>
             </div>
             
@@ -275,58 +284,51 @@
             <h2 class="text-xl font-medium">Nairobi neighborhoods</h2>
             <a href="#" class="text-kenyan-green text-sm font-medium hover:underline" onclick="showAllNeighborhoods(); return false;">View all <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="hood-card" onclick="selectArea('Kilimani')">
-                <img src="https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Kilimani">
-                <div class="overlay"><h3 class="font-bold text-lg">Kilimani</h3><p class="text-xs">24 properties · from KSh 45K ($346)</p></div>
-            </div>
-            <div class="hood-card" onclick="selectArea('Westlands')">
-                <img src="https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Westlands">
-                <div class="overlay"><h3 class="font-bold text-lg">Westlands</h3><p class="text-xs">31 properties · from KSh 60K ($462)</p></div>
-            </div>
-            <div class="hood-card" onclick="selectArea('Karen')">
-                <img src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Karen">
-                <div class="overlay"><h3 class="font-bold text-lg">Karen</h3><p class="text-xs">18 properties · from KSh 85K ($654)</p></div>
-            </div>
-            <div class="hood-card" onclick="selectArea('Eastlands')">
-                <img src="https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Eastlands">
-                <div class="overlay"><h3 class="font-bold text-lg">Eastlands</h3><p class="text-xs">22 properties · from KSh 15K ($115)</p></div>
-            </div>
-        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="neighborhoodsGrid"></div>
     </div>
 
-    <!-- Most Popular Services - Enhanced with Images (15 Services) -->
+    <!-- Most Popular Services with Realistic Kenyan Prices -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex items-center justify-between mb-5">
             <h2 class="text-xl font-medium">Most popular services</h2>
-            <a href="#" class="text-kenyan-green text-sm font-medium hover:underline" onclick="showAllServices(); return false;">All 30+ services <i class="fas fa-arrow-right ml-1 text-xs"></i></a>
+            <button class="text-kenyan-green text-sm font-medium hover:underline flex items-center gap-1" onclick="toggleCollapsible()">
+                <span id="toggleText">Show all 15+ services</span>
+                <i id="toggleIcon" class="fas fa-chevron-down text-xs rotate-icon"></i>
+            </button>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5" id="servicesGrid"></div>
+        <div id="servicesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        
+        <div id="collapsibleServices" class="collapsible-content mt-5">
+            <div class="border-t border-[#eef2f6] pt-6 mt-2">
+                <h3 class="text-lg font-semibold mb-4 text-kenyan-green">More services you might need</h3>
+                <div id="moreServicesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Quick Service Grid - Additional Services -->
+    <!-- Quick Service Grid -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <h3 class="text-md font-semibold mb-3">More services</h3>
+        <h3 class="text-md font-semibold mb-3">Quick book</h3>
         <div class="grid grid-cols-4 md:grid-cols-8 gap-3">
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Movers (2hrs)', 2500)"><i class="fas fa-truck-moving text-kenyan-green text-xl"></i><p class="text-xs mt-1">Movers</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Furniture rental', 4500)"><i class="fas fa-couch text-kenyan-green text-xl"></i><p class="text-xs mt-1">Furniture</p><span class="text-[10px] text-[#8a7a64]">KSh 4,500/mo</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Electrician', 1500)"><i class="fas fa-bolt text-kenyan-green text-xl"></i><p class="text-xs mt-1">Electrician</p><span class="text-[10px] text-[#8a7a64]">KSh 1,500</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Plumber', 1500)"><i class="fas fa-wrench text-kenyan-green text-xl"></i><p class="text-xs mt-1">Plumber</p><span class="text-[10px] text-[#8a7a64]">KSh 1,500</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Wallpaper installation', 2500)"><i class="fas fa-paint-roller text-kenyan-green text-xl"></i><p class="text-xs mt-1">Wallpaper</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('TV repair', 1000)"><i class="fas fa-tv text-kenyan-green text-xl"></i><p class="text-xs mt-1">TV repair</p><span class="text-[10px] text-[#8a7a64]">KSh 1,000</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Movers (4hrs, 2 men)', 4500)"><i class="fas fa-truck-moving text-kenyan-green text-xl"></i><p class="text-xs mt-1">Movers</p><span class="text-[10px] text-[#8a7a64]">KSh 4,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Furniture rental', 8500)"><i class="fas fa-couch text-kenyan-green text-xl"></i><p class="text-xs mt-1">Furniture</p><span class="text-[10px] text-[#8a7a64]">KSh 8,500/mo</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Electrician', 2500)"><i class="fas fa-bolt text-kenyan-green text-xl"></i><p class="text-xs mt-1">Electrician</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Plumber', 2500)"><i class="fas fa-wrench text-kenyan-green text-xl"></i><p class="text-xs mt-1">Plumber</p><span class="text-[10px] text-[#8a7a64]">KSh 2,500</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Wallpaper installation', 4500)"><i class="fas fa-paint-roller text-kenyan-green text-xl"></i><p class="text-xs mt-1">Wallpaper</p><span class="text-[10px] text-[#8a7a64]">KSh 4,500/room</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('TV repair', 2000)"><i class="fas fa-tv text-kenyan-green text-xl"></i><p class="text-xs mt-1">TV repair</p><span class="text-[10px] text-[#8a7a64]">KSh 2,000</span></div>
             <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="showDepositLoanCalculator()"><i class="fas fa-coins text-kenyan-green text-xl"></i><p class="text-xs mt-1">Deposit loan</p><span class="text-[10px] text-[#8a7a64]">from 3% APR</span></div>
-            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Deep cleaning', 3000)"><i class="fas fa-broom text-kenyan-green text-xl"></i><p class="text-xs mt-1">Cleaning</p><span class="text-[10px] text-[#8a7a64]">KSh 3,000</span></div>
+            <div class="bg-white rounded-xl p-3 text-center border border-[#f0e6d5] cursor-pointer hover:border-kenyan-green" onclick="addToCart('Deep cleaning', 5500)"><i class="fas fa-broom text-kenyan-green text-xl"></i><p class="text-xs mt-1">Cleaning</p><span class="text-[10px] text-[#8a7a64]">KSh 5,500</span></div>
         </div>
     </div>
 
     <!-- Deposit Loan Banner -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div class="deposit-banner flex flex-col md:flex-row items-center justify-between gap-4 cursor-pointer" onclick="showDepositLoanCalculator()">
+        <div class="deposit-banner flex flex-col md:flex-row items-center justify-between gap-4 cursor-pointer" onclick="openWhatsAppForm('Deposit Loan Inquiry')">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-kenyan-green rounded-full flex items-center justify-center text-white text-2xl"><i class="fas fa-coins"></i></div>
                 <div><h3 class="font-bold text-lg">Move in with just 1 month's rent</h3><p class="text-sm">We finance your deposit. Pay in 3-12 installments from <span class="font-semibold">3% APR</span></p></div>
             </div>
-            <button class="bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium" onclick="event.stopPropagation(); showDepositLoanCalculator()">Check eligibility →</button>
+            <button class="bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium" onclick="event.stopPropagation(); openWhatsAppForm('Deposit Loan Eligibility')">Check eligibility →</button>
         </div>
     </div>
 
@@ -337,7 +339,7 @@
                 <div class="w-12 h-12 bg-kenyan-green rounded-full flex items-center justify-center text-white text-xl"><i class="fas fa-percent"></i></div>
                 <div><h3 class="font-bold">Save with household tax deduction</h3><p class="text-sm text-[#6b5e4a]">You can deduct up to 35% of labor costs from your taxes. Save up to KSh 25,000 ($192)/year</p></div>
             </div>
-            <button class="border-2 border-kenyan-green text-kenyan-green px-5 py-2 rounded-full text-sm font-medium hover:bg-kenyan-green hover:text-white transition" onclick="showTaxCalculator()">Try calculator →</button>
+            <button class="border-2 border-kenyan-green text-kenyan-green px-5 py-2 rounded-full text-sm font-medium hover:bg-kenyan-green hover:text-white transition" onclick="openWhatsAppForm('Tax Deduction Question')">Try calculator →</button>
         </div>
     </div>
 
@@ -352,7 +354,7 @@
         </div>
         <div id="propertyGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         <div class="text-center mt-8">
-            <button class="border border-[#e6d9c8] hover:border-kenyan-green px-8 py-3 rounded-full text-sm font-medium" onclick="showAllProperties()">View more properties (47) <i class="fas fa-arrow-right text-xs"></i></button>
+            <button class="border border-[#e6d9c8] hover:border-kenyan-green px-8 py-3 rounded-full text-sm font-medium" onclick="openWhatsAppForm('Property Inquiry - More listings')">View more properties (47) <i class="fas fa-arrow-right text-xs"></i></button>
         </div>
     </div>
 
@@ -368,34 +370,34 @@
                 <div class="bg-white rounded-2xl p-5 border border-[#e6d9c8] card-hover">
                     <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-seedling text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Starter</h3>
-                    <div class="font-bold text-kenyan-green text-xl">KSh 8,500</div><div class="price-dual mb-2">~$65</div>
-                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (2 hours)</li><li>✓ 1 x fundi visit</li><li>✓ Table + 2 chairs</li><li>✓ Bed frame + mattress</li></ul>
-                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="addToCart('Starter Package', 8500)">Add to cart</button>
+                    <div class="font-bold text-kenyan-green text-xl">KSh 15,000</div><div class="price-dual mb-2">~$115</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (4 hours, 2 men)</li><li>✓ 1 x technician visit</li><li>✓ Basic cleaning</li><li>✓ Bed frame + mattress</li></ul>
+                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="submitPackageInquiry('Starter Package', 15000)">Add to cart</button>
                 </div>
                 <div class="bg-white rounded-2xl p-5 border-2 border-[#d4b68a] card-hover relative">
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#d4b68a] text-white px-3 py-0.5 rounded-full text-xs">Perfect for 1-bed</div>
                     <div class="w-12 h-12 bg-[#f5e6d3] rounded-xl flex items-center justify-center text-[#b87c4b] mb-3"><i class="fas fa-couch text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Studio / 1-Bed</h3>
-                    <div class="font-bold text-[#b87c4b] text-xl">KSh 13,500</div><div class="price-dual mb-2">~$104</div>
-                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (half day)</li><li>✓ Electrician + plumber</li><li>✓ 3-seater sofa</li><li>✓ Dining set + bed + wardrobe</li></ul>
-                    <button class="w-full mt-4 bg-[#b87c4b] text-white py-2 rounded-xl text-sm font-medium hover:bg-[#9e683f]" onclick="addToCart('Studio/1-Bed Package', 13500)">Add to cart</button>
+                    <div class="font-bold text-[#b87c4b] text-xl">KSh 25,000</div><div class="price-dual mb-2">~$192</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (full day, 3 men)</li><li>✓ Electrician + plumber</li><li>✓ 3-seater sofa + dining set</li><li>✓ Bed + wardrobe + curtains</li></ul>
+                    <button class="w-full mt-4 bg-[#b87c4b] text-white py-2 rounded-xl text-sm font-medium hover:bg-[#9e683f]" onclick="submitPackageInquiry('Studio/1-Bed Package', 25000)">Add to cart</button>
                 </div>
                 <div class="bg-white rounded-2xl p-5 border-2 border-kenyan-green card-hover relative">
                     <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-kenyan-green text-white px-3 py-0.5 rounded-full text-xs">Most popular</div>
                     <div class="timer mb-3 mx-auto w-fit"><i class="fas fa-clock"></i><span id="timer">12:34:56</span><span id="spotsLeft" class="text-xs ml-1">4 left</span></div>
                     <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-users text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Family package</h3>
-                    <div><span class="font-bold text-kenyan-green text-xl">KSh 18,500</span><span class="text-xs line-through ml-2">KSh 24,000</span></div>
-                    <div class="price-dual mb-2">~$142</div>
+                    <div><span class="font-bold text-kenyan-green text-xl">KSh 35,000</span><span class="text-xs line-through ml-2">KSh 48,000</span></div>
+                    <div class="price-dual mb-2">~$269</div>
                     <ul class="mt-3 space-y-1 text-sm"><li>✓ Movers (full day + 2 trucks)</li><li>✓ Furniture for 4 rooms</li><li>✓ Plumber + electrician</li><li>✓ Deep cleaning + WiFi/DStv</li><li class="font-semibold text-kenyan-green">✓ Deposit loan pre-approved</li></ul>
                     <button class="w-full mt-4 bg-kenyan-green text-white py-2 rounded-xl text-sm font-medium animate-pulse" onclick="claimDeal()" id="claimDealBtn">Claim deal - 4 spots left</button>
                 </div>
                 <div class="bg-white rounded-2xl p-5 border border-[#e6d9c8] card-hover">
                     <div class="w-12 h-12 bg-[#e0ebdd] rounded-xl flex items-center justify-center text-kenyan-green mb-3"><i class="fas fa-briefcase text-xl"></i></div>
                     <h3 class="font-semibold text-lg">Executive</h3>
-                    <div class="font-bold text-kenyan-green text-xl">KSh 32,000</div><div class="price-dual mb-2">~$246</div>
-                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Premium movers</li><li>✓ Designer furniture</li><li>✓ Specialized technicians</li><li>✓ Smart home setup</li><li>✓ Deposit loan included</li></ul>
-                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="addToCart('Executive Package', 32000)">Add to cart</button>
+                    <div class="font-bold text-kenyan-green text-xl">KSh 55,000</div><div class="price-dual mb-2">~$423</div>
+                    <ul class="mt-3 space-y-1 text-sm"><li>✓ Premium movers (4 men, 2 trucks)</li><li>✓ Designer furniture package</li><li>✓ Specialized technicians</li><li>✓ Premium cleaning + smart home setup</li><li>✓ Deposit loan included</li></ul>
+                    <button class="w-full mt-4 border border-kenyan-green text-kenyan-green py-2 rounded-xl text-sm font-medium hover:bg-kenyan-green hover:text-white" onclick="submitPackageInquiry('Executive Package', 55000)">Add to cart</button>
                 </div>
             </div>
             
@@ -404,13 +406,13 @@
                 <div class="flex justify-center gap-2 mb-2"><i class="fas fa-heart text-kenyan-red text-2xl"></i><i class="fas fa-heart text-kenyan-green text-2xl"></i><i class="fas fa-heart text-kenyan-red text-2xl"></i></div>
                 <h3 class="text-xl font-bold">Refer a friend, you both save</h3>
                 <p class="text-[#6b5e4a] mb-3">Share SmartMove.Co.Ke with someone moving to Nairobi</p>
-                <div class="flex justify-center gap-4"><span class="font-bold text-kenyan-green">KSh 1,000 off</span><span>|</span><span class="font-bold text-kenyan-green">$7.70 off</span></div>
+                <div class="flex justify-center gap-4"><span class="font-bold text-kenyan-green">KSh 2,000 off</span><span>|</span><span class="font-bold text-kenyan-green">$15 off</span></div>
                 <button class="mt-4 bg-kenyan-green text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#004d29]" onclick="generateReferral()">Get referral link →</button>
                 <div id="referralLink" class="mt-3 text-sm text-kenyan-green hidden"></div>
             </div>
             
             <div class="mt-8 text-center italic text-sm text-[#6b5e4a] border-l-3 border-kenyan-red pl-4 max-w-2xl mx-auto">
-                <p>Are you a service provider or business? <a href="#" class="text-kenyan-green font-medium hover:underline" onclick="showPartnerSignup(); return false;">Join as a partner</a> and get new customers every day.</p>
+                <p>Are you a service provider or business? <a href="#" class="text-kenyan-green font-medium hover:underline" onclick="openWhatsAppForm('Partner Application'); return false;">Join as a partner</a> and get new customers every day.</p>
             </div>
         </div>
     </div>
@@ -429,17 +431,17 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h2 class="text-xl font-medium text-center mb-8">What our customers say</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Mary Wanjiku')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">MW</div><div><div class="font-medium">Mary Wanjiku</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Found my 2-bed in Kilimani for KSh 55K ($423) and got movers and furniture all in one place. Saved over KSh 8,000!"</p></div>
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('John Omondi')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">JO</div><div><div class="font-medium">John Omondi</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"The deposit loan helped me move into Westlands with just KSh 45K ($346). Paying KSh 4,500/month for the loan."</p></div>
-            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="showTestimonial('Amina Hassan')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">AH</div><div><div class="font-medium">Amina Hassan</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Referred my cousin and we both got KSh 1,000 off. Best move ever! Total savings over KSh 15,000 on the Family package."</p></div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="openWhatsAppForm('Testimonial - Mary Wanjiku')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">MW</div><div><div class="font-medium">Mary Wanjiku</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Found my 2-bed in Kilimani for KSh 55K ($423) and got movers and furniture all in one place. Saved over KSh 15,000!"</p></div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="openWhatsAppForm('Testimonial - John Omondi')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">JO</div><div><div class="font-medium">John Omondi</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"The deposit loan helped me move into Westlands with just KSh 45K ($346). Paying KSh 8,500/month for the loan."</p></div>
+            <div class="bg-white p-5 rounded-2xl border border-[#f0e6d5] cursor-pointer" onclick="openWhatsAppForm('Testimonial - Amina Hassan')"><div class="flex items-center gap-2 mb-3"><div class="w-10 h-10 bg-[#d9d0c0] rounded-full flex items-center justify-center">AH</div><div><div class="font-medium">Amina Hassan</div><div class="stars">★★★★★</div></div></div><p class="text-sm">"Referred my cousin and we both got KSh 2,000 off. Best move ever! Total savings over KSh 25,000 on the Family package."</p></div>
         </div>
     </div>
 
     <!-- Download App + Professional CTA -->
     <div class="bg-kenyan-green py-12 mt-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-white text-center md:text-left"><i class="fas fa-mobile-alt text-3xl mb-2 block"></i><h3 class="font-bold text-xl">Download the SmartMove app</h3><p>Over 100 services available at your fingertips</p><div class="flex gap-3 mt-3 justify-center md:justify-start"><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="showToast('App Store')"><i class="fab fa-apple"></i> App Store</button><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="showToast('Google Play')"><i class="fab fa-google-play"></i> Google Play</button></div></div>
-            <div class="text-white text-center"><i class="fas fa-briefcase text-3xl mb-2 block"></i><p class="font-semibold">Are you a professional?</p><p class="text-sm">Join SmartMove and get new customers</p><button class="mt-3 bg-white text-kenyan-green px-6 py-2 rounded-full font-medium" onclick="showPartnerSignup()">Register as a professional →</button></div>
+            <div class="text-white text-center md:text-left"><i class="fas fa-mobile-alt text-3xl mb-2 block"></i><h3 class="font-bold text-xl">Download the SmartMove app</h3><p>Over 100 services available at your fingertips</p><div class="flex gap-3 mt-3 justify-center md:justify-start"><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="openWhatsAppForm('App Download Inquiry')"><i class="fab fa-apple"></i> App Store</button><button class="bg-white/20 px-4 py-2 rounded-xl" onclick="openWhatsAppForm('App Download Inquiry')"><i class="fab fa-google-play"></i> Google Play</button></div></div>
+            <div class="text-white text-center"><i class="fas fa-briefcase text-3xl mb-2 block"></i><p class="font-semibold">Are you a professional?</p><p class="text-sm">Join SmartMove and get new customers</p><button class="mt-3 bg-white text-kenyan-green px-6 py-2 rounded-full font-medium" onclick="openWhatsAppForm('Professional Registration')">Register as a professional →</button></div>
         </div>
     </div>
 
@@ -447,44 +449,105 @@
     <footer class="border-t border-[#e6d9c8] pt-10 pb-6 bg-[#faf5eb]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-                <div><h4 class="font-bold mb-3">SmartMove.Co.Ke</h4><ul class="space-y-2 text-sm text-[#6b5e4a]"><li><a href="#" onclick="showToast('About')">About us</a></li><li><a href="#" onclick="showToast('How it works')">How it works?</a></li><li><a href="#" onclick="showTaxCalculator()">Tax deduction</a></li></ul></div>
-                <div><h4 class="font-bold mb-3">Services</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="showAllServices()">All Services</a></li><li><a href="#" onclick="showAllServices()">Plumber/Electrician</a></li><li><a href="#" onclick="showDepositLoanCalculator()">Deposit loan</a></li></ul></div>
-                <div><h4 class="font-bold mb-3">Company</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="showPartnerSignup()">Register as professional</a></li><li><a href="#" onclick="showToast('Terms')">Terms of service</a></li><li><a href="#" onclick="showToast('Privacy')">Privacy policy</a></li></ul></div>
-                <div><h4 class="font-bold mb-3">Connect</h4><div class="flex gap-3 text-xl"><a href="#" onclick="showToast('Instagram')"><i class="fab fa-instagram"></i></a><a href="#" onclick="showToast('Twitter')"><i class="fab fa-x-twitter"></i></a><a href="#" onclick="showToast('WhatsApp')"><i class="fab fa-whatsapp"></i></a></div></div>
+                <div><h4 class="font-bold mb-3">SmartMove.Co.Ke</h4><ul class="space-y-2 text-sm text-[#6b5e4a]"><li><a href="#" onclick="openWhatsAppForm('About Us Inquiry')">About us</a></li><li><a href="#" onclick="openWhatsAppForm('How It Works Question')">How it works?</a></li><li><a href="#" onclick="openWhatsAppForm('Tax Deduction Question')">Tax deduction</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Services</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="openWhatsAppForm('All Services Inquiry')">All Services</a></li><li><a href="#" onclick="openWhatsAppForm('Plumber/Electrician Inquiry')">Plumber/Electrician</a></li><li><a href="#" onclick="openWhatsAppForm('Deposit Loan Inquiry')">Deposit loan</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Company</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="openWhatsAppForm('Professional Registration')">Register as professional</a></li><li><a href="#" onclick="openWhatsAppForm('Terms Inquiry')">Terms of service</a></li><li><a href="#" onclick="openWhatsAppForm('Privacy Inquiry')">Privacy policy</a></li></ul></div>
+                <div><h4 class="font-bold mb-3">Connect</h4><div class="flex gap-3 text-xl"><a href="#" onclick="openWhatsAppForm('Social - Instagram')"><i class="fab fa-instagram"></i></a><a href="#" onclick="openWhatsAppForm('Social - Twitter')"><i class="fab fa-x-twitter"></i></a><a href="#" onclick="openWhatsAppForm('Social - WhatsApp')"><i class="fab fa-whatsapp"></i></a></div></div>
             </div>
             <div class="border-t pt-6 text-xs text-[#8a7a64] text-center">© 2026 SmartMove.Co.Ke Kenya · Making moves easier · Exchange rate: 1 USD = 130 KES</div>
         </div>
     </footer>
 
     <script>
+        // WhatsApp Integration
+        const WHATSAPP_NUMBER = "254115006628";
+        const SUPPORT_EMAIL = "info@haofinder.com";
         const USD_RATE = 130;
+        
         function formatPrice(kes) { return `KSh ${kes.toLocaleString()} ($${Math.round(kes/USD_RATE)})`; }
         
-        // Enhanced services array with images, descriptions, ratings, prices
-        const services = [
-            { id: 1, name: "Window Washing", price: 2499, original: 3500, rating: 4.8, reviews: 156, desc: "Crystal clear windows by professionals. Interior & exterior cleaning, streak-free guarantee.", img: "https://images.pexels.com/photos/6207466/pexels-photo-6207466.jpeg?auto=compress&cs=tinysrgb&w=400", category: "cleaning" },
-            { id: 2, name: "Hedge Trimming / Lawn Care", price: 1999, original: 2800, rating: 4.7, reviews: 89, desc: "Professional lawn mowing, hedge trimming, and garden maintenance. Weekly or one-off service.", img: "https://images.pexels.com/photos/189332/pexels-photo-189332.jpeg?auto=compress&cs=tinysrgb&w=400", category: "garden" },
-            { id: 3, name: "Tank Cleaning Service", price: 4999, original: 7000, rating: 4.9, reviews: 67, desc: "Overhead & underground tank cleaning. Safe, hygienic, and certified professionals.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", category: "maintenance" },
-            { id: 4, name: "Washing Machine Repair", price: 1800, original: 2500, rating: 4.8, reviews: 112, desc: "Same-day washing machine repair. All brands, warranty on parts, doorstep service.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", category: "appliance" },
-            { id: 5, name: "Cooker / Microwave Repair", price: 1500, original: 2200, rating: 4.7, reviews: 94, desc: "Expert repair for all cooker and microwave brands. Fast diagnosis, quality parts.", img: "https://images.pexels.com/photos/4239152/pexels-photo-4239152.jpeg?auto=compress&cs=tinysrgb&w=400", category: "appliance" },
-            { id: 6, name: "Gutter Cleaning", price: 1899, original: 2700, rating: 4.8, reviews: 73, desc: "Complete gutter cleaning and downpipe unblocking. Prevent water damage to your home.", img: "https://images.pexels.com/photos/209231/pexels-photo-209231.jpeg?auto=compress&cs=tinysrgb&w=400", category: "maintenance" },
-            { id: 7, name: "AC Repair & Maintenance", price: 2500, original: 3800, rating: 4.9, reviews: 145, desc: "Air conditioner repair, gas refill, and maintenance. Keep your home cool all year.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", category: "hvac" },
-            { id: 8, name: "Move-out Cleaning", price: 2499, original: 3500, rating: 4.7, reviews: 234, desc: "Professional home cleaning - 2 bedroom apartment. Deep cleaning for move-out.", img: "https://images.pexels.com/photos/4107283/pexels-photo-4107283.jpeg?auto=compress&cs=tinysrgb&w=400", category: "cleaning" }
+        function openWhatsAppForm(subject, details = "") {
+            let message = `*SmartMove.Co.Ke Inquiry*%0A%0A`;
+            message += `*Subject:* ${encodeURIComponent(subject)}%0A`;
+            message += `*Date:* ${new Date().toLocaleString()}%0A`;
+            if (details) {
+                message += `*Details:* ${encodeURIComponent(details)}%0A`;
+            }
+            message += `%0APlease get back to me as soon as possible.`;
+            const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+            showToast(`📱 Opening WhatsApp for ${subject}`);
+        }
+        
+        function submitSearchToWhatsApp() {
+            const location = document.getElementById('searchLocation').value;
+            const service = document.getElementById('searchService').value;
+            const date = document.getElementById('moveDate').value;
+            const message = `Search Query:%0A- Location: ${location}%0A- Service: ${service || 'Not specified'}%0A- Move Date: ${new Date(date).toLocaleDateString()}`;
+            openWhatsAppForm('Property & Service Search', message);
+        }
+        
+        function submitPackageInquiry(packageName, price) {
+            const message = `Package Inquiry:%0A- Package: ${packageName}%0A- Price: ${formatPrice(price)}%0A- I am interested in booking this package.`;
+            openWhatsAppForm(`Package: ${packageName}`, message);
+        }
+        
+        // Neighborhoods data
+        const neighborhoods = [
+            { name: "Kilimani", image: "https://images.unsplash.com/photo-1545324418-f1d3ac157c90?auto=format&fit=crop&w=800&q=80", price: "KSh 45K", usd: "$346", properties: 24 },
+            { name: "Westlands", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", price: "KSh 60K", usd: "$462", properties: 31 },
+            { name: "Karen", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", price: "KSh 85K", usd: "$654", properties: 18 },
+            { name: "Eastlands", image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80", price: "KSh 15K", usd: "$115", properties: 22 }
         ];
         
-        // Render services grid
-        function renderServices() {
-            const grid = document.getElementById('servicesGrid');
+        // Services with realistic Kenyan prices
+        const allServices = [
+            { id: 1, name: "Window Washing", price: 3500, original: 5000, rating: 4.8, reviews: 156, desc: "Professional window cleaning for 2-bedroom apartment. Includes interior and exterior.", img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 2, name: "Moving Help", price: 4500, original: 6500, rating: 4.9, reviews: 89, desc: "2 movers with truck for 4 hours. Includes loading, transport, and unloading.", img: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 3, name: "Move-out Cleaning", price: 5500, original: 8000, rating: 4.7, reviews: 234, desc: "Deep cleaning for 2-3 bedroom apartment. Perfect for end of tenancy.", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6958?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 4, name: "Home Maintenance", price: 3500, original: 5000, rating: 4.7, reviews: 112, desc: "Handyman service for small repairs: doors, cabinets, shelves, and more.", img: "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 5, name: "Gutter Cleaning", price: 3500, original: 5000, rating: 4.8, reviews: 73, desc: "Complete gutter cleaning and downpipe unblocking for standard home.", img: "https://images.unsplash.com/photo-1621905252507-b35242f8df49?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 6, name: "AC Repair & Maintenance", price: 4000, original: 6000, rating: 4.9, reviews: 145, desc: "AC servicing, gas refill, and repairs. Includes diagnostic and 30-day warranty.", img: "https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 7, name: "Tank Cleaning", price: 8000, original: 12000, rating: 4.9, reviews: 67, desc: "Professional overhead tank cleaning and disinfection. Certified and safe.", img: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80", featured: true },
+            { id: 8, name: "Hedge / Lawn Care", price: 3000, original: 4500, rating: 4.7, reviews: 89, desc: "Lawn mowing, hedge trimming, and garden cleanup for standard compound.", img: "https://images.unsplash.com/photo-1558905611-306869408605?auto=format&fit=crop&w=800&q=80", featured: true },
+            // Additional services
+            { id: 9, name: "Ventilation Duct Cleaning", price: 6000, original: 9000, rating: 4.8, reviews: 45, desc: "Professional duct cleaning for better air quality and energy efficiency.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 10, name: "Heat Pump Maintenance", price: 5500, original: 8000, rating: 4.8, reviews: 52, desc: "Complete heat pump servicing and maintenance for optimal performance.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 11, name: "Chimney Cleaning", price: 3500, original: 5000, rating: 4.9, reviews: 38, desc: "Safe and certified chimney sweeping to prevent fire hazards.", img: "https://images.pexels.com/photos/209231/pexels-photo-209231.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 12, name: "Drainage Inspection", price: 4500, original: 6500, rating: 4.7, reviews: 28, desc: "CCTV drain inspection and unblocking for residential properties.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 13, name: "Washing Machine Repair", price: 2500, original: 4000, rating: 4.8, reviews: 112, desc: "Same-day repair for all major brands. Includes diagnostic and parts warranty.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 14, name: "Cooker / Microwave Repair", price: 2500, original: 4000, rating: 4.7, reviews: 94, desc: "Expert repair for all cooker and microwave brands. Fast service.", img: "https://images.pexels.com/photos/4239152/pexels-photo-4239152.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 15, name: "Plumber Services", price: 2500, original: 4000, rating: 4.8, reviews: 156, desc: "Professional plumbing repairs. Leaky faucets, burst pipes, installations.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
+            { id: 16, name: "Electrician", price: 2500, original: 4000, rating: 4.9, reviews: 203, desc: "Certified electrician for repairs, installations, and safety inspections.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false }
+        ];
+        
+        const featuredServices = allServices.filter(s => s.featured);
+        const moreServices = allServices.filter(s => !s.featured);
+        
+        function renderNeighborhoods() {
+            const grid = document.getElementById('neighborhoodsGrid');
             if (!grid) return;
-            grid.innerHTML = services.map(s => `
-                <div class="service-card-enhanced card-hover" onclick="showServiceDetail('${s.name}', ${s.original}, ${s.price}, ${s.rating}, ${s.reviews}, '${s.desc}', '${s.img}')">
-                    <img src="${s.img}" class="service-img" alt="${s.name}">
+            grid.innerHTML = neighborhoods.map(n => `
+                <div class="hood-card" onclick="selectArea('${n.name}')">
+                    <img src="${n.image}" alt="${n.name}" onerror="this.src='https://placehold.co/800x400/006233/white?text=${n.name}'">
+                    <div class="overlay">
+                        <h3 class="font-bold text-lg">${n.name}</h3>
+                        <p class="text-xs">${n.properties} properties · from ${n.price} (${n.usd})</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function renderServiceCard(s) {
+            return `
+                <div class="service-card-enhanced card-hover" onclick="openWhatsAppForm('Service Inquiry: ${s.name}', 'Price: ${formatPrice(s.price)}\\nRating: ${s.rating} ★\\n${s.desc}')">
+                    <img src="${s.img}" class="service-img" alt="${s.name}" onerror="this.src='https://placehold.co/400x300/006233/white?text=${encodeURIComponent(s.name)}'">
                     <div class="p-4">
                         <div class="flex justify-between items-start">
                             <h3 class="font-semibold text-lg">${s.name}</h3>
                             <span class="rating-badge"><i class="fas fa-star text-xs"></i> ${s.rating} (${s.reviews})</span>
                         </div>
-                        <p class="text-sm text-[#6b7a5e] mt-1 line-clamp-2">${s.desc.substring(0, 80)}...</p>
+                        <p class="text-sm text-[#6b7a5e] mt-1">${s.desc.substring(0, 70)}...</p>
                         <div class="flex items-center gap-2 mt-3">
                             <span class="font-bold text-kenyan-green text-xl">KSh ${s.price.toLocaleString()}</span>
                             <span class="text-sm line-through text-[#8a7a64]">KSh ${s.original.toLocaleString()}</span>
@@ -492,22 +555,41 @@
                         <div class="price-dual">~$${Math.round(s.price/USD_RATE)}</div>
                         <div class="mt-3 flex items-center justify-between">
                             <span class="guarantee-badge"><i class="fas fa-check-circle"></i> 100% guarantee</span>
-                            <button class="bg-kenyan-green text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-[#004d29]" onclick="event.stopPropagation(); addToCart('${s.name}', ${s.price})">Book now</button>
+                            <button class="bg-kenyan-green text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-[#004d29]" onclick="event.stopPropagation(); openWhatsAppForm('Book Service: ${s.name}', 'Price: ${formatPrice(s.price)}\\nI would like to book this service.')">Book now</button>
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
         }
         
-        let cartCount = 0, cartItems = [], selectedServices = {}, propertyPage = 0, spotsLeft = 4, timerInterval;
+        let cartCount = 0, cartItems = [], propertyPage = 0, spotsLeft = 4, timerInterval;
+        let collapsibleOpen = false;
+        
         const properties = [
-            { name: 'Modern 2-Bed Apartment, Kilimani', price: 55000, beds: 2, baths: 2, sqft: 950, img: 'https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg', description: 'Modern apartment with parking, 24/7 security, and backup generator' },
-            { name: 'Family Home with Garden, Karen', price: 95000, beds: 4, baths: 3, sqft: 2200, img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg', description: 'Spacious home on 1/4 acre with mature garden, staff quarters, and borehole' },
-            { name: 'Affordable 2-Bed, Umoja', price: 18500, beds: 2, baths: 1, sqft: 650, img: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg', description: 'Cozy apartment close to shops and matatu stage' },
-            { name: 'Luxury Penthouse, Westlands', price: 120000, beds: 3, baths: 3, sqft: 1800, img: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg', description: 'Stunning penthouse with city views, private elevator, and rooftop terrace' },
-            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, sqft: 1500, img: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg', description: 'Beautiful bungalow with compound, secure parking, and servant quarters' },
-            { name: 'Studio Apartment, Kilimani', price: 35000, beds: 1, baths: 1, sqft: 450, img: 'https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg', description: 'Perfect for singles or students, fully furnished option available' }
+            { name: 'Modern 2-Bed Apartment, Kilimani', price: 55000, beds: 2, baths: 2, sqft: 950, img: 'https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Modern apartment with parking, 24/7 security, and backup generator' },
+            { name: 'Family Home with Garden, Karen', price: 95000, beds: 4, baths: 3, sqft: 2200, img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Spacious home on 1/4 acre with mature garden, staff quarters, and borehole' },
+            { name: 'Affordable 2-Bed, Umoja', price: 18500, beds: 2, baths: 1, sqft: 650, img: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Cozy apartment close to shops and matatu stage' },
+            { name: 'Luxury Penthouse, Westlands', price: 120000, beds: 3, baths: 3, sqft: 1800, img: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Stunning penthouse with city views, private elevator, and rooftop terrace' },
+            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, sqft: 1500, img: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Beautiful bungalow with compound, secure parking, and servant quarters' },
+            { name: 'Studio Apartment, Kilimani', price: 35000, beds: 1, baths: 1, sqft: 450, img: 'https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Perfect for singles or students, fully furnished option available' }
         ];
+
+        function toggleCollapsible() {
+            const content = document.getElementById('collapsibleServices');
+            const icon = document.getElementById('toggleIcon');
+            const text = document.getElementById('toggleText');
+            
+            collapsibleOpen = !collapsibleOpen;
+            if (collapsibleOpen) {
+                content.classList.add('open');
+                icon.classList.add('open');
+                text.textContent = 'Show less services';
+            } else {
+                content.classList.remove('open');
+                icon.classList.remove('open');
+                text.textContent = 'Show all 15+ services';
+            }
+        }
 
         function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
         function showModal(title, body) { document.getElementById('modalTitle').textContent = title; document.getElementById('modalBody').innerHTML = body; document.getElementById('modal').classList.add('show'); }
@@ -515,30 +597,35 @@
         function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
         function addToCart(name, price) { cartCount++; cartItems.push({ name, price }); updateCartCounter(); showToast(`✅ Added ${name} to cart (${formatPrice(price)})`); }
         function showCart() { if(cartItems.length===0) return showToast('Cart empty'); let total = cartItems.reduce((s,i)=>s+i.price,0); let list = cartItems.map(i=>`<li>${i.name} - ${formatPrice(i.price)}</li>`).join(''); showModal('Cart', `<ul class="list-disc pl-4 mb-4">${list}</ul><p class="font-bold">Total: ${formatPrice(total)}</p><button class="mt-4 bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="checkout()">Checkout</button>`); }
-        function checkout() { closeModal(); showToast('🎉 Checkout complete!'); cartCount=0; cartItems=[]; updateCartCounter(); }
-        function selectArea(area) { document.getElementById('searchLocation').value = area + ', Nairobi'; showToast(`📍 Searching in ${area}`); document.querySelectorAll('.pill-button').forEach(p=>p.classList.remove('active')); event.currentTarget.classList.add('active'); }
-        function performSearch() { let loc = document.getElementById('searchLocation').value; let svc = document.getElementById('searchService').value; showToast(`🔍 Searching for ${svc||'properties'} in ${loc}`); }
-        function viewProperty(name, price) { let property = properties.find(p=>p.name===name) || properties[0]; showModal(name, `<img src="${property.img}" class="w-full rounded-lg mb-4"><p class="mb-2">${property.description}</p><p class="mb-2 font-bold">Price: ${formatPrice(price)}/month</p><p class="mb-4 text-sm"><i class="fas fa-bed"></i> ${property.beds} beds · <i class="fas fa-bath"></i> ${property.baths} baths · ${property.sqft} sqft</p><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg" onclick="scheduleViewing('${name}')">Schedule viewing</button>`); }
-        function scheduleViewing(p) { closeModal(); showToast(`📅 Viewing scheduled for ${p}. We'll confirm via SMS.`); }
+        function checkout() { closeModal(); let total = cartItems.reduce((s,i)=>s+i.price,0); let items = cartItems.map(i=>`- ${i.name}: ${formatPrice(i.price)}`).join('%0A'); openWhatsAppForm('Checkout Order', `Order Summary:%0A${items}%0A%0ATotal: ${formatPrice(total)}%0A%0APlease confirm my order.`); cartCount=0; cartItems=[]; updateCartCounter(); }
+        function selectArea(area) { document.getElementById('searchLocation').value = area + ', Nairobi'; showToast(`📍 Searching in ${area}`); document.querySelectorAll('.pill-button').forEach(p=>p.classList.remove('active')); if(event.currentTarget) event.currentTarget.classList.add('active'); }
+        function performSearch() { submitSearchToWhatsApp(); }
+        function viewProperty(name, price) { let property = properties.find(p=>p.name===name) || properties[0]; openWhatsAppForm(`Property Inquiry: ${name}`, `Property: ${name}%0APrice: ${formatPrice(price)}/month%0A${property.beds} beds, ${property.baths} baths, ${property.sqft} sqft%0A%0AI would like to schedule a viewing.`); }
+        function scheduleViewing(p) { closeModal(); openWhatsAppForm(`Schedule Viewing: ${p}`, `I would like to schedule a viewing for ${p}. Please let me know available times.`); }
         function toggleSave(el) { let i = el.querySelector('i'); i.classList.contains('far') ? (i.classList.remove('far'), i.classList.add('fas'), showToast('❤️ Saved to favorites')) : (i.classList.remove('fas'), i.classList.add('far'), showToast('💔 Removed from favorites')); }
         function nextProperties() { propertyPage = (propertyPage+1)%2; updatePropertyGrid(); }
         function prevProperties() { propertyPage = (propertyPage-1+2)%2; updatePropertyGrid(); }
-        function updatePropertyGrid() { let start=propertyPage*3, end=start+3, shown=properties.slice(start,end), grid=document.getElementById('propertyGrid'); grid.innerHTML = shown.map(p=>`<div class="property-card card-hover" onclick="viewProperty('${p.name}',${p.price})"><div class="relative h-48"><img src="${p.img}" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-xs"><i class="fas fa-star text-yellow-400"></i> Verified</div><div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)"><i class="far fa-heart"></i></div></div><div class="p-4"><div class="flex justify-between"><div><h3 class="font-semibold">${p.name}</h3><p class="text-sm text-[#6b5e4a]">Nairobi</p></div><div class="text-right"><span class="font-bold text-kenyan-green">KSh ${p.price.toLocaleString()}</span><div class="text-xs text-[#8a7a64]">~$${Math.round(p.price/USD_RATE)}</div></div></div><div class="flex gap-3 mt-2 text-sm"><span><i class="fas fa-bed"></i> ${p.beds} beds</span><span><i class="fas fa-bath"></i> ${p.baths} baths</span><span><i class="fas fa-ruler-combined"></i> ${p.sqft} sqft</span></div></div></div>`).join(''); }
-        function showServiceDetail(name, orig, disc, rating, rev, desc, img) { showModal(name, `<img src="${img}" class="w-full rounded-lg mb-4 h-48 object-cover"><p class="mb-2">${desc}</p><p class="mb-2">Price: <span class="font-bold text-kenyan-green">${formatPrice(disc)}</span> <span class="line-through">${formatPrice(orig)}</span></p><p class="mb-2">Rating: ${rating} ★ (${rev} reviews)</p><p class="mb-4">100% money back guarantee. Verified professionals. <strong>Save up to 35% with tax deduction!</strong></p><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="addToCart('${name}', ${disc}); closeModal();">Book now</button>`); }
-        function showDepositLoanCalculator() { showModal('Deposit Loan Calculator', `<div class="mb-4"><label>Deposit amount (KSh)</label><input type="number" id="depositAmount" class="w-full border rounded-lg p-2" value="60000"><div class="text-xs text-[#8a7a64] mt-1">~$${Math.round(60000/USD_RATE)}</div></div><div class="mb-4"><label>Loan term (months)</label><select id="loanTerm" class="w-full border rounded-lg p-2"><option value="3">3 months</option><option value="6">6 months</option><option value="12">12 months</option></select></div><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg w-full" onclick="calculateLoan()">Calculate</button><div id="loanResult" class="mt-4 font-bold"></div>`); }
-        function calculateLoan() { let amt=parseFloat(document.getElementById('depositAmount').value), months=parseInt(document.getElementById('loanTerm').value), rate=0.03/12, monthly=(amt*rate*Math.pow(1+rate,months))/(Math.pow(1+rate,months)-1); document.getElementById('loanResult').innerHTML=`Monthly: ${formatPrice(Math.round(monthly))}<br>Total: ${formatPrice(Math.round(monthly*months))}<br><span class="text-xs text-green-600">Save ${formatPrice(Math.round(amt*0.03))} in interest vs traditional loans</span>`; }
-        function showTaxCalculator() { showModal('Tax Deduction Calculator', `<div class="mb-4"><label>Service cost (KSh)</label><input type="number" id="taxCost" class="w-full border rounded-lg p-2" value="10000"><div class="text-xs text-[#8a7a64] mt-1">~$${Math.round(10000/USD_RATE)}</div></div><button class="bg-kenyan-green text-white px-4 py-2 rounded-lg w-full" onclick="calculateTax()">Calculate savings</button><div id="taxResult" class="mt-4 font-bold"></div>`); }
-        function calculateTax() { let cost=parseFloat(document.getElementById('taxCost').value); let savings=cost*0.35; document.getElementById('taxResult').innerHTML=`You save: ${formatPrice(Math.round(savings))}<br><span class="text-xs text-green-600">That's 35% of your service cost!</span>`; }
-        function showAllServices() { showModal('All Services (30+)', `<div class="grid grid-cols-2 gap-2">${services.map(s=>`<div class="p-3 bg-[#f5efe3] rounded-lg cursor-pointer text-center" onclick="addToCart('${s.name}',${s.price});closeModal()"><i class="fas ${s.category === 'cleaning' ? 'fa-broom' : s.category === 'garden' ? 'fa-leaf' : s.category === 'appliance' ? 'fa-microchip' : 'fa-tools'} text-kenyan-green"></i><p class="text-sm font-medium mt-1">${s.name}</p><p class="text-xs">${formatPrice(s.price)}</p></div>`).join('')}</div>`); }
-        function showAllNeighborhoods() { showModal('Nairobi Neighborhoods', `<div class="space-y-2"><div><strong>Premium areas:</strong> Kilimani (KSh 45K-80K / $346-615), Westlands (KSh 50K-100K / $385-769), Karen (KSh 70K-150K / $538-1154)</div><div class="mt-2"><strong>Mid-range:</strong> Lavington, Kileleshwa, Lang'ata (KSh 35K-70K / $269-538)</div><div class="mt-2"><strong>Affordable:</strong> Eastlands, Umoja, Donholm (KSh 12K-25K / $92-192)</div></div>`); }
-        function showAllProperties() { showModal('All Properties', `<div class="space-y-3">${properties.map(p=>`<div class="border-b pb-2 cursor-pointer" onclick="viewProperty('${p.name}',${p.price})"><div class="font-medium">${p.name}</div><div class="text-sm">${formatPrice(p.price)}/month · ${p.beds} beds · ${p.baths} baths</div></div>`).join('')}</div>`); }
-        function showAuthModal() { showModal('Sign In', `<button class="w-full border border-kenyan-green text-kenyan-green py-2 rounded-lg mb-3" onclick="showToast('Google sign-in')">Continue with Google</button><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('Email sign-up')">Continue with Email</button>`); }
-        function showPartnerSignup() { showModal('Become a Professional', `<input type="text" placeholder="Business name" class="w-full border rounded-lg p-2 mb-3"><input type="text" placeholder="Service type" class="w-full border rounded-lg p-2 mb-3"><input type="text" placeholder="Phone number" class="w-full border rounded-lg p-2 mb-3"><button class="w-full bg-kenyan-green text-white py-2 rounded-lg" onclick="showToast('Application submitted! We'll contact you within 24 hours.');closeModal()">Apply now</button>`); }
-        function showTestimonial(name) { showModal(`${name}'s Story`, `<p>"I found my dream home through SmartMove. The process was smooth and the services bundled saved me a lot of money. The dual pricing in KES and USD made it easy for my relatives abroad to help with the deposit."</p><p class="text-kenyan-green font-bold mt-3">- ${name}</p>`); }
-        function generateReferral() { let code='FRIEND'+Math.floor(Math.random()*1000); document.getElementById('referralLink').innerHTML=`🔗 Your link: SmartMove.co.ke/ref/${code}<br><span class="text-xs">Share this link - you both get KSh 1,000 ($7.70) off</span>`; document.getElementById('referralLink').classList.remove('hidden'); showToast('Referral link generated! Share with friends.'); }
-        function claimDeal() { if(spotsLeft>0) { spotsLeft--; document.getElementById('spotsLeft').textContent=`${spotsLeft} left`; addToCart('Family Package (Discounted)', 18500); if(spotsLeft===0) { let btn=document.getElementById('claimDealBtn'); btn.disabled=true; btn.classList.add('opacity-50'); btn.textContent='Sold out'; } } }
+        function updatePropertyGrid() { let start=propertyPage*3, end=start+3, shown=properties.slice(start,end), grid=document.getElementById('propertyGrid'); grid.innerHTML = shown.map(p=>`<div class="property-card card-hover" onclick="viewProperty('${p.name}',${p.price})"><div class="relative h-48"><img src="${p.img}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x300/006233/white?text=Property'"><div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-xs"><i class="fas fa-star text-yellow-400"></i> Verified</div><div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)"><i class="far fa-heart"></i></div></div><div class="p-4"><div class="flex justify-between"><div><h3 class="font-semibold">${p.name}</h3><p class="text-sm text-[#6b5e4a]">Nairobi</p></div><div class="text-right"><span class="font-bold text-kenyan-green">${formatPrice(p.price)}</span><div class="text-xs text-[#8a7a64]">/month</div></div></div><div class="flex gap-3 mt-2 text-sm"><span><i class="fas fa-bed"></i> ${p.beds} beds</span><span><i class="fas fa-bath"></i> ${p.baths} baths</span><span><i class="fas fa-ruler-combined"></i> ${p.sqft} sqft</span></div></div></div>`).join(''); }
+        function showDepositLoanCalculator() { openWhatsAppForm('Deposit Loan Calculator', 'I am interested in learning about deposit loan options for my move. Please share more information.'); }
+        function showTaxCalculator() { openWhatsAppForm('Tax Deduction Calculator', 'I would like to learn about tax deduction savings for home services.'); }
+        function showAllServices() { openWhatsAppForm('All Services Inquiry', 'Please share information about all available home services in Nairobi.'); }
+        function showAllNeighborhoods() { openWhatsAppForm('Neighborhoods Inquiry', 'Please share information about properties in different Nairobi neighborhoods.'); }
+        function showAllProperties() { openWhatsAppForm('All Properties Inquiry', 'Please share more property listings in Nairobi.'); }
+        function showAuthModal() { openWhatsAppForm('Account Sign In', 'I need help with signing in to my SmartMove account.'); }
+        function showPartnerSignup() { openWhatsAppForm('Partner Application', 'Business Name: %0AService Type: %0APhone Number: %0A%0AI would like to register as a professional partner.'); }
+        function generateReferral() { let code='FRIEND'+Math.floor(Math.random()*1000); document.getElementById('referralLink').innerHTML=`🔗 Your link: SmartMove.co.ke/ref/${code}<br><span class="text-xs">Share this link - you both get KSh 2,000 ($15) off</span>`; document.getElementById('referralLink').classList.remove('hidden'); showToast('Referral link generated! Share with friends.'); }
+        function claimDeal() { if(spotsLeft>0) { spotsLeft--; document.getElementById('spotsLeft').textContent=`${spotsLeft} left`; openWhatsAppForm('Family Package Deal', 'I want to claim the Family Package deal with the limited-time offer.'); if(spotsLeft===0) { let btn=document.getElementById('claimDealBtn'); btn.disabled=true; btn.classList.add('opacity-50'); btn.textContent='Sold out'; } } }
         function startTimer(duration, display) { let timer=duration, h,m,s; timerInterval=setInterval(()=>{ h=parseInt(timer/3600,10); m=parseInt((timer%3600)/60,10); s=parseInt(timer%60,10); display.textContent=`${h<10?'0'+h:h}:${m<10?'0'+m:m}:${s<10?'0'+s:s}`; if(--timer<0) { clearInterval(timerInterval); display.textContent='EXPIRED'; document.getElementById('spotsLeft').textContent='0 left'; } },1000); }
-        window.onload = function() { renderServices(); updatePropertyGrid(); let timerDisplay=document.querySelector('#timer'); if(timerDisplay) startTimer(12*60*60, timerDisplay); };
+        
+        window.onload = function() { 
+            renderNeighborhoods();
+            document.getElementById('servicesGrid').innerHTML = featuredServices.map(s => renderServiceCard(s)).join('');
+            document.getElementById('moreServicesGrid').innerHTML = moreServices.map(s => renderServiceCard(s)).join('');
+            updatePropertyGrid(); 
+            let timerDisplay=document.querySelector('#timer'); 
+            if(timerDisplay) startTimer(12*60*60, timerDisplay); 
+            showToast('🎉 Welcome to SmartMove.Co.Ke!');
+        };
     </script>
 </body>
 </html>
