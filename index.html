@@ -454,7 +454,7 @@
                 <div><h4 class="font-bold mb-3">Company</h4><ul class="space-y-2 text-sm"><li><a href="#" onclick="openWhatsAppForm('Professional Registration')">Register as professional</a></li><li><a href="#" onclick="openWhatsAppForm('Terms Inquiry')">Terms of service</a></li><li><a href="#" onclick="openWhatsAppForm('Privacy Inquiry')">Privacy policy</a></li></ul></div>
                 <div><h4 class="font-bold mb-3">Connect</h4><div class="flex gap-3 text-xl"><a href="#" onclick="openWhatsAppForm('Social - Instagram')"><i class="fab fa-instagram"></i></a><a href="#" onclick="openWhatsAppForm('Social - Twitter')"><i class="fab fa-x-twitter"></i></a><a href="#" onclick="openWhatsAppForm('Social - WhatsApp')"><i class="fab fa-whatsapp"></i></a></div></div>
             </div>
-            <div class="border-t pt-6 text-xs text-[#8a7a64] text-center">© 2026 SmartMove.Co.Ke Kenya · Making moves easier · Exchange rate: 1 USD = 130 KES</div>
+            <div class="border-t pt-6 text-xs text-[#8a7a64] text-center"> &copy; <script>document.write(new Date().getFullYear())</script> SmartMove.Co.Ke Kenya · Making moves easier · Exchange rate: 1 USD = 130 KES</div>
         </div>
     </footer>
 
@@ -494,31 +494,27 @@
         
         // Neighborhoods data
         const neighborhoods = [
-            { name: "Kilimani", image: "https://images.unsplash.com/photo-1545324418-f1d3ac157c90?auto=format&fit=crop&w=800&q=80", price: "KSh 45K", usd: "$346", properties: 24 },
-            { name: "Westlands", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80", price: "KSh 60K", usd: "$462", properties: 31 },
-            { name: "Karen", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80", price: "KSh 85K", usd: "$654", properties: 18 },
-            { name: "Eastlands", image: "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80", price: "KSh 15K", usd: "$115", properties: 22 }
+            { name: "Kilimani", image: "/img/kilimani.jpg", price: "KSh 45K", usd: "$346", properties: 24 },
+            { name: "Westlands", image: "/img/westlands.jpg", price: "KSh 60K", usd: "$462", properties: 31 },
+            { name: "Karen", image: "/img/karen.jpg", price: "KSh 85K", usd: "$654", properties: 18 },
+            { name: "Eastlands", image: "/img/eastlands.jpg", price: "KSh 15K", usd: "$115", properties: 22 }
         ];
         
         // Services with realistic Kenyan prices
         const allServices = [
-            { id: 1, name: "Window Washing", price: 3500, original: 5000, rating: 4.8, reviews: 156, desc: "Professional window cleaning for 2-bedroom apartment. Includes interior and exterior.", img: "https://images.unsplash.com/photo-1527515637462-cff94eecc1ac?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 2, name: "Moving Help", price: 4500, original: 6500, rating: 4.9, reviews: 89, desc: "2 movers with truck for 4 hours. Includes loading, transport, and unloading.", img: "https://images.unsplash.com/photo-1600518464441-9154a4dea21b?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 3, name: "Move-out Cleaning", price: 5500, original: 8000, rating: 4.7, reviews: 234, desc: "Deep cleaning for 2-3 bedroom apartment. Perfect for end of tenancy.", img: "https://images.unsplash.com/photo-1581578731548-c64695cc6958?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 4, name: "Home Maintenance", price: 3500, original: 5000, rating: 4.7, reviews: 112, desc: "Handyman service for small repairs: doors, cabinets, shelves, and more.", img: "https://images.unsplash.com/photo-1581244277943-fe4a9c777189?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 5, name: "Gutter Cleaning", price: 3500, original: 5000, rating: 4.8, reviews: 73, desc: "Complete gutter cleaning and downpipe unblocking for standard home.", img: "https://images.unsplash.com/photo-1621905252507-b35242f8df49?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 6, name: "AC Repair & Maintenance", price: 4000, original: 6000, rating: 4.9, reviews: 145, desc: "AC servicing, gas refill, and repairs. Includes diagnostic and 30-day warranty.", img: "https://images.unsplash.com/photo-1581094288338-2314dddb7bc3?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 7, name: "Tank Cleaning", price: 8000, original: 12000, rating: 4.9, reviews: 67, desc: "Professional overhead tank cleaning and disinfection. Certified and safe.", img: "https://images.unsplash.com/photo-1517646287270-a5a9ca602e5c?auto=format&fit=crop&w=800&q=80", featured: true },
-            { id: 8, name: "Hedge / Lawn Care", price: 3000, original: 4500, rating: 4.7, reviews: 89, desc: "Lawn mowing, hedge trimming, and garden cleanup for standard compound.", img: "https://images.unsplash.com/photo-1558905611-306869408605?auto=format&fit=crop&w=800&q=80", featured: true },
-            // Additional services
-            { id: 9, name: "Ventilation Duct Cleaning", price: 6000, original: 9000, rating: 4.8, reviews: 45, desc: "Professional duct cleaning for better air quality and energy efficiency.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 10, name: "Heat Pump Maintenance", price: 5500, original: 8000, rating: 4.8, reviews: 52, desc: "Complete heat pump servicing and maintenance for optimal performance.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 11, name: "Chimney Cleaning", price: 3500, original: 5000, rating: 4.9, reviews: 38, desc: "Safe and certified chimney sweeping to prevent fire hazards.", img: "https://images.pexels.com/photos/209231/pexels-photo-209231.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 12, name: "Drainage Inspection", price: 4500, original: 6500, rating: 4.7, reviews: 28, desc: "CCTV drain inspection and unblocking for residential properties.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 13, name: "Washing Machine Repair", price: 2500, original: 4000, rating: 4.8, reviews: 112, desc: "Same-day repair for all major brands. Includes diagnostic and parts warranty.", img: "https://images.pexels.com/photos/4108650/pexels-photo-4108650.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 14, name: "Cooker / Microwave Repair", price: 2500, original: 4000, rating: 4.7, reviews: 94, desc: "Expert repair for all cooker and microwave brands. Fast service.", img: "https://images.pexels.com/photos/4239152/pexels-photo-4239152.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 15, name: "Plumber Services", price: 2500, original: 4000, rating: 4.8, reviews: 156, desc: "Professional plumbing repairs. Leaky faucets, burst pipes, installations.", img: "https://images.pexels.com/photos/258732/pexels-photo-258732.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false },
-            { id: 16, name: "Electrician", price: 2500, original: 4000, rating: 4.9, reviews: 203, desc: "Certified electrician for repairs, installations, and safety inspections.", img: "https://images.pexels.com/photos/2106008/pexels-photo-2106008.jpeg?auto=compress&cs=tinysrgb&w=400", featured: false }
+            { id: 1, name: "Window Washing", price: 3500, original: 5000, rating: 4.8, reviews: 156, desc: "Professional window cleaning for 2-bedroom apartment. Includes interior and exterior.", img: "/img/windowwashing.jpg", featured: true },
+            { id: 2, name: "Moving Help", price: 4500, original: 6500, rating: 4.9, reviews: 89, desc: "2 movers with truck for 4 hours. Includes loading, transport, and unloading.", img: "/img/movinghelp.jpg", featured: true },
+            { id: 3, name: "Move-out Cleaning", price: 5500, original: 8000, rating: 4.7, reviews: 234, desc: "Deep cleaning for 2-3 bedroom apartment. Perfect for end of tenancy.", img: "/img/moveoutcleaning.jpg", featured: true },
+            { id: 4, name: "Home Maintenance", price: 3500, original: 5000, rating: 4.7, reviews: 112, desc: "Handyman service for small repairs: doors, cabinets, shelves, and more.", img: "/img/homemaintenance.jpg", featured: true },
+            { id: 5, name: "Gutter Cleaning", price: 3500, original: 5000, rating: 4.8, reviews: 73, desc: "Complete gutter cleaning and downpipe unblocking for standard home.", img: "/img/guttercleaning.jpg", featured: true },
+            { id: 6, name: "AC Repair & Maintenance", price: 4000, original: 6000, rating: 4.9, reviews: 145, desc: "AC servicing, gas refill, and repairs. Includes diagnostic and 30-day warranty.", img: "/img/acrepairandmaintenance.jpg", featured: true },
+            { id: 7, name: "Tank Cleaning", price: 8000, original: 12000, rating: 4.9, reviews: 67, desc: "Professional overhead tank cleaning and disinfection. Certified and safe.", img: "/img/tankcleaning.jpg", featured: true },
+            { id: 11, name: "Chimney Cleaning", price: 3500, original: 5000, rating: 4.9, reviews: 38, desc: "Safe and certified chimney sweeping to prevent fire hazards.", img: "/img/chimneycleaning.jpg", featured: false },
+            { id: 12, name: "Drainage Inspection", price: 4500, original: 6500, rating: 4.7, reviews: 28, desc: "CCTV drain inspection and unblocking for residential properties.", img: "/img/drainage-inspection.jpg", featured: false },
+            { id: 13, name: "Washing Machine Repair", price: 2500, original: 4000, rating: 4.8, reviews: 112, desc: "Same-day repair for all major brands. Includes diagnostic and parts warranty.", img: "/img/washing-machine-repair.jpg", featured: false },
+            { id: 14, name: "Cooker / Microwave Repair", price: 2500, original: 4000, rating: 4.7, reviews: 94, desc: "Expert repair for all cooker and microwave brands. Fast service.", img: "/img/cooker-microwave-repair.jpg", featured: false },
+            { id: 15, name: "Plumber Services", price: 2500, original: 4000, rating: 4.8, reviews: 156, desc: "Professional plumbing repairs. Leaky faucets, burst pipes, installations.", img: "/img/plumbing.jpg", featured: false },
+            { id: 16, name: "Electrician", price: 2500, original: 4000, rating: 4.9, reviews: 203, desc: "Certified electrician for repairs, installations, and safety inspections.", img: "/img/electrician.jpg", featured: false }
         ];
         
         const featuredServices = allServices.filter(s => s.featured);
@@ -529,7 +525,7 @@
             if (!grid) return;
             grid.innerHTML = neighborhoods.map(n => `
                 <div class="hood-card" onclick="selectArea('${n.name}')">
-                    <img src="${n.image}" alt="${n.name}" onerror="this.src='https://placehold.co/800x400/006233/white?text=${n.name}'">
+                    <img src="${n.image}" alt="${n.name}" onerror="this.src='/img/tankcleaning.jpg?text=${n.name}'">
                     <div class="overlay">
                         <h3 class="font-bold text-lg">${n.name}</h3>
                         <p class="text-xs">${n.properties} properties · from ${n.price} (${n.usd})</p>
@@ -541,7 +537,7 @@
         function renderServiceCard(s) {
             return `
                 <div class="service-card-enhanced card-hover" onclick="openWhatsAppForm('Service Inquiry: ${s.name}', 'Price: ${formatPrice(s.price)}\\nRating: ${s.rating} ★\\n${s.desc}')">
-                    <img src="${s.img}" class="service-img" alt="${s.name}" onerror="this.src='https://placehold.co/400x300/006233/white?text=${encodeURIComponent(s.name)}'">
+                    <img src="${s.img}" class="service-img" alt="${s.name}" onerror="this.src='/img/tankcleaning.jpg?text=${encodeURIComponent(s.name)}'">
                     <div class="p-4">
                         <div class="flex justify-between items-start">
                             <h3 class="font-semibold text-lg">${s.name}</h3>
@@ -566,12 +562,12 @@
         let collapsibleOpen = false;
         
         const properties = [
-            { name: 'Modern 2-Bed Apartment, Kilimani', price: 55000, beds: 2, baths: 2, sqft: 950, img: 'https://images.pexels.com/photos/271743/pexels-photo-271743.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Modern apartment with parking, 24/7 security, and backup generator' },
-            { name: 'Family Home with Garden, Karen', price: 95000, beds: 4, baths: 3, sqft: 2200, img: 'https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Spacious home on 1/4 acre with mature garden, staff quarters, and borehole' },
-            { name: 'Affordable 2-Bed, Umoja', price: 18500, beds: 2, baths: 1, sqft: 650, img: 'https://images.pexels.com/photos/2089698/pexels-photo-2089698.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Cozy apartment close to shops and matatu stage' },
-            { name: 'Luxury Penthouse, Westlands', price: 120000, beds: 3, baths: 3, sqft: 1800, img: 'https://images.pexels.com/photos/2587054/pexels-photo-2587054.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Stunning penthouse with city views, private elevator, and rooftop terrace' },
-            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, sqft: 1500, img: 'https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Beautiful bungalow with compound, secure parking, and servant quarters' },
-            { name: 'Studio Apartment, Kilimani', price: 35000, beds: 1, baths: 1, sqft: 450, img: 'https://images.pexels.com/photos/3688262/pexels-photo-3688262.jpeg?auto=compress&cs=tinysrgb&w=400', description: 'Perfect for singles or students, fully furnished option available' }
+            { name: 'Modern 2-Bed Apartment, Kilimani', price: 55000, beds: 2, baths: 2, sqft: 950, img: '/img/2brkilimani.jpg', description: 'Modern apartment with parking, 24/7 security, and backup generator' },
+            { name: 'Family Home with Garden, Karen', price: 95000, beds: 4, baths: 3, sqft: 2200, img: '/img/homekaren.jpg', description: 'Spacious home on 1/4 acre with mature garden, staff quarters, and borehole' },
+            { name: 'Affordable 2-Bed, Umoja', price: 18500, beds: 2, baths: 1, sqft: 650, img: '/img/2brumoja.jpg', description: 'Cozy apartment close to shops and matatu stage' },
+            { name: 'Luxury Penthouse, Westlands', price: 120000, beds: 3, baths: 3, sqft: 1800, img: '/img/2brkilimani.jpg', description: 'Stunning penthouse with city views, private elevator, and rooftop terrace' },
+            { name: 'Bungalow, Lavington', price: 85000, beds: 3, baths: 2, sqft: 1500, img: '/img/2brumoja.jpg', description: 'Beautiful bungalow with compound, secure parking, and servant quarters' },
+            { name: 'Studio Apartment, Kilimani', price: 35000, beds: 1, baths: 1, sqft: 450, img: '/img/studio-apartment-kilimani.jpg', description: 'Perfect for singles or students, fully furnished option available' }
         ];
 
         function toggleCollapsible() {
@@ -605,7 +601,7 @@
         function toggleSave(el) { let i = el.querySelector('i'); i.classList.contains('far') ? (i.classList.remove('far'), i.classList.add('fas'), showToast('❤️ Saved to favorites')) : (i.classList.remove('fas'), i.classList.add('far'), showToast('💔 Removed from favorites')); }
         function nextProperties() { propertyPage = (propertyPage+1)%2; updatePropertyGrid(); }
         function prevProperties() { propertyPage = (propertyPage-1+2)%2; updatePropertyGrid(); }
-        function updatePropertyGrid() { let start=propertyPage*3, end=start+3, shown=properties.slice(start,end), grid=document.getElementById('propertyGrid'); grid.innerHTML = shown.map(p=>`<div class="property-card card-hover" onclick="viewProperty('${p.name}',${p.price})"><div class="relative h-48"><img src="${p.img}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/400x300/006233/white?text=Property'"><div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-xs"><i class="fas fa-star text-yellow-400"></i> Verified</div><div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)"><i class="far fa-heart"></i></div></div><div class="p-4"><div class="flex justify-between"><div><h3 class="font-semibold">${p.name}</h3><p class="text-sm text-[#6b5e4a]">Nairobi</p></div><div class="text-right"><span class="font-bold text-kenyan-green">${formatPrice(p.price)}</span><div class="text-xs text-[#8a7a64]">/month</div></div></div><div class="flex gap-3 mt-2 text-sm"><span><i class="fas fa-bed"></i> ${p.beds} beds</span><span><i class="fas fa-bath"></i> ${p.baths} baths</span><span><i class="fas fa-ruler-combined"></i> ${p.sqft} sqft</span></div></div></div>`).join(''); }
+        function updatePropertyGrid() { let start=propertyPage*3, end=start+3, shown=properties.slice(start,end), grid=document.getElementById('propertyGrid'); grid.innerHTML = shown.map(p=>`<div class="property-card card-hover" onclick="viewProperty('${p.name}',${p.price})"><div class="relative h-48"><img src="${p.img}" class="w-full h-full object-cover" onerror="this.src='/img/tankcleaning.jpg?text=Property'"><div class="absolute top-3 left-3 bg-white/90 px-3 py-1 rounded-full text-xs"><i class="fas fa-star text-yellow-400"></i> Verified</div><div class="absolute top-3 right-3 bg-white w-8 h-8 rounded-full flex items-center justify-center shadow-md" onclick="event.stopPropagation(); toggleSave(this)"><i class="far fa-heart"></i></div></div><div class="p-4"><div class="flex justify-between"><div><h3 class="font-semibold">${p.name}</h3><p class="text-sm text-[#6b5e4a]">Nairobi</p></div><div class="text-right"><span class="font-bold text-kenyan-green">${formatPrice(p.price)}</span><div class="text-xs text-[#8a7a64]">/month</div></div></div><div class="flex gap-3 mt-2 text-sm"><span><i class="fas fa-bed"></i> ${p.beds} beds</span><span><i class="fas fa-bath"></i> ${p.baths} baths</span><span><i class="fas fa-ruler-combined"></i> ${p.sqft} sqft</span></div></div></div>`).join(''); }
         function showDepositLoanCalculator() { openWhatsAppForm('Deposit Loan Calculator', 'I am interested in learning about deposit loan options for my move. Please share more information.'); }
         function showTaxCalculator() { openWhatsAppForm('Tax Deduction Calculator', 'I would like to learn about tax deduction savings for home services.'); }
         function showAllServices() { openWhatsAppForm('All Services Inquiry', 'Please share information about all available home services in Nairobi.'); }
