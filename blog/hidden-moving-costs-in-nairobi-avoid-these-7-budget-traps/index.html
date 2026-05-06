@@ -10,8 +10,8 @@
     <meta property="og:title" content="Hidden Moving Costs in Nairobi: Avoid These 7 Budget Traps (Save KSh 15,000+)">
     <meta property="og:description" content="Don't get surprised by extra moving fees. Learn the 7 most common hidden charges by movers in Nairobi and how to avoid them.">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps">
-    <link rel="canonical" href="https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps">
+    <meta property="og:url" content="https://smartmove.co.ke/blog/hidden-moving-costs-in-nairobi-avoid-these-7-budget-traps">
+    <link rel="canonical" href="https://smartmove.co.ke/blog/hidden-moving-costs-in-nairobi-avoid-these-7-budget-traps">
     <link rel="icon" type="image/png" href="../../img/logo.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -405,7 +405,7 @@
         function showAuthModal() { openWhatsAppForm('Account Sign In'); }
         function showCart() { if(cartItems.length===0) return showToast('Cart empty'); let total = cartItems.reduce((s,i)=>s+i.price,0); let modal = document.getElementById('modal'); document.getElementById('modalTitle').textContent = 'Cart'; document.getElementById('modalBody').innerHTML = `<p>Total: KSh ${total}</p><button onclick="checkout()">Checkout</button>`; modal.classList.add('show'); }
         function checkout() { closeModal(); openWhatsAppForm('Checkout'); cartItems=[]; cartCount=0; updateCartCounter(); }
-        function shareArticle() { openWhatsAppForm('Shared article: Hidden Moving Costs in Nairobi', 'Check out this guide to avoid moving traps: https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps'); }
+        function shareArticle() { openWhatsAppForm('Shared article: Hidden Moving Costs in Nairobi', 'Check out this guide to avoid moving traps: https://smartmove.co.ke/blog/hidden-moving-costs-in-nairobi-avoid-these-7-budget-traps'); }
         function copyLink() { navigator.clipboard.writeText(window.location.href); showToast('🔗 Link copied!'); }
     </script>
 </body>
