@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hidden Moving Costs in Nairobi: Avoid 7 Budget Traps | SmartMove.Co.Ke</title>
+    <meta name="description" content="Hidden moving costs in Nairobi revealed: parking fees, stair charges, packing materials, waiting time, and more. Save up to KSh 15,000 by knowing these 7 traps.">
+    <meta name="keywords" content="hidden moving costs Nairobi, moving expenses Kenya, mover charges Nairobi, relocation budget Kenya, moving tips Nairobi, SmartMove Kenya">
+    <meta name="author" content="SmartMove.Co.Ke">
+    <meta property="og:title" content="Hidden Moving Costs in Nairobi: Avoid These 7 Budget Traps (Save KSh 15,000+)">
+    <meta property="og:description" content="Don't get surprised by extra moving fees. Learn the 7 most common hidden charges by movers in Nairobi and how to avoid them.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps">
+    <link rel="canonical" href="https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps">
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #fefcf5; }
+        .bg-kenyan-green { background-color: #006233; }
+        .text-kenyan-green { color: #006233; }
+        .bg-kenyan-red { background-color: #BB2E2E; }
+        .text-kenyan-red { color: #BB2E2E; }
+        .prose-blog h2 { font-size: 1.8rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; color: #2d2a24; border-left: 4px solid #006233; padding-left: 1rem; }
+        .prose-blog h3 { font-size: 1.4rem; font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.75rem; color: #2d2a24; }
+        .prose-blog p { color: #4a3f32; line-height: 1.7; margin-bottom: 1.2rem; }
+        .prose-blog ul, .prose-blog ol { margin-left: 1.5rem; margin-bottom: 1.5rem; color: #4a3f32; }
+        .prose-blog li { margin-bottom: 0.5rem; }
+        .trap-card { background: white; border-radius: 20px; padding: 1.2rem; margin-bottom: 1.2rem; border-left: 4px solid #BB2E2E; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .trap-card h3 { margin-top: 0; margin-bottom: 0.5rem; }
+        .savings-badge { background: #e6f7e6; color: #006233; padding: 4px 12px; border-radius: 30px; font-size: 12px; font-weight: 600; display: inline-block; }
+        .table-of-contents { background: #faf5eb; border-radius: 20px; padding: 1.2rem 1.8rem; border-left: 4px solid #006233; }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #006233; color: white; padding: 12px 24px; border-radius: 50px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; font-weight: 500; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; border-radius: 32px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .cart-counter { background: #BB2E2E; color: white; border-radius: 20px; padding: 2px 8px; font-size: 12px; }
+        .checklist { background: #f0f7f0; border-radius: 16px; padding: 1.2rem; }
+    </style>
+</head>
+<body class="text-[#2d2a24] antialiased">
+
+    <div id="toast" class="toast"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold" id="modalTitle">Title</h3>
+                <button onclick="closeModal()" class="text-2xl hover:text-kenyan-green">&times;</button>
+            </div>
+            <div id="modalBody" class="text-[#6b5e4a]"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='/index.html'">
+                <div class="w-10 h-10 rounded-xl bg-kenyan-green flex items-center justify-center">
+                    <i class="fas fa-home text-white text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold text-kenyan-green">SmartMove</span>
+                    <span class="text-sm font-medium text-[#8b7355]">.Co.Ke</span>
+                </div>
+                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Blog</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="openWhatsAppForm('List Property Inquiry')">List your property</button>
+                <div class="relative cursor-pointer" onclick="showCart()">
+                    <i class="fas fa-shopping-cart text-xl text-[#5a6b4a] hover:text-kenyan-green"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 cart-counter">0</span>
+                </div>
+                <button class="bg-kenyan-green text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition" onclick="showAuthModal()">Sign in</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Breadcrumb -->
+        <div class="text-sm text-[#8a7a64] mb-4 flex items-center gap-2 flex-wrap">
+            <a href="/index.html" class="hover:text-kenyan-green">Home</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <a href="/blog/index.html" class="hover:text-kenyan-green">Blog</a>
+            <i class="fas fa-chevron-right text-xs"></i>
+            <span class="text-kenyan-green font-medium">Hidden Moving Costs in Nairobi</span>
+        </div>
+
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center gap-3 mb-3 flex-wrap">
+                <span class="bg-[#eef2e6] text-kenyan-green px-3 py-1 rounded-full text-xs font-semibold">💰 BUDGET</span>
+                <span class="bg-[#eef2e6] text-kenyan-green px-3 py-1 rounded-full text-xs font-semibold"><i class="far fa-clock mr-1"></i> 8 min read</span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-[#2d2a24] leading-tight">Hidden Moving Costs in Nairobi: Avoid These 7 Budget Traps</h1>
+            <p class="text-lg text-[#6b5e4a] mt-4 border-l-4 border-kenyan-green pl-4 italic">That "KSh 5,000" moving quote can easily become KSh 12,000+. Learn the 7 hidden charges Nairobi movers don't tell you about – and save up to KSh 15,000 on your next move.</p>
+            <div class="flex items-center justify-between mt-5 flex-wrap gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-kenyan-green rounded-full flex items-center justify-center text-white font-bold text-sm">SM</div>
+                    <div><span class="font-semibold text-sm">SmartMove Moving Experts</span><p class="text-xs text-[#8a7a64]">Updated April 2026 · Based on 1,000+ customer surveys</p></div>
+                </div>
+                <div class="flex gap-3">
+                    <span class="cursor-pointer text-[#6b5e4a] hover:text-kenyan-green" onclick="shareArticle()"><i class="fab fa-whatsapp text-xl"></i></span>
+                    <span class="cursor-pointer text-[#6b5e4a] hover:text-kenyan-green" onclick="copyLink()"><i class="fas fa-link text-xl"></i></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Image -->
+        <div class="rounded-2xl overflow-hidden mb-8 bg-gradient-to-r from-[#fef3c7] to-[#fde68a] h-64 flex items-center justify-center">
+            <div class="text-center">
+                <i class="fas fa-exclamation-triangle text-6xl text-kenyan-red opacity-60"></i>
+                <i class="fas fa-money-bill-wave text-6xl text-kenyan-green opacity-60 mx-2"></i>
+                <p class="text-kenyan-red font-medium mt-2">⚠️ Don't fall for these moving traps</p>
+            </div>
+        </div>
+
+        <!-- Table of Contents -->
+        <div class="table-of-contents mb-8">
+            <h3 class="font-bold text-lg mb-3 flex items-center gap-2"><i class="fas fa-bug text-kenyan-green"></i> Hidden traps uncovered</h3>
+            <ul class="space-y-2 text-sm grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                <li><a href="#trap1">🚚 1. Parking & access fees</a></li>
+                <li><a href="#trap2">📦 2. Packing materials markups</a></li>
+                <li><a href="#trap3">⏰ 3. Waiting time charges</a></li>
+                <li><a href="#trap4">🪜 4. Stair & elevator fees</a></li>
+                <li><a href="#trap5">📏 5. "Extra item" surprise fees</a></li>
+                <li><a href="#trap6">🗺️ 6. Long carry fees</a></li>
+                <li><a href="#trap7">📅 7. Weekend/holiday premiums</a></li>
+                <li><a href="#checklist">✅ 8. Pre-move checklist to avoid all traps</a></li>
+                <li><a href="#smartmove">🛡️ 9. How SmartMove protects you</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Blog Content -->
+        <div class="prose-blog">
+            <p>You've gotten a quote: KSh 5,000 to move your 1-bedroom apartment. Sounds great. But on moving day, surprise fees start adding up. By the end, you're paying KSh 12,000+. This happens every day in Nairobi. We've analyzed <strong>over 1,000 customer moves</strong> to identify the 7 most common hidden moving costs – and exactly how to avoid them.</p>
+
+            <div class="bg-kenyan-red/10 p-4 rounded-xl my-4 border-l-4 border-kenyan-red">
+                <p class="font-semibold text-kenyan-red"><i class="fas fa-chart-line mr-2"></i>The shocking stat:</p>
+                <p class="text-sm">87% of Nairobi movers pay <strong>at least 40% more</strong> than their initial quote. Average hidden cost: <strong>KSh 7,500</strong>.</p>
+            </div>
+
+            <h2 id="trap1">🚚 Trap #1: Parking & access fees</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>The quote assumes free parking directly at your door. In Nairobi estates like Kilimani, Westlands, or Kileleshwa, parking is often paid or restricted. Movers will charge you <strong>KSh 500-2,000 extra</strong> for "parking fees" or "access permit."</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 500-2,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Ask upfront: "Are parking and access fees included? If not, how much?" Get it in writing.</p>
+            </div>
+
+            <h2 id="trap2">📦 Trap #2: Packing materials markups</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>"We provide packing materials" – but they don't mention the price. Boxes can cost KSh 200-500 each (you need 10-20). Bubble wrap and tape add another KSh 1,000-2,000. Total surprise: <strong>KSh 3,000-8,000</strong>.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 3,000-8,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Buy your own boxes from Gikomba (KSh 50-100 each) or ask supermarkets for free boxes. Confirm if packing materials are included or extra.</p>
+            </div>
+
+            <h2 id="trap3">⏰ Trap #3: Waiting time charges</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>The quote includes "loading/unloading time" but doesn't specify how many hours. If your building elevator is slow or you're not ready exactly on time, movers charge <strong>KSh 500-1,000 per extra hour</strong>.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 1,000-5,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Get a flat-rate quote that includes up to 4 hours. Be completely packed before movers arrive.</p>
+            </div>
+
+            <h2 id="trap4">🪜 Trap #4: Stair & elevator fees</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>Living on the 3rd floor with no elevator? That's extra. Many movers charge <strong>KSh 200-500 per floor</strong> above ground floor. Some even charge for elevator usage if it's slow or requires a service fee.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 500-3,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Disclose your floor number and elevator situation when getting quotes. Ask: "Is there any additional charge for stairs or elevator?"</p>
+            </div>
+
+            <h2 id="trap5">📏 Trap #5: "Extra item" surprise fees</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>The quote is for a "standard 1-bedroom" but if you have a piano, large safe, pool table, or extra-heavy furniture, movers add <strong>KSh 1,000-5,000 per item</strong> on moving day – when you have no choice but to pay.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 1,000-10,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Provide a complete inventory list when getting quotes. Include photos of unusually large items.</p>
+            </div>
+
+            <h2 id="trap6">🗺️ Trap #6: Long carry fees</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>If the truck can't park directly at your door (e.g., your apartment is inside a compound, or there's a long walkway), movers charge <strong>KSh 50-100 per meter</strong> beyond 20 meters. A 100-meter walk = KSh 4,000-8,000 extra.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 2,000-8,000</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Ask: "Is there a long carry fee? What distance is included?" Choose movers with no long carry fees.</p>
+            </div>
+
+            <h2 id="trap7">📅 Trap #7: Weekend/holiday premiums</h2>
+            <div class="trap-card">
+                <h3 class="font-bold text-kenyan-red">What movers don't tell you</h3>
+                <p>The cheap quote is for Tuesday at 9am. But you need to move on Saturday? That's <strong>30-50% higher</strong> – but they won't mention that until you try to book.</p>
+                <p class="text-sm mt-2"><span class="savings-badge"><i class="fas fa-coins"></i> Typical hidden cost: KSh 1,500-5,000 extra</span></p>
+                <p class="text-sm mt-2"><strong>How to avoid:</strong> Get quotes for your specific moving date. Compare weekday vs weekend pricing.</p>
+            </div>
+
+            <h2 id="checklist">✅ Pre-move checklist to avoid ALL hidden costs</h2>
+            <div class="checklist">
+                <p class="font-bold mb-3"><i class="fas fa-clipboard-list text-kenyan-green mr-2"></i>Ask every mover these 7 questions BEFORE booking:</p>
+                <ul class="space-y-2 text-sm">
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>1.</strong> Is parking included? If not, how much per hour?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>2.</strong> Are packing materials included? What's the cost for boxes/tape?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>3.</strong> How many hours are included? What's the overtime rate?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>4.</strong> Is there a stair/elevator fee? How much per floor?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>5.</strong> Do you charge extra for large/heavy items? Which items?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>6.</strong> Is there a long carry fee? What distance is free?</li>
+                    <li><i class="fas fa-check-circle text-kenyan-green mr-2"></i> <strong>7.</strong> Is weekend pricing the same as weekday?</li>
+                </ul>
+                <p class="text-sm mt-3 p-2 bg-white rounded-lg"><i class="fas fa-download text-kenyan-green mr-2"></i><strong>Pro tip:</strong> Screenshot or write down their answers. If they charge something not disclosed, refuse to pay.</p>
+            </div>
+
+            <h2 id="smartmove">🛡️ How SmartMove protects you from hidden moving costs</h2>
+            <p>Unlike random movers found on Facebook or streets, every SmartMove moving partner operates under a <strong>transparent pricing guarantee</strong>:</p>
+            <ul>
+                <li><strong>All-inclusive upfront quote</strong> – Parking, stairs, waiting time, and long carry are ALL included.</li>
+                <li><strong>Fixed price, no surprises</strong> – What you see is what you pay. No "extra item" fees.</li>
+                <li><strong>Free packing materials</strong> – For all moving packages, boxes and tape are provided free.</li>
+                <li><strong>Same price weekends</strong> – No premium for Saturday or Sunday moves.</li>
+                <li><strong>Price match guarantee</strong> – If you find a lower all-inclusive quote, we match it.</li>
+            </ul>
+            <div class="bg-kenyan-green/5 p-4 rounded-xl my-4 border-l-4 border-kenyan-green">
+                <p class="font-semibold"><i class="fas fa-shield-alt text-kenyan-green mr-2"></i>SmartMove Promise</p>
+                <p class="text-sm">Book any moving service through SmartMove and the price you see at checkout is the price you pay. <strong>Zero hidden fees. Guaranteed.</strong></p>
+            </div>
+
+            <!-- Real-life example -->
+            <h2>📊 Real-life example: Hidden costs adding up</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm border border-[#f0e6d5] rounded-xl mb-6 bg-white">
+                    <thead><tr class="bg-[#faf5eb]"><th class="p-3 text-left">Cost item</th><th class="p-3 text-left">Initial quote</th><th class="p-3 text-left">Hidden addition</th><th class="p-3 text-left">What you actually paid</th></tr></thead>
+                    <tbody>
+                        <tr class="border-b"><td class="p-3">Base moving (2 men, 4 hours)</td><td class="p-3">KSh 5,000</td><td class="p-3">-</td><td class="p-3">KSh 5,000</td></tr>
+                        <tr class="border-b"><td class="p-3">Parking fee (Westlands)</td><td class="p-3">KSh 0</td><td class="p-3">+ KSh 500</td><td class="p-3">KSh 500</td></tr>
+                        <tr class="border-b"><td class="p-3">Boxes & tape (15 boxes)</td><td class="p-3">KSh 0 (assumed included)</td><td class="p-3">+ KSh 3,000</td><td class="p-3">KSh 3,000</td></tr>
+                        <tr class="border-b"><td class="p-3">Stair fee (3rd floor)</td><td class="p-3">KSh 0</td><td class="p-3">+ KSh 1,500</td><td class="p-3">KSh 1,500</td></tr>
+                        <tr class="border-b"><td class="p-3">Waiting time (elevator slow)</td><td class="p-3">KSh 0</td><td class="p-3">+ KSh 1,000</td><td class="p-3">KSh 1,000</td></tr>
+                        <tr class="border-b"><td class="p-3">Extra item (large sofa)</td><td class="p-3">KSh 0</td><td class="p-3">+ KSh 2,000</td><td class="p-3">KSh 2,000</td></tr>
+                        <tr class="bg-[#eef2e6]"><td class="p-3 font-bold">TOTAL</td><td class="p-3 font-bold">KSh 5,000</td><td class="p-3 font-bold text-kenyan-red">+ KSh 8,000</td><td class="p-3 font-bold">KSh 13,000</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><strong>With SmartMove:</strong> All-inclusive price would have been <strong>KSh 6,500</strong> – saving you KSh 6,500!</p>
+
+            <!-- CTA -->
+            <div class="bg-gradient-to-r from-[#006233] to-[#008048] rounded-2xl p-6 my-8 text-white">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div>
+                        <h3 class="text-xl font-bold">Ready for a transparent move?</h3>
+                        <p class="text-white/80 text-sm">Book movers on SmartMove – all-inclusive pricing, no hidden fees. Get a fixed quote in 2 minutes.</p>
+                    </div>
+                    <button class="bg-white text-kenyan-green px-6 py-2 rounded-full font-semibold text-sm hover:bg-gray-100 transition" onclick="openWhatsAppForm('Moving Quote - No Hidden Fees', 'I need a moving quote. My move details: from ______ to ______, 1-bedroom apartment.')">Get transparent quote →</button>
+                </div>
+            </div>
+
+            <h2>❓ Frequently asked questions</h2>
+            <div class="space-y-4">
+                <div class="border-b border-[#e6d9c8] pb-3"><p class="font-semibold">Can I refuse to pay hidden fees on moving day?</p><p class="text-sm">Yes, if they weren't disclosed before. But they might refuse to complete the move. Best practice is to get everything in writing <strong>before</strong> moving day.</p></div>
+                <div class="border-b border-[#e6d9c8] pb-3"><p class="font-semibold">Are all moving companies in Nairobi this sneaky?</p><p class="text-sm">Not all, but many small operators rely on hidden fees to stay profitable. SmartMove vets partners who commit to transparent pricing.</p></div>
+                <div class="border-b border-[#e6d9c8] pb-3"><p class="font-semibold">Does insurance cover hidden moving costs?</p><p class="text-sm">No. Moving insurance covers damaged goods, not service charges. Hidden costs come out of your pocket.</p></div>
+                <div><p class="font-semibold">How much can I realistically save by avoiding these traps?</p><p class="text-sm">Most Nairobi moves have KSh 5,000-15,000 in potential hidden costs. SmartMove customers save an average of <strong>KSh 8,500</strong> per move.</p></div>
+            </div>
+        </div>
+
+        <!-- Author & Related -->
+        <div class="mt-12 pt-6 border-t border-[#e6d9c8]">
+            <div class="flex items-center gap-4 mb-6">
+                <div class="w-14 h-14 bg-kenyan-green rounded-full flex items-center justify-center text-white font-bold text-lg">SM</div>
+                <div><p class="font-bold">SmartMove Moving Experts</p><p class="text-sm text-[#6b5e4a]">We've helped 10,000+ Nairobi residents move without budget surprises.</p></div>
+            </div>
+            <div class="bg-[#faf5eb] p-5 rounded-2xl">
+                <p class="font-semibold mb-2"><i class="fas fa-newspaper text-kenyan-green mr-2"></i>Related reading</p>
+                <ul class="text-sm space-y-1">
+                    <li>• <a href="../the-complete-nairobi-moving-checklist-from-deposit-loan-to-deep-cleaning" class="text-kenyan-green hover:underline">Complete Nairobi Moving Checklist</a></li>
+                    <li>• <a href="../deposit-loan-kenya-2026-how-to-move-in-with-just-one-months-rent" class="text-kenyan-green hover:underline">Deposit Loan Kenya: Move with 1 month's rent</a></li>
+                    <li>• <a href="../furniture-rental-vs-buying-in-nairobi-what-saves-you-more-2026" class="text-kenyan-green hover:underline">Furniture Rental vs Buying in Nairobi</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- Contact Us Section - Modern Minimalist (Full-width responsive) -->
+<div class="w-full">
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+        <!-- Header - Clean & Simple -->
+        <div class="px-6 md:px-8 pt-6 pb-2">
+            <h3 class="text-gray-900 font-semibold text-lg flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                </svg>
+                Contact Us
+            </h3>
+        </div>
+        
+        <div class="p-6 md:p-8 pt-2">
+            <!-- Description - Full width on all screens -->
+            <p class="text-gray-600 text-sm md:text-base mb-8 leading-relaxed max-w-2xl">
+                Questions about moving, deposit loans, or home services? We're here to help.
+            </p>
+            
+            <!-- Contact Options - Grid layout that expands on larger screens -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Email -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer" onclick="window.location.href='mailto:business@haofinder.com'">
+                    <div class="w-11 h-11 rounded-full bg-emerald-600 group-hover:bg-emerald-700 transition-colors flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Email</p>
+                        <p class="text-sm font-medium text-gray-900 truncate">business@haofinder.com</p>
+                        <p class="text-xs text-gray-400 mt-1">Response within 4h</p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                
+                <!-- Phone -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer" onclick="window.location.href='tel:+254715560734'">
+                    <div class="w-11 h-11 rounded-full bg-emerald-600 group-hover:bg-emerald-700 transition-colors flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Phone & WhatsApp</p>
+                        <p class="text-sm font-medium text-gray-900">+254 715 560 734</p>
+                        <p class="text-xs text-gray-400 mt-1">Urgent inquiries</p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                
+                <!-- WhatsApp -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-emerald-50 border border-emerald-100 hover:bg-emerald-100 transition-all duration-200 cursor-pointer" onclick="window.open('https://wa.me/254715560734', '_blank')">
+                    <div class="w-11 h-11 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.032 2.002c-5.52 0-10 4.48-10 10 0 1.83.483 3.56 1.358 5.085L2 22.002l5.074-1.3c1.44.797 3.07 1.3 4.826 1.3 5.52 0 10-4.48 10-10s-4.476-10-9.968-10zm0 18.4c-1.53 0-2.996-.417-4.267-1.18l-.306-.18-3.01.77.814-2.93-.2-.317c-.866-1.368-1.32-2.93-1.32-4.556 0-4.6 3.746-8.35 8.35-8.35 4.6 0 8.35 3.746 8.35 8.35 0 4.6-3.746 8.35-8.35 8.35zm4.77-6.28c-.26-.13-1.54-.76-1.78-.846-.24-.087-.415-.13-.59.127-.175.256-.68.846-.834 1.02-.153.173-.306.195-.567.066-1.43-.72-2.42-1.76-3.14-3.02-.14-.25.03-.38.11-.51.09-.12.19-.26.28-.4.09-.13.12-.23.18-.38.06-.15.03-.28-.02-.39-.05-.11-.56-1.35-.77-1.85-.2-.49-.42-.42-.58-.43-.15 0-.33-.02-.5-.02s-.46.06-.7.28c-.24.22-.92.9-.92 2.2 0 1.3.95 2.56 1.08 2.73.13.17 1.86 2.84 4.5 3.98.63.27 1.12.44 1.5.56.63.2 1.2.17 1.65.1.5-.08 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.27-.18-.53-.31z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs text-emerald-700 uppercase tracking-wide font-medium">WhatsApp Business</p>
+                        <p class="text-sm text-emerald-900 font-medium">Chat with us</p>
+                        <p class="text-xs text-emerald-600 mt-1">Fastest response</p>
+                    </div>
+                    <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Business Info - Now spreads horizontally on larger screens -->
+            <div class="mt-8 pt-6 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Business Hours
+                    </p>
+                    <div class="space-y-1 text-gray-600">
+                        <p class="flex justify-between"><span>Monday–Friday:</span><span class="font-medium">8 AM – 6 PM</span></p>
+                        <p class="flex justify-between"><span>Saturday:</span><span class="font-medium">9 AM – 4 PM</span></p>
+                        <p class="flex justify-between"><span>Sunday:</span><span class="text-gray-400">Closed</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Location
+                    </p>
+                    <p class="text-gray-600">Nairobi, Kenya</p>
+                    <p class="text-sm text-gray-400 mt-1">Online support only</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="border-t border-[#e6d9c8] pt-10 pb-6 bg-[#faf5eb] mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-[#8a7a64]">
+            &copy; <script>document.write(new Date().getFullYear())</script> Part of Nakibolis Heirs Limited (NHL) | SmartMove.Co.Ke Kenya · Transparent moving, no surprises · <a href="/index.html" class="hover:text-kenyan-green">Home</a>
+        </div>
+    </footer>
+
+    <script>
+        const WHATSAPP_NUMBER = "254115006628";
+        let cartCount = 0, cartItems = [];
+        
+        function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+        function closeModal() { document.getElementById('modal').classList.remove('show'); }
+        function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
+        function openWhatsAppForm(subject, details = "") { let message = `*SmartMove.Co.Ke Inquiry*%0A%0A*Subject:* ${encodeURIComponent(subject)}%0A*Date:* ${new Date().toLocaleString()}%0A${details ? `*Details:* ${encodeURIComponent(details)}%0A` : ''}`; window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank'); showToast(`📱 Opening WhatsApp`); }
+        function showAuthModal() { openWhatsAppForm('Account Sign In'); }
+        function showCart() { if(cartItems.length===0) return showToast('Cart empty'); let total = cartItems.reduce((s,i)=>s+i.price,0); let modal = document.getElementById('modal'); document.getElementById('modalTitle').textContent = 'Cart'; document.getElementById('modalBody').innerHTML = `<p>Total: KSh ${total}</p><button onclick="checkout()">Checkout</button>`; modal.classList.add('show'); }
+        function checkout() { closeModal(); openWhatsAppForm('Checkout'); cartItems=[]; cartCount=0; updateCartCounter(); }
+        function shareArticle() { openWhatsAppForm('Shared article: Hidden Moving Costs in Nairobi', 'Check out this guide to avoid moving traps: https://smartmove.co.ke/blog/hidden-moving-costs-nairobi-avoid-these-7-budget-traps'); }
+        function copyLink() { navigator.clipboard.writeText(window.location.href); showToast('🔗 Link copied!'); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SmartMove Blog | Moving Tips, Home Services & Nairobi Neighborhoods</title>
+    <meta name="description" content="Expert moving guides, home service tips, deposit loan advice, and Nairobi neighborhood insights. Save money and move smart with SmartMove.Co.Ke blog.">
+    <meta name="keywords" content="Nairobi moving blog, home services Kenya, deposit loan blog, moving tips, SmartMove Kenya">
+    <meta name="author" content="SmartMove.Co.Ke">
+    <link rel="canonical" href="https://smartmove.co.ke/blog/">
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        body { background: #fefcf5; }
+        .bg-kenyan-green { background-color: #006233; }
+        .text-kenyan-green { color: #006233; }
+        .border-kenyan-green { border-color: #006233; }
+        .blog-card { transition: all 0.3s ease; border-radius: 24px; overflow: hidden; background: white; border: 1px solid #f0e6d5; }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 20px 30px -12px rgba(0,98,51,0.12); border-color: #006233; }
+        .category-pill { background: #eef2e6; color: #006233; padding: 4px 12px; border-radius: 40px; font-size: 0.7rem; font-weight: 600; display: inline-block; }
+        .category-pill-finance { background: #fef3c7; color: #b45309; }
+        .category-pill-moving { background: #e0f2fe; color: #0369a1; }
+        .category-pill-home { background: #dcfce7; color: #166534; }
+        .category-pill-tech { background: #f3e8ff; color: #6b21a5; }
+        .search-input { border: 1px solid #e6d9c8; border-radius: 60px; padding: 12px 20px; width: 100%; outline: none; transition: all 0.2s; }
+        .search-input:focus { border-color: #006233; box-shadow: 0 0 0 3px rgba(0,98,51,0.1); }
+        .toast { position: fixed; bottom: 20px; right: 20px; background: #006233; color: white; padding: 12px 24px; border-radius: 50px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; font-weight: 500; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; border-radius: 32px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .cart-counter { background: #BB2E2E; color: white; border-radius: 20px; padding: 2px 8px; font-size: 12px; }
+        .featured-badge { position: absolute; top: 16px; left: 16px; background: #006233; color: white; padding: 4px 12px; border-radius: 30px; font-size: 11px; font-weight: 600; }
+    </style>
+</head>
+<body class="text-[#2d2a24] antialiased">
+
+    <div id="toast" class="toast"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold" id="modalTitle">Title</h3>
+                <button onclick="closeModal()" class="text-2xl hover:text-kenyan-green">&times;</button>
+            </div>
+            <div id="modalBody" class="text-[#6b5e4a]"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='/'">
+                <div class="w-10 h-10 rounded-xl bg-kenyan-green flex items-center justify-center">
+                    <i class="fas fa-home text-white text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold text-kenyan-green">SmartMove</span>
+                    <span class="text-sm font-medium text-[#8b7355]">.Co.Ke</span>
+                </div>
+                <span class="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full ml-2">Blog</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button class="text-sm font-medium text-[#6b5e4a] hover:text-kenyan-green hidden sm:block" onclick="openWhatsAppForm('List Property Inquiry')">List your property</button>
+                <div class="relative cursor-pointer" onclick="showCart()">
+                    <i class="fas fa-shopping-cart text-xl text-[#5a6b4a] hover:text-kenyan-green"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 cart-counter">0</span>
+                </div>
+                <button class="bg-kenyan-green text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-[#004d29] transition" onclick="showAuthModal()">Sign in</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-r from-[#006233] to-[#008048] text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">SmartMove Blog</h1>
+            <p class="text-lg md:text-xl opacity-90 max-w-2xl mx-auto">Expert guides on moving, home services, deposit loans, and Nairobi neighborhoods. Everything you need to move smarter.</p>
+            <div class="mt-8 max-w-md mx-auto relative">
+                <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                <input type="text" id="searchInput" placeholder="Search articles..." class="search-input pl-12 pr-4 text-gray-800" onkeyup="filterBlogs()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 -mt-6">
+        <div class="bg-white rounded-2xl shadow-sm p-4 flex flex-wrap justify-center gap-2">
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-kenyan-green text-white" data-category="all" onclick="filterByCategory('all')">All</button>
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="moving" onclick="filterByCategory('moving')">🚚 Moving</button>
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="finance" onclick="filterByCategory('finance')">💰 Finance</button>
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="home" onclick="filterByCategory('home')">🏠 Home Services</button>
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="neighborhoods" onclick="filterByCategory('neighborhoods')">📍 Neighborhoods</button>
+            <button class="filter-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200" data-category="tech" onclick="filterByCategory('tech')">💡 Smart Home</button>
+        </div>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="blogGrid"></div>
+        
+        <!-- No results message -->
+        <div id="noResults" class="text-center py-12 hidden">
+            <i class="fas fa-search text-5xl text-gray-300 mb-3"></i>
+            <p class="text-gray-500">No articles found. Try a different search term.</p>
+        </div>
+    </div>
+
+    <!-- Newsletter Section -->
+    <div class="bg-[#faf5eb] py-12 mt-8">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <i class="fas fa-envelope text-3xl text-kenyan-green mb-3"></i>
+            <h2 class="text-2xl font-bold mb-2">Get moving tips in your inbox</h2>
+            <p class="text-gray-600 mb-4">Subscribe to our newsletter for monthly moving guides, money-saving tips, and Nairobi neighborhood insights.</p>
+            <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                <input type="email" placeholder="Your email address" id="newsletterEmail" class="flex-1 px-4 py-3 rounded-full border border-gray-200 outline-none focus:border-kenyan-green">
+                <button class="bg-kenyan-green text-white px-6 py-3 rounded-full font-medium hover:bg-[#004d29] transition" onclick="subscribeNewsletter()">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Contact Us Section - Modern Minimalist (Full-width responsive) -->
+<div class="w-full">
+    <div class="bg-white rounded-2xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+        <!-- Header - Clean & Simple -->
+        <div class="px-6 md:px-8 pt-6 pb-2">
+            <h3 class="text-gray-900 font-semibold text-lg flex items-center gap-2">
+                <svg class="w-5 h-5 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+                </svg>
+                Contact Us
+            </h3>
+        </div>
+        
+        <div class="p-6 md:p-8 pt-2">
+            <!-- Description - Full width on all screens -->
+            <p class="text-gray-600 text-sm md:text-base mb-8 leading-relaxed max-w-2xl">
+                Questions about moving, deposit loans, or home services? We're here to help.
+            </p>
+            
+            <!-- Contact Options - Grid layout that expands on larger screens -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Email -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer" onclick="window.location.href='mailto:business@haofinder.com'">
+                    <div class="w-11 h-11 rounded-full bg-emerald-600 group-hover:bg-emerald-700 transition-colors flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Email</p>
+                        <p class="text-sm font-medium text-gray-900 truncate">business@haofinder.com</p>
+                        <p class="text-xs text-gray-400 mt-1">Response within 4h</p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                
+                <!-- Phone -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-all duration-200 cursor-pointer" onclick="window.location.href='tel:+254715560734'">
+                    <div class="w-11 h-11 rounded-full bg-emerald-600 group-hover:bg-emerald-700 transition-colors flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-gray-500 uppercase tracking-wide">Phone & WhatsApp</p>
+                        <p class="text-sm font-medium text-gray-900">+254 715 560 734</p>
+                        <p class="text-xs text-gray-400 mt-1">Urgent inquiries</p>
+                    </div>
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-gray-600 transition-colors flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+                
+                <!-- WhatsApp -->
+                <div class="group flex items-center gap-4 p-4 rounded-xl bg-emerald-50 border border-emerald-100 hover:bg-emerald-100 transition-all duration-200 cursor-pointer" onclick="window.open('https://wa.me/254715560734', '_blank')">
+                    <div class="w-11 h-11 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.032 2.002c-5.52 0-10 4.48-10 10 0 1.83.483 3.56 1.358 5.085L2 22.002l5.074-1.3c1.44.797 3.07 1.3 4.826 1.3 5.52 0 10-4.48 10-10s-4.476-10-9.968-10zm0 18.4c-1.53 0-2.996-.417-4.267-1.18l-.306-.18-3.01.77.814-2.93-.2-.317c-.866-1.368-1.32-2.93-1.32-4.556 0-4.6 3.746-8.35 8.35-8.35 4.6 0 8.35 3.746 8.35 8.35 0 4.6-3.746 8.35-8.35 8.35zm4.77-6.28c-.26-.13-1.54-.76-1.78-.846-.24-.087-.415-.13-.59.127-.175.256-.68.846-.834 1.02-.153.173-.306.195-.567.066-1.43-.72-2.42-1.76-3.14-3.02-.14-.25.03-.38.11-.51.09-.12.19-.26.28-.4.09-.13.12-.23.18-.38.06-.15.03-.28-.02-.39-.05-.11-.56-1.35-.77-1.85-.2-.49-.42-.42-.58-.43-.15 0-.33-.02-.5-.02s-.46.06-.7.28c-.24.22-.92.9-.92 2.2 0 1.3.95 2.56 1.08 2.73.13.17 1.86 2.84 4.5 3.98.63.27 1.12.44 1.5.56.63.2 1.2.17 1.65.1.5-.08 1.54-.63 1.76-1.24.22-.61.22-1.13.15-1.24-.07-.11-.27-.18-.53-.31z"/>
+                        </svg>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs text-emerald-700 uppercase tracking-wide font-medium">WhatsApp Business</p>
+                        <p class="text-sm text-emerald-900 font-medium">Chat with us</p>
+                        <p class="text-xs text-emerald-600 mt-1">Fastest response</p>
+                    </div>
+                    <svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Business Info - Now spreads horizontally on larger screens -->
+            <div class="mt-8 pt-6 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
+                        Business Hours
+                    </p>
+                    <div class="space-y-1 text-gray-600">
+                        <p class="flex justify-between"><span>Monday–Friday:</span><span class="font-medium">8 AM – 6 PM</span></p>
+                        <p class="flex justify-between"><span>Saturday:</span><span class="font-medium">9 AM – 4 PM</span></p>
+                        <p class="flex justify-between"><span>Sunday:</span><span class="text-gray-400">Closed</span></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-700 mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        Location
+                    </p>
+                    <p class="text-gray-600">Nairobi, Kenya</p>
+                    <p class="text-sm text-gray-400 mt-1">Online support only</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-[#e6d9c8] pt-10 pb-6 bg-white mt-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-[#8a7a64]">
+            &copy; <script>document.write(new Date().getFullYear())</script> : Part of <a href="http://nhl.co.ke" target="_blank" rel="noopener noreferrer">Nakibolis Heirs Limited (NHL)</a> | SmartMove.Co.Ke Kenya · <a href="/" class="hover:text-kenyan-green">Home</a> · <a href="#" onclick="openWhatsAppForm('Contact Blog')" class="hover:text-kenyan-green">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        const WHATSAPP_NUMBER = "254115006628";
+        let cartCount = 0, cartItems = [];
+        let currentCategory = "all";
+        let currentSearch = "";
+        
+        // Blog posts data
+        const blogPosts = [
+            {
+                slug: "35-tax-deduction-on-home-services-in-kenya-what-you-can-claim",
+                title: "35% Tax Deduction on Home Services in Kenya",
+                excerpt: "Learn how to claim up to 35% tax relief on movers, plumbers, electricians, and cleaning. Save up to KSh 25,000/year with KRA-approved deductions.",
+                category: "finance",
+                categoryName: "💰 Finance",
+                categoryClass: "category-pill-finance",
+                readTime: "6 min read",
+                date: "Apr 15, 2026",
+                featured: true
+            },
+            {
+                slug: "best-family-friendly-neighborhoods-in-nairobi-kilimani-karen-westlands-more",
+                title: "Best Family-Friendly Neighborhoods in Nairobi",
+                excerpt: "Compare Kilimani, Karen, Westlands, Lavington, Kileleshwa & Runda for schools, safety, parks, and rent prices. Find your family's perfect home.",
+                category: "neighborhoods",
+                categoryName: "📍 Neighborhoods",
+                categoryClass: "",
+                readTime: "8 min read",
+                date: "Apr 12, 2026",
+                featured: true
+            },
+            {
+                slug: "deposit-loan-kenya-2026-how-to-move-in-with-just-one-months-rent",
+                title: "Deposit Loan Kenya 2026: Move In With One Month's Rent",
+                excerpt: "Stop paying 3 months upfront. Get a deposit loan from 3% APR and spread your rental deposit over 3-12 months. Available for Nairobi properties.",
+                category: "finance",
+                categoryName: "💰 Finance",
+                categoryClass: "category-pill-finance",
+                readTime: "7 min read",
+                date: "Apr 10, 2026",
+                featured: true
+            },
+            {
+                slug: "furniture-rental-vs-buying-in-nairobi-what-saves-you-more-2026",
+                title: "Furniture Rental vs Buying in Nairobi: What Saves You More",
+                excerpt: "Rent a sofa for KSh 1,500/month or buy for KSh 25,000? Detailed cost analysis with break-even calculator for Nairobi renters.",
+                category: "home",
+                categoryName: "🏠 Home Services",
+                categoryClass: "category-pill-home",
+                readTime: "7 min read",
+                date: "Apr 8, 2026",
+                featured: false
+            },
+            {
+                slug: "hidden-moving-costs-nairobi-avoid-these-7-budget-traps",
+                title: "Hidden Moving Costs in Nairobi: Avoid 7 Budget Traps",
+                excerpt: "Hidden moving costs revealed: parking fees, stair charges, packing materials, waiting time. Save up to KSh 15,000 by knowing these traps.",
+                category: "moving",
+                categoryName: "🚚 Moving",
+                categoryClass: "category-pill-moving",
+                readTime: "8 min read",
+                date: "Apr 5, 2026",
+                featured: false
+            },
+            {
+                slug: "movers-plumbers-electricians-how-to-vet-professionals-in-nairobi",
+                title: "How to Vet Movers, Plumbers & Electricians in Nairobi",
+                excerpt: "Don't get scammed! Step-by-step guide to verify credentials, check reviews, and hire trusted home service professionals in Nairobi.",
+                category: "home",
+                categoryName: "🏠 Home Services",
+                categoryClass: "category-pill-home",
+                readTime: "9 min read",
+                date: "Apr 2, 2026",
+                featured: false
+            },
+            {
+                slug: "smart-home-setup-for-renters-in-nairobi-wifi-dstv-security-more",
+                title: "Smart Home Setup for Renters in Nairobi",
+                excerpt: "Transform your rental into a smart home without drilling. Best WiFi providers, DStv installation, security systems, and voice assistants — renter-friendly.",
+                category: "tech",
+                categoryName: "💡 Smart Home",
+                categoryClass: "category-pill-tech",
+                readTime: "8 min read",
+                date: "Mar 28, 2026",
+                featured: false
+            },
+            {
+                slug: "ultimate-guide-to-end-of-tenancy-cleaning-in-nairobi-get-your-deposit-back",
+                title: "End of Tenancy Cleaning in Nairobi: Get Your Deposit Back",
+                excerpt: "Complete move-out cleaning checklist, professional prices, and tips to avoid unfair deposit deductions. Starting from KSh 5,500.",
+                category: "moving",
+                categoryName: "🚚 Moving",
+                categoryClass: "category-pill-moving",
+                readTime: "8 min read",
+                date: "Mar 25, 2026",
+                featured: false
+            },
+            {
+                slug: "how-to-save-ksh-25000-when-moving-to-nairobi-bundles-referrals-loans",
+                title: "Save KSh 25,000+ When Moving to Nairobi",
+                excerpt: "7 proven strategies using deposit loans, service bundles, referral discounts, and tax deductions. Average customer saves KSh 28,500.",
+                category: "finance",
+                categoryName: "💰 Finance",
+                categoryClass: "category-pill-finance",
+                readTime: "9 min read",
+                date: "Mar 20, 2026",
+                featured: true
+            },
+            {
+                slug: "the-complete-nairobi-moving-checklist-from-deposit-loan-to-deep-cleaning",
+                title: "Complete Nairobi Moving Checklist: 8-Week Timeline",
+                excerpt: "The ultimate moving checklist from 8 weeks before to move-in day. Deposit loans, movers, utilities, schools, cleaning — all covered. Printable version.",
+                category: "moving",
+                categoryName: "🚚 Moving",
+                categoryClass: "category-pill-moving",
+                readTime: "10 min read",
+                date: "Mar 15, 2026",
+                featured: true
+            }
+        ];
+
+        function renderBlogs() {
+            const grid = document.getElementById('blogGrid');
+            const filtered = blogPosts.filter(post => {
+                const matchesCategory = currentCategory === "all" || post.category === currentCategory;
+                const matchesSearch = currentSearch === "" || 
+                    post.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                    post.excerpt.toLowerCase().includes(currentSearch.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+            
+            if (filtered.length === 0) {
+                document.getElementById('noResults').classList.remove('hidden');
+                grid.innerHTML = '';
+                return;
+            }
+            
+            document.getElementById('noResults').classList.add('hidden');
+            
+            grid.innerHTML = filtered.map(post => `
+                <div class="blog-card card-hover relative cursor-pointer" onclick="window.location.href='${post.slug}'">
+                    ${post.featured ? '<div class="featured-badge"><i class="fas fa-star text-xs mr-1"></i>Featured</div>' : ''}
+                    <div class="p-5">
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="category-pill ${post.categoryClass || ''}">${post.categoryName}</span>
+                            <span class="text-xs text-gray-400">${post.date}</span>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2 hover:text-kenyan-green transition">${post.title}</h3>
+                        <p class="text-gray-600 text-sm mb-4">${post.excerpt.substring(0, 100)}${post.excerpt.length > 100 ? '...' : ''}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-gray-400"><i class="far fa-clock mr-1"></i>${post.readTime}</span>
+                            <span class="text-kenyan-green text-sm font-medium hover:underline">Read more <i class="fas fa-arrow-right text-xs ml-1"></i></span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            // Update active button styles
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                if (btn.dataset.category === category) {
+                    btn.classList.add('bg-kenyan-green', 'text-white');
+                    btn.classList.remove('bg-gray-100', 'text-gray-700');
+                } else {
+                    btn.classList.remove('bg-kenyan-green', 'text-white');
+                    btn.classList.add('bg-gray-100', 'text-gray-700');
+                }
+            });
+            renderBlogs();
+        }
+
+        function filterBlogs() {
+            currentSearch = document.getElementById('searchInput').value;
+            renderBlogs();
+        }
+
+        // Utility functions
+        function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
+        function closeModal() { document.getElementById('modal').classList.remove('show'); }
+        function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
+        function openWhatsAppForm(subject, details = "") { 
+            let message = `*SmartMove.Co.Ke Inquiry*%0A%0A*Subject:* ${encodeURIComponent(subject)}%0A*Date:* ${new Date().toLocaleString()}%0A${details ? `*Details:* ${encodeURIComponent(details)}%0A` : ''}`; 
+            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank'); 
+            showToast(`📱 Opening WhatsApp`); 
+        }
+        function showAuthModal() { openWhatsAppForm('Account Sign In'); }
+        function showCart() { 
+            if(cartItems.length===0) return showToast('Cart empty'); 
+            let total = cartItems.reduce((s,i)=>s+i.price,0); 
+            let modal = document.getElementById('modal'); 
+            document.getElementById('modalTitle').textContent = 'Cart'; 
+            document.getElementById('modalBody').innerHTML = `<p>Total: KSh ${total}</p><button onclick="checkout()" class="bg-kenyan-green text-white px-4 py-2 rounded-lg mt-4">Checkout</button>`; 
+            modal.classList.add('show'); 
+        }
+        function checkout() { closeModal(); openWhatsAppForm('Checkout'); cartItems=[]; cartCount=0; updateCartCounter(); }
+        function subscribeNewsletter() {
+            let email = document.getElementById('newsletterEmail').value;
+            if (!email || !email.includes('@')) {
+                showToast('Please enter a valid email address');
+                return;
+            }
+            openWhatsAppForm('Newsletter Subscription', `Email: ${email} - Please add me to the SmartMove newsletter.`);
+            document.getElementById('newsletterEmail').value = '';
+        }
+        
+        // Initialize
+        window.onload = function() {
+            renderBlogs();
+            showToast('📚 Welcome to the SmartMove Blog!');
+        };
+    </script>
+</body>
+</html>
