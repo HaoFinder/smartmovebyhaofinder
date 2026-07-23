@@ -414,7 +414,7 @@
         function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
         function openWhatsAppForm(subject, details = "") { 
             let message = `*SmartMove.Co.Ke Inquiry*%0A%0A*Subject:* ${encodeURIComponent(subject)}%0A*Date:* ${new Date().toLocaleString()}%0A${details ? `*Details:* ${encodeURIComponent(details)}%0A` : ''}`; 
-            window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank'); 
+            window.open(`https://wa.me/2540115006628?text=${message}`, '_blank'); 
             showToast(`📱 Opening WhatsApp`); 
         }
         function showAuthModal() { openWhatsAppForm('Account Sign In'); }

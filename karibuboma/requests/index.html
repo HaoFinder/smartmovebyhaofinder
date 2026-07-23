@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KaribuBoma · Post a Request — SmartMove.Co.Ke</title>
+    <meta name="description" content="Post a trip request and find hosts across Kenya. Tell hosts about your journey and what you're looking for." />
+    <link rel="canonical" href="https://smartmove.co.ke/karibuboma/requests/" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="KaribuBoma — Post a Request" />
+    <meta property="og:description" content="Post a trip request and find hosts across Kenya. Tell hosts about your journey and what you're looking for." />
+    <meta property="og:url" content="https://smartmove.co.ke/karibuboma/requests/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "KaribuBoma Requests",
+        "description": "Post a trip request and find hosts across Kenya.",
+        "url": "https://smartmove.co.ke/karibuboma/requests/"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+           GLOBAL DESIGN SYSTEM
+           ============================================================ */
+        :root {
+            --color-primary: #006233;
+            --color-primary-dark: #004d29;
+            --color-primary-light: #e8f5ee;
+            --color-accent: #BB2E2E;
+            --color-gold: #D4AF37;
+            --color-text: #1a1a2e;
+            --color-text-secondary: #4a4a5a;
+            --color-bg: #faf8f5;
+            --color-white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 98, 51, 0.3);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 98, 51, 0.4);
+            background: var(--color-primary-dark);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 98, 51, 0.2);
+        }
+
+        .request-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .request-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 98, 51, 0.1);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1000;
+            font-weight: 500;
+            pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 8px 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        @media (max-width: 768px) {
+            .request-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="toast" class="toast"></div>
+
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h3 id="modalTitle" style="font-size:1.5rem;font-weight:700;">Title</h3>
+                <button onclick="closeModal()" style="font-size:2rem;background:none;border:none;cursor:pointer;color:#4a4a5a;">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);">
+        <div style="max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:72px;">
+            <a href="/karibuboma/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:12px;background:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-home" style="color:white;font-size:1.2rem;"></i>
+                </div>
+                <span style="font-size:1.3rem;font-weight:800;color:var(--color-primary);">SmartMove</span>
+                <span style="font-size:0.65rem;font-weight:600;background:#f5e6c8;color:#8a7a4a;padding:0.2rem 0.7rem;border-radius:40px;">KaribuBoma</span>
+            </a>
+            <nav style="display:flex;align-items:center;gap:1.5rem;">
+                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a>
+                <a href="/karibuboma/requests/" style="font-size:0.9rem;font-weight:600;color:var(--color-primary);text-decoration:none;">Post a request</a>
+                <a href="/karibuboma/hangouts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Hangouts</a>
+                <a href="/karibuboma/verify/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Verify</a>
+                <button onclick="showAuthModal()" style="background:var(--color-primary);color:white;border:none;padding:0.6rem 1.6rem;border-radius:40px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,98,51,0.25);">Become a host</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    MAIN CONTENT: REQUESTS
+    ============================================================ -->
+    <main id="main-content" style="max-width:1280px;margin:0 auto;padding:2rem;">
+
+        <!-- Page Header -->
+        <div style="margin-bottom:2.5rem;">
+            <h1 style="font-size:2.8rem;font-weight:900;letter-spacing:-0.02em;">Post a request</h1>
+            <p style="font-size:1.2rem;color:var(--color-text-secondary);max-width:600px;">Tell hosts about your journey and what you're looking for. Get matched with locals across Kenya.</p>
+        </div>
+
+        <!-- Post Request Form -->
+        <div style="background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);margin-bottom:2.5rem;">
+            <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Create a trip request</h2>
+            <form onsubmit="submitRequest(); return false;" style="display:flex;flex-direction:column;gap:1.25rem;">
+                <div>
+                    <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Where are you going? <span style="color:#e53e3e;">*</span></label>
+                    <input type="text" id="requestLocation" placeholder="County, town, or landmark" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;transition:var(--transition);" value="Nairobi" required />
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                    <div>
+                        <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Arrival date <span style="color:#e53e3e;">*</span></label>
+                        <input type="date" id="requestArrival" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;transition:var(--transition);" value="2026-07-15" required />
+                    </div>
+                    <div>
+                        <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Departure date <span style="color:#e53e3e;">*</span></label>
+                        <input type="date" id="requestDeparture" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;transition:var(--transition);" value="2026-07-20" required />
+                    </div>
+                </div>
+                <div>
+                    <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">About your trip <span style="color:#e53e3e;">*</span></label>
+                    <textarea id="requestDescription" rows="4" placeholder="Tell hosts about yourself, why you're traveling, what you're looking for in a stay, and any special interests..." style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;transition:var(--transition);resize:vertical;" required>Hi! I'm a digital nomad exploring Kenya for the first time. I love coffee, hiking, and meeting locals. Looking for a place to stay for about 5 days in Nairobi. Happy to share meals and stories!</textarea>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;">
+                    <div>
+                        <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Number of guests</label>
+                        <select id="requestGuests" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;background:transparent;">
+                            <option value="1">1 guest</option>
+                            <option value="2">2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Verification level</label>
+                        <select id="requestTier" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;background:transparent;">
+                            <option value="any">Any</option>
+                            <option value="2">Verified only</option>
+                            <option value="3">Trusted only</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label style="font-weight:600;font-size:0.95rem;display:block;margin-bottom:0.4rem;">Meals offered</label>
+                        <select id="requestMeals" style="width:100%;padding:0.9rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;font-size:1rem;outline:none;background:transparent;">
+                            <option value="any">No preference</option>
+                            <option value="yes">Meals preferred</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" style="padding:1rem;background:var(--color-primary);color:white;font-weight:700;font-size:1.1rem;border:none;border-radius:16px;cursor:pointer;transition:var(--transition);box-shadow:0 4px 20px rgba(0,98,51,0.25);">
+                    <i class="fas fa-paper-plane" style="margin-right:0.75rem;"></i> Post request
+                </button>
+            </form>
+        </div>
+
+        <!-- Recent Requests -->
+        <h2 style="font-size:1.3rem;font-weight:700;margin-bottom:1.5rem;">Recent requests</h2>
+        <div id="requestsGrid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top:1px solid rgba(0,0,0,0.04);padding:3rem 2rem 2rem;background:white;margin-top:2rem;">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">KaribuBoma</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/hosts/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a></li>
+                    <li><a href="/karibuboma/requests/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a></li>
+                    <li><a href="/karibuboma/community-guidelines/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Community guidelines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Verification</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">M-Pesa verification</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">National ID match</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Address verification</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">SmartMove</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Home services</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Movers &amp; cleaning</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Property search</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
+                <div style="display:flex;gap:1rem;font-size:1.6rem;">
+                    <a href="#" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width:1280px;margin:2rem auto 0;border-top:1px solid rgba(0,0,0,0.04);padding-top:1.5rem;text-align:center;font-size:0.85rem;color:var(--color-text-secondary);">
+            © 2026 SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const WHATSAPP_NUMBER = "254115006628";
+
+        // ============================================================
+        // TOAST & MODAL
+        // ============================================================
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // WHATSAPP INTEGRATION
+        // ============================================================
+        function openWhatsAppForm(subject, details = "") {
+            let message = `*KaribuBoma Inquiry*%0A%0A`;
+            message += `*Subject:* ${encodeURIComponent(subject)}%0A`;
+            message += `*Date:* ${new Date().toLocaleString()}%0A`;
+            if (details) message += `*Details:* ${encodeURIComponent(details)}%0A`;
+            message += `%0AAsante! 🙏`;
+            window.open(`https://wa.me/2540115006628?text=${message}`, '_blank');
+            showToast(`📱 Opening WhatsApp for ${subject}`);
+        }
+
+        // ============================================================
+        // AUTH MODAL
+        // ============================================================
+        function showAuthModal() {
+            showModal('Become a host', `
+                    <p style="margin-bottom:1.5rem;color:var(--color-text-secondary);">Share your space and welcome travelers to your home. Complete verification to get started.</p>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <a href="/karibuboma/verify/" style="display:block;text-align:center;padding:0.9rem;border:2px solid var(--color-primary);border-radius:40px;font-weight:600;color:var(--color-primary);text-decoration:none;transition:var(--transition);">Get verified</a>
+                        <button onclick="openWhatsAppForm('Become a host', 'I want to become a KaribuBoma host. Please guide me.'); closeModal();" style="padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:1rem;cursor:pointer;transition:var(--transition);">List your space →</button>
+                    </div>
+                `);
+        }
+
+        // ============================================================
+        // REQUESTS DATA
+        // ============================================================
+        const requests = [
+            { id: 1, name: "Sarah Kimani", location: "Nakuru", dates: "Jul 20-25", guests: 2,
+                description: "Traveling with a friend for a safari. Looking for a cozy place near Lake Nakuru. We're both photographers and nature lovers.",
+                tier: 2, avatar: "https://images.unsplash.com/photo-1494790108372-be9c29b29330?w=100&h=100&fit=crop" },
+            { id: 2, name: "Michael Ochieng", location: "Mombasa", dates: "Aug 5-12", guests: 1,
+                description: "Remote worker looking for a quiet place with good WiFi for a week. Love swimming and local food.",
+                tier: 3, avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop" },
+            { id: 3, name: "Amina Hassan", location: "Kisumu", dates: "Jul 28-Aug 2", guests: 3,
+                description: "Family trip to explore Lake Victoria. Looking for a spacious place for 3 people, preferably near the lake.",
+                tier: 1, avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop" }
+        ];
+
+        // ============================================================
+        // RENDER REQUESTS
+        // ============================================================
+        function renderRequests() {
+            const grid = document.getElementById('requestsGrid');
+            if (!grid) return;
+
+            grid.innerHTML = requests.map(r => `
+                    <div class="request-card" onclick="viewRequest(${r.id})">
+                        <div style="display:flex;align-items:center;gap:1rem;margin-bottom:0.75rem;">
+                            <img src="${r.avatar}" style="width:48px;height:48px;border-radius:50%;object-fit:cover;" onerror="this.src='https://placehold.co/100x100/e8e0d5/006233?text=${r.name[0]}'" />
+                            <div>
+                                <h3 style="font-weight:700;font-size:1.05rem;">${r.name}</h3>
+                                <p style="font-size:0.85rem;color:var(--color-text-secondary);"><i class="fas fa-map-pin"></i> ${r.location} · ${r.dates} · ${r.guests} guest${r.guests > 1 ? 's' : ''}</p>
+                            </div>
+                            <span style="margin-left:auto;padding:0.2rem 0.8rem;border-radius:40px;background:${r.tier === 3 ? '#d1fae5' : r.tier === 2 ? '#dbeafe' : '#e5e7eb'};font-size:0.7rem;font-weight:600;color:${r.tier === 3 ? '#065f46' : r.tier === 2 ? '#1d4ed8' : '#4b5563'};">${r.tier === 3 ? 'Trusted' : r.tier === 2 ? 'Verified' : 'Basic'}</span>
+                        </div>
+                        <p style="color:var(--color-text-secondary);font-size:0.95rem;">${r.description}</p>
+                        <button onclick="event.stopPropagation(); openWhatsAppForm('Request: ${r.name}', 'I saw ${r.name}'s request for ${r.location}. I would like to host them.')" style="margin-top:1rem;padding:0.5rem 1.2rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:var(--transition);">Offer to host</button>
+                    </div>
+                `).join('');
+        }
+
+        function viewRequest(id) {
+            const r = requests.find(req => req.id === id);
+            if (!r) return;
+            showModal(r.name + "'s Request", `
+                    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1rem;">
+                        <img src="${r.avatar}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;" onerror="this.src='https://placehold.co/100x100/e8e0d5/006233?text=${r.name[0]}'" />
+                        <div>
+                            <h3 style="font-weight:700;font-size:1.2rem;">${r.name}</h3>
+                            <p style="color:var(--color-text-secondary);"><i class="fas fa-map-pin"></i> ${r.location} · ${r.dates} · ${r.guests} guest${r.guests > 1 ? 's' : ''}</p>
+                        </div>
+                    </div>
+                    <p style="color:var(--color-text-secondary);line-height:1.8;">${r.description}</p>
+                    <button onclick="openWhatsAppForm('Request: ${r.name}', 'I saw ${r.name}'s request for ${r.location}. I would like to host them.'); closeModal();" style="width:100%;margin-top:1.5rem;padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:700;font-size:1rem;cursor:pointer;transition:var(--transition);">Offer to host</button>
+                `);
+        }
+
+        // ============================================================
+        // SUBMIT REQUEST
+        // ============================================================
+        function submitRequest() {
+            const location = document.getElementById('requestLocation').value;
+            const arrival = document.getElementById('requestArrival').value;
+            const departure = document.getElementById('requestDeparture').value;
+            const description = document.getElementById('requestDescription').value;
+            const guests = document.getElementById('requestGuests').value;
+            const tier = document.getElementById('requestTier').value;
+            const meals = document.getElementById('requestMeals').value;
+
+            const details =
+                `Location: ${location}%0AArrival: ${new Date(arrival).toLocaleDateString()}%0ADeparture: ${new Date(departure).toLocaleDateString()}%0AGuests: ${guests}%0AVerification: ${tier === 'any' ? 'Any' : tier === '3' ? 'Trusted only' : 'Verified only'}%0AMeals: ${meals === 'any' ? 'No preference' : 'Meals preferred'}%0A%0ADescription: ${description}`;
+
+            openWhatsAppForm('Trip Request', details);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', renderRequests);
+    </script>
+</body>
+</html>

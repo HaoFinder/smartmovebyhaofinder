@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KaribuBoma · Verify — SmartMove.Co.Ke</title>
+    <meta name="description" content="Complete your KaribuBoma verification: M-Pesa ID match, National ID upload, and SmartMove Trusted address verification for secure and trusted hosting." />
+    <link rel="canonical" href="https://smartmove.co.ke/karibuboma/verify/" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="KaribuBoma — Verify" />
+    <meta property="og:description" content="Complete your KaribuBoma verification: M-Pesa ID match, National ID upload, and SmartMove Trusted address verification." />
+    <meta property="og:url" content="https://smartmove.co.ke/karibuboma/verify/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "KaribuBoma Verification",
+        "description": "Complete your KaribuBoma verification for secure and trusted hosting.",
+        "url": "https://smartmove.co.ke/karibuboma/verify/"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        :root {
+            --color-primary: #006233;
+            --color-primary-dark: #004d29;
+            --color-primary-light: #e8f5ee;
+            --color-accent: #BB2E2E;
+            --color-gold: #D4AF37;
+            --color-text: #1a1a2e;
+            --color-text-secondary: #4a4a5a;
+            --color-bg: #faf8f5;
+            --color-white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 98, 51, 0.3);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 98, 51, 0.4);
+            background: var(--color-primary-dark);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 98, 51, 0.2);
+        }
+
+        .step-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        .step-card:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 98, 51, 0.1);
+        }
+        .step-card.completed {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: white;
+            background: var(--color-primary);
+        }
+        .step-number.done {
+            background: #065f46;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1000;
+            font-weight: 500;
+            pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 8px 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        @media (max-width: 768px) {
+            .step-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+            .step-number {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="toast" class="toast"></div>
+
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h3 id="modalTitle" style="font-size:1.5rem;font-weight:700;">Title</h3>
+                <button onclick="closeModal()" style="font-size:2rem;background:none;border:none;cursor:pointer;color:#4a4a5a;">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);">
+        <div style="max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:72px;">
+            <a href="/karibuboma/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:12px;background:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-home" style="color:white;font-size:1.2rem;"></i>
+                </div>
+                <span style="font-size:1.3rem;font-weight:800;color:var(--color-primary);">SmartMove</span>
+                <span style="font-size:0.65rem;font-weight:600;background:#f5e6c8;color:#8a7a4a;padding:0.2rem 0.7rem;border-radius:40px;">KaribuBoma</span>
+            </a>
+            <nav style="display:flex;align-items:center;gap:1.5rem;">
+                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a>
+                <a href="/karibuboma/requests/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a>
+                <a href="/karibuboma/hangouts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Hangouts</a>
+                <a href="/karibuboma/verify/" style="font-size:0.9rem;font-weight:600;color:var(--color-primary);text-decoration:none;">Verify</a>
+                <button onclick="showAuthModal()" style="background:var(--color-primary);color:white;border:none;padding:0.6rem 1.6rem;border-radius:40px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,98,51,0.25);">Become a host</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    MAIN CONTENT: VERIFY
+    ============================================================ -->
+    <main id="main-content" style="max-width:1280px;margin:0 auto;padding:2rem;">
+
+        <!-- Page Header -->
+        <div style="margin-bottom:2.5rem;">
+            <h1 style="font-size:2.8rem;font-weight:900;letter-spacing:-0.02em;">Complete your verification</h1>
+            <p style="font-size:1.2rem;color:var(--color-text-secondary);max-width:600px;">Unlock full access and build trust with the community. Complete these steps to become a verified host or surfer.</p>
+        </div>
+
+        <!-- Verification Steps -->
+        <div style="display:flex;flex-direction:column;gap:1.5rem;margin-bottom:2.5rem;">
+
+            <!-- Step 1: Phone Verification -->
+            <div class="step-card completed" id="step1">
+                <div class="step-number done"><i class="fas fa-check" style="font-size:1.2rem;"></i></div>
+                <div style="flex:1;">
+                    <h3 style="font-weight:700;font-size:1.1rem;">1. Phone &amp; SMS Verification</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.95rem;">Verify your phone number to enable basic access and browsing.</p>
+                    <div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;">
+                        <span style="background:#d1fae5;color:#065f46;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;"><i class="fas fa-check"></i> Completed</span>
+                        <span style="background:#e5e7eb;color:#4b5563;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;">Tier 1</span>
+                    </div>
+                </div>
+                <button onclick="showVerificationDetail('Phone Verification')" style="padding:0.4rem 1.2rem;border:1px solid var(--color-primary);background:transparent;color:var(--color-primary);border-radius:40px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:var(--transition);">View status</button>
+            </div>
+
+            <!-- Step 2: M-Pesa & ID Match -->
+            <div class="step-card" id="step2">
+                <div class="step-number">2</div>
+                <div style="flex:1;">
+                    <h3 style="font-weight:700;font-size:1.1rem;">2. M-Pesa Name &amp; National ID Match</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.95rem;">Match your M-Pesa registered name with your National ID to unlock full messaging and the verified badge.</p>
+                    <div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;">
+                        <span style="background:#e5e7eb;color:#4b5563;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;">Pending</span>
+                        <span style="background:#dbeafe;color:#1d4ed8;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;">Tier 2</span>
+                    </div>
+                </div>
+                <button onclick="showVerificationDetail('M-Pesa & ID Match')" style="padding:0.4rem 1.2rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:var(--transition);">Verify now</button>
+            </div>
+
+            <!-- Step 3: SmartMove Trusted (Address Verification) -->
+            <div class="step-card" id="step3">
+                <div class="step-number">3</div>
+                <div style="flex:1;">
+                    <h3 style="font-weight:700;font-size:1.1rem;">3. SmartMove Trusted Address Verification</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.95rem;">Get your physical address verified by SmartMove agents or movers for the highest trust level and featured host badge.</p>
+                    <div style="display:flex;gap:0.5rem;margin-top:0.5rem;flex-wrap:wrap;">
+                        <span style="background:#e5e7eb;color:#4b5563;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;">Pending</span>
+                        <span style="background:#d1fae5;color:#065f46;padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;">Tier 3</span>
+                    </div>
+                </div>
+                <button onclick="showVerificationDetail('SmartMove Trusted')" style="padding:0.4rem 1.2rem;border:2px solid var(--color-gold);background:transparent;color:var(--color-gold);border-radius:40px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:var(--transition);">Schedule address check</button>
+            </div>
+        </div>
+
+        <!-- Verification Summary -->
+        <div style="background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);">
+            <h2 style="font-weight:700;font-size:1.2rem;margin-bottom:1rem;">Your verification status</h2>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+                <div style="text-align:center;padding:1rem;background:var(--color-primary-light);border-radius:var(--radius-sm);">
+                    <div style="font-size:2rem;font-weight:800;color:var(--color-primary);">1/3</div>
+                    <div style="font-size:0.9rem;color:var(--color-text-secondary);">Steps completed</div>
+                </div>
+                <div style="text-align:center;padding:1rem;background:#e5e7eb;border-radius:var(--radius-sm);">
+                    <div style="font-size:2rem;font-weight:800;color:#4b5563;">Basic</div>
+                    <div style="font-size:0.9rem;color:var(--color-text-secondary);">Current tier</div>
+                </div>
+                <div style="text-align:center;padding:1rem;background:#dbeafe;border-radius:var(--radius-sm);">
+                    <div style="font-size:2rem;font-weight:800;color:#1d4ed8;">Tier 2</div>
+                    <div style="font-size:0.9rem;color:var(--color-text-secondary);">Next tier</div>
+                </div>
+            </div>
+            <div style="margin-top:1.5rem;text-align:center;">
+                <p style="color:var(--color-text-secondary);font-size:0.95rem;">Annual verification fee: <strong>KES 350 (~$2.70)</strong> via M-Pesa</p>
+                <button onclick="openWhatsAppForm('Verification Payment', 'I want to complete my KaribuBoma verification. Please guide me through the payment.')" class="btn-primary" style="margin-top:1rem;">
+                    <i class="fas fa-mobile-alt"></i> Pay with M-Pesa
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top:1px solid rgba(0,0,0,0.04);padding:3rem 2rem 2rem;background:white;margin-top:2rem;">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">KaribuBoma</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/hosts/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a></li>
+                    <li><a href="/karibuboma/requests/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a></li>
+                    <li><a href="/karibuboma/community-guidelines/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Community guidelines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Verification</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">M-Pesa verification</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">National ID match</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Address verification</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">SmartMove</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Home services</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Movers &amp; cleaning</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Property search</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
+                <div style="display:flex;gap:1rem;font-size:1.6rem;">
+                    <a href="#" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width:1280px;margin:2rem auto 0;border-top:1px solid rgba(0,0,0,0.04);padding-top:1.5rem;text-align:center;font-size:0.85rem;color:var(--color-text-secondary);">
+            © 2026 SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const WHATSAPP_NUMBER = "254115006628";
+
+        // ============================================================
+        // TOAST & MODAL
+        // ============================================================
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // WHATSAPP INTEGRATION
+        // ============================================================
+        function openWhatsAppForm(subject, details = "") {
+            let message = `*KaribuBoma Inquiry*%0A%0A`;
+            message += `*Subject:* ${encodeURIComponent(subject)}%0A`;
+            message += `*Date:* ${new Date().toLocaleString()}%0A`;
+            if (details) message += `*Details:* ${encodeURIComponent(details)}%0A`;
+            message += `%0AAsante! 🙏`;
+            window.open(`https://wa.me/2540115006628?text=${message}`, '_blank');
+            showToast(`📱 Opening WhatsApp for ${subject}`);
+        }
+
+        // ============================================================
+        // AUTH MODAL
+        // ============================================================
+        function showAuthModal() {
+            showModal('Become a host', `
+                    <p style="margin-bottom:1.5rem;color:var(--color-text-secondary);">Share your space and welcome travelers to your home. Complete verification to get started.</p>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <a href="/karibuboma/verify/" style="display:block;text-align:center;padding:0.9rem;border:2px solid var(--color-primary);border-radius:40px;font-weight:600;color:var(--color-primary);text-decoration:none;transition:var(--transition);">Get verified</a>
+                        <button onclick="openWhatsAppForm('Become a host', 'I want to become a KaribuBoma host. Please guide me.'); closeModal();" style="padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:1rem;cursor:pointer;transition:var(--transition);">List your space →</button>
+                    </div>
+                `);
+        }
+
+        // ============================================================
+        // VERIFICATION DETAILS
+        // ============================================================
+        function showVerificationDetail(step) {
+            const details = {
+                'Phone Verification': {
+                    desc: 'This step verifies your phone number and enables basic browsing of hosts and events.',
+                    status: 'Completed',
+                    action: 'Verified ✅'
+                },
+                'M-Pesa & ID Match': {
+                    desc: 'Match your M-Pesa registered name with your National ID. This unlocks unlimited messaging and the verified badge.',
+                    status: 'Pending',
+                    action: 'Start verification'
+                },
+                'SmartMove Trusted': {
+                    desc: 'Get your physical address verified by a SmartMove agent. This gives you the highest trust level and a featured host badge.',
+                    status: 'Pending',
+                    action: 'Schedule address check'
+                }
+            };
+
+            const d = details[step];
+            showModal(step, `
+                    <p style="margin-bottom:1rem;">${d.desc}</p>
+                    <p style="font-weight:600;">Status: <span style="color:${d.status === 'Completed' ? '#065f46' : '#1d4ed8'};">${d.status}</span></p>
+                    <button onclick="openWhatsAppForm('${step}', 'I want to complete ${step} for KaribuBoma. Please guide me.'); closeModal();" style="width:100%;margin-top:1.5rem;padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:700;font-size:1rem;cursor:pointer;transition:var(--transition);">${d.action} →</button>
+                `);
+        }
+    </script>
+</body>
+</html>

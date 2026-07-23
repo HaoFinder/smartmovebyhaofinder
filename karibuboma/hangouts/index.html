@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KaribuBoma · Hangouts & Meetups — SmartMove.Co.Ke</title>
+    <meta name="description" content="Find local meetups, coffee hangs, and community events across Kenya. Connect with travelers and locals in real life." />
+    <link rel="canonical" href="https://smartmove.co.ke/karibuboma/hangouts/" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="KaribuBoma — Hangouts & Meetups" />
+    <meta property="og:description" content="Find local meetups, coffee hangs, and community events across Kenya. Connect with travelers and locals in real life." />
+    <meta property="og:url" content="https://smartmove.co.ke/karibuboma/hangouts/" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "KaribuBoma Hangouts",
+        "description": "Find local meetups and community events across Kenya.",
+        "url": "https://smartmove.co.ke/karibuboma/hangouts/"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        :root {
+            --color-primary: #006233;
+            --color-primary-dark: #004d29;
+            --color-primary-light: #e8f5ee;
+            --color-accent: #BB2E2E;
+            --color-gold: #D4AF37;
+            --color-text: #1a1a2e;
+            --color-text-secondary: #4a4a5a;
+            --color-bg: #faf8f5;
+            --color-white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 98, 51, 0.3);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 98, 51, 0.4);
+            background: var(--color-primary-dark);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 98, 51, 0.2);
+        }
+
+        .hangout-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .hangout-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 98, 51, 0.1);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1000;
+            font-weight: 500;
+            pointer-events: none;
+        }
+        .toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 8px 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .status-upcoming { background: #dbeafe; color: #1d4ed8; }
+        .status-ongoing { background: #d1fae5; color: #065f46; }
+        .status-past { background: #e5e7eb; color: #4b5563; }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--color-text-secondary);
+        }
+        .filter-chip:hover,
+        .filter-chip.active {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .hangout-card { padding: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="toast" class="toast"></div>
+
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h3 id="modalTitle" style="font-size:1.5rem;font-weight:700;">Title</h3>
+                <button onclick="closeModal()" style="font-size:2rem;background:none;border:none;cursor:pointer;color:#4a4a5a;">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);">
+        <div style="max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:72px;">
+            <a href="/karibuboma/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:12px;background:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-home" style="color:white;font-size:1.2rem;"></i>
+                </div>
+                <span style="font-size:1.3rem;font-weight:800;color:var(--color-primary);">SmartMove</span>
+                <span style="font-size:0.65rem;font-weight:600;background:#f5e6c8;color:#8a7a4a;padding:0.2rem 0.7rem;border-radius:40px;">KaribuBoma</span>
+            </a>
+            <nav style="display:flex;align-items:center;gap:1.5rem;">
+                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a>
+                <a href="/karibuboma/requests/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a>
+                <a href="/karibuboma/hangouts/" style="font-size:0.9rem;font-weight:600;color:var(--color-primary);text-decoration:none;">Hangouts</a>
+                <a href="/karibuboma/verify/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Verify</a>
+                <button onclick="showAuthModal()" style="background:var(--color-primary);color:white;border:none;padding:0.6rem 1.6rem;border-radius:40px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,98,51,0.25);">Become a host</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    MAIN CONTENT: HANGOUTS
+    ============================================================ -->
+    <main id="main-content" style="max-width:1280px;margin:0 auto;padding:2rem;">
+
+        <!-- Page Header -->
+        <div style="margin-bottom:2.5rem;">
+            <h1 style="font-size:2.8rem;font-weight:900;letter-spacing:-0.02em;">Hangouts &amp; Meetups</h1>
+            <p style="font-size:1.2rem;color:var(--color-text-secondary);max-width:600px;">Find local coffee hangs, cultural events, and meetups across Kenya. Connect with the community in real life.</p>
+        </div>
+
+        <!-- Create Hangout -->
+        <div style="background:white;border-radius:var(--radius-lg);padding:1.5rem 2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;">
+            <div>
+                <h3 style="font-weight:700;font-size:1.1rem;">Organize a meetup</h3>
+                <p style="color:var(--color-text-secondary);font-size:0.9rem;">Plan a coffee hang, cultural event, or outdoor adventure</p>
+            </div>
+            <button onclick="openWhatsAppForm('Create Hangout', 'I want to organize a meetup. Please help me set it up.')" style="padding:0.7rem 2rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;cursor:pointer;transition:var(--transition);">
+                <i class="fas fa-plus" style="margin-right:0.5rem;"></i> Create event
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.5rem;">
+            <span style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);display:flex;align-items:center;">Filter:</span>
+            <span class="filter-chip active" onclick="toggleFilter(this)">All events</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Upcoming</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Ongoing</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Nairobi</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Coast</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Rift Valley</span>
+            <span class="filter-chip" onclick="toggleFilter(this)">Western</span>
+        </div>
+
+        <!-- Hangouts Grid -->
+        <div id="hangoutsGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;"></div>
+
+        <!-- Map Section -->
+        <div style="margin-top:2.5rem;background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);text-align:center;">
+            <i class="fas fa-map-marked-alt" style="font-size:3rem;color:var(--color-primary);margin-bottom:1rem;"></i>
+            <h3 style="font-weight:700;font-size:1.2rem;">Find hangouts near you</h3>
+            <p style="color:var(--color-text-secondary);margin-bottom:1.5rem;">See all meetups on an interactive map</p>
+            <button onclick="openWhatsAppForm('Hangouts Map', 'I want to see all hangouts on a map.')" class="btn-primary">View map →</button>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top:1px solid rgba(0,0,0,0.04);padding:3rem 2rem 2rem;background:white;margin-top:2rem;">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">KaribuBoma</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/hosts/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a></li>
+                    <li><a href="/karibuboma/requests/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a></li>
+                    <li><a href="/karibuboma/community-guidelines/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Community guidelines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Verification</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">M-Pesa verification</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">National ID match</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Address verification</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">SmartMove</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Home services</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Movers &amp; cleaning</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Property search</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
+                <div style="display:flex;gap:1rem;font-size:1.6rem;">
+                    <a href="#" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width:1280px;margin:2rem auto 0;border-top:1px solid rgba(0,0,0,0.04);padding-top:1.5rem;text-align:center;font-size:0.85rem;color:var(--color-text-secondary);">
+            © 2026 SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
+        </div>
+    </footer>
+
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const WHATSAPP_NUMBER = "254115006628";
+
+        // ============================================================
+        // TOAST & MODAL
+        // ============================================================
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // WHATSAPP INTEGRATION
+        // ============================================================
+        function openWhatsAppForm(subject, details = "") {
+            let message = `*KaribuBoma Inquiry*%0A%0A`;
+            message += `*Subject:* ${encodeURIComponent(subject)}%0A`;
+            message += `*Date:* ${new Date().toLocaleString()}%0A`;
+            if (details) message += `*Details:* ${encodeURIComponent(details)}%0A`;
+            message += `%0AAsante! 🙏`;
+            window.open(`https://wa.me/2540115006628?text=${message}`, '_blank');
+            showToast(`📱 Opening WhatsApp for ${subject}`);
+        }
+
+        // ============================================================
+        // AUTH MODAL
+        // ============================================================
+        function showAuthModal() {
+            showModal('Become a host', `
+                    <p style="margin-bottom:1.5rem;color:var(--color-text-secondary);">Share your space and welcome travelers to your home. Complete verification to get started.</p>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <a href="/karibuboma/verify/" style="display:block;text-align:center;padding:0.9rem;border:2px solid var(--color-primary);border-radius:40px;font-weight:600;color:var(--color-primary);text-decoration:none;transition:var(--transition);">Get verified</a>
+                        <button onclick="openWhatsAppForm('Become a host', 'I want to become a KaribuBoma host. Please guide me.'); closeModal();" style="padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:1rem;cursor:pointer;transition:var(--transition);">List your space →</button>
+                    </div>
+                `);
+        }
+
+        // ============================================================
+        // FILTER CHIPS
+        // ============================================================
+        function toggleFilter(el) {
+            el.classList.toggle('active');
+            showToast(`Filter: ${el.textContent} ${el.classList.contains('active') ? 'applied' : 'removed'}`);
+        }
+
+        // ============================================================
+        // HANGOUTS DATA
+        // ============================================================
+        const hangouts = [
+            { id: 1, title: "Nairobi Coffee Meetup", location: "Westlands, Nairobi", date: "Today, 5:00 PM",
+                description: "Join fellow travelers and locals for coffee, conversation, and networking. All welcome!",
+                category: "coffee", status: "ongoing", attendees: 12, maxAttendees: 20,
+                organizer: "Grace Wanjiru",
+                img: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=200&fit=crop" },
+            { id: 2, title: "Naivasha Lake Day Trip", location: "Naivasha", date: "Sat, 10:00 AM",
+                description: "A day trip to Lake Naivasha. Swimming, bird watching, and picnic. Bring your own lunch!",
+                category: "outdoor", status: "upcoming", attendees: 8, maxAttendees: 15,
+                organizer: "David Ochieng",
+                img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=200&fit=crop" },
+            { id: 3, title: "Kisumu Sunset Chill", location: "Lake Victoria, Kisumu", date: "Sun, 4:30 PM",
+                description: "Relax by the lake, watch the sunset, and enjoy local music. Bring a blanket and snacks.",
+                category: "social", status: "upcoming", attendees: 6, maxAttendees: 12,
+                organizer: "Faith Akinyi",
+                img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=200&fit=crop" },
+            { id: 4, title: "Mombasa Beach Cleanup", location: "Nyali Beach, Mombasa", date: "Sat, 8:00 AM",
+                description: "Help clean the beach and meet like-minded people. Gloves and bags provided.",
+                category: "community", status: "upcoming", attendees: 15, maxAttendees: 30,
+                organizer: "Amina Hassan",
+                img: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&h=200&fit=crop" },
+            { id: 5, title: "Nakuru Cycling Tour", location: "Nakuru Town", date: "Next Sat, 7:00 AM",
+                description: "A 20km cycling tour around Lake Nakuru. Bring your own bike. All skill levels welcome.",
+                category: "outdoor", status: "upcoming", attendees: 5, maxAttendees: 10,
+                organizer: "Peter Njoroge",
+                img: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=400&h=200&fit=crop" },
+            { id: 6, title: "Nairobi Language Exchange", location: "Kilimani, Nairobi", date: "Wed, 6:00 PM",
+                description: "Practice languages with locals and travelers. English, Swahili, French, and more.",
+                category: "cultural", status: "ongoing", attendees: 18, maxAttendees: 25,
+                organizer: "James Mwangi",
+                img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=400&h=200&fit=crop" }
+        ];
+
+        // ============================================================
+        // RENDER HANGOUTS
+        // ============================================================
+        function getStatusBadge(status) {
+            if (status === 'ongoing') return '<span class="status-badge status-ongoing"><i class="fas fa-circle" style="font-size:0.5rem;margin-right:4px;color:#065f46;"></i> Ongoing</span>';
+            if (status === 'upcoming') return '<span class="status-badge status-upcoming"><i class="fas fa-circle" style="font-size:0.5rem;margin-right:4px;color:#1d4ed8;"></i> Upcoming</span>';
+            return '<span class="status-badge status-past">Past</span>';
+        }
+
+        function renderHangouts() {
+            const grid = document.getElementById('hangoutsGrid');
+            if (!grid) return;
+
+            grid.innerHTML = hangouts.map(h => `
+                    <div class="hangout-card" onclick="viewHangout(${h.id})">
+                        <img src="${h.img}" style="width:100%;height:140px;object-fit:cover;border-radius:12px;margin-bottom:1rem;" onerror="this.src='https://placehold.co/400x200/e8e0d5/006233?text=${h.title}'" />
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <h3 style="font-weight:700;font-size:1.1rem;">${h.title}</h3>
+                            ${getStatusBadge(h.status)}
+                        </div>
+                        <p style="font-size:0.9rem;color:var(--color-text-secondary);margin-top:0.25rem;"><i class="fas fa-map-pin"></i> ${h.location}</p>
+                        <p style="font-size:0.9rem;color:var(--color-text-secondary);"><i class="far fa-calendar"></i> ${h.date}</p>
+                        <p style="font-size:0.9rem;color:var(--color-text-secondary);margin-top:0.5rem;">👥 ${h.attendees}/${h.maxAttendees} attending · Organized by ${h.organizer}</p>
+                        <p style="font-size:0.85rem;color:var(--color-text-secondary);margin-top:0.5rem;">${h.description.substring(0, 80)}...</p>
+                        <button onclick="event.stopPropagation(); openWhatsAppForm('Hangout: ${h.title}', 'I want to join ${h.title} on ${h.date}. Please add me to the group.')" style="margin-top:0.75rem;padding:0.5rem 1.2rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:0.85rem;cursor:pointer;transition:var(--transition);">Join event</button>
+                    </div>
+                `).join('');
+        }
+
+        function viewHangout(id) {
+            const h = hangouts.find(ev => ev.id === id);
+            if (!h) return;
+            showModal(h.title, `
+                    <img src="${h.img}" style="width:100%;height:180px;object-fit:cover;border-radius:12px;margin-bottom:1rem;" onerror="this.src='https://placehold.co/400x200/e8e0d5/006233?text=${h.title}'" />
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <p style="color:var(--color-text-secondary);"><i class="fas fa-map-pin"></i> ${h.location}</p>
+                            <p style="color:var(--color-text-secondary);"><i class="far fa-calendar"></i> ${h.date}</p>
+                        </div>
+                        ${getStatusBadge(h.status)}
+                    </div>
+                    <p style="margin-top:0.5rem;">👥 ${h.attendees}/${h.maxAttendees} attending · Organized by ${h.organizer}</p>
+                    <p style="margin-top:1rem;line-height:1.8;">${h.description}</p>
+                    <p style="margin-top:0.5rem;font-size:0.9rem;color:var(--color-text-secondary);"><strong>Category:</strong> ${h.category}</p>
+                    <button onclick="openWhatsAppForm('Hangout: ${h.title}', 'I want to join ${h.title} on ${h.date}. Please add me to the group.'); closeModal();" style="width:100%;margin-top:1.5rem;padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:700;font-size:1rem;cursor:pointer;transition:var(--transition);">Join event</button>
+                `);
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', renderHangouts);
+    </script>
+</body>
+</html>

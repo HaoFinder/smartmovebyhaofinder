@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KaribuBoma · Find a Host — SmartMove.Co.Ke</title>
+    <meta name="description" content="Discover verified hosts across Kenya. Search by county, read reviews, and connect with locals for free stays." />
+    <link rel="canonical" href="https://smartmove.co.ke/karibuboma/hosts/" />
+    <link rel="icon" type="image/png" href="/img/logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="KaribuBoma — Find a Host" />
+    <meta property="og:description" content="Discover verified hosts across Kenya. Search by county, read reviews, and connect with locals for free stays." />
+    <meta property="og:url" content="https://smartmove.co.ke/karibuboma/hosts/" />
+    <meta property="og:type" content="website" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "KaribuBoma Hosts",
+        "description": "Find verified hosts across Kenya for free cultural stays.",
+        "url": "https://smartmove.co.ke/karibuboma/hosts/"
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================================
+           GLOBAL DESIGN SYSTEM (inherited from index)
+           ============================================================ */
+        :root {
+            --color-primary: #006233;
+            --color-primary-dark: #004d29;
+            --color-primary-light: #e8f5ee;
+            --color-accent: #BB2E2E;
+            --color-gold: #D4AF37;
+            --color-text: #1a1a2e;
+            --color-text-secondary: #4a4a5a;
+            --color-bg: #faf8f5;
+            --color-white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 30px 80px rgba(0, 0, 0, 0.12);
+            --radius-sm: 12px;
+            --radius-md: 20px;
+            --radius-lg: 32px;
+            --radius-xl: 48px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0, 98, 51, 0.3);
+            text-decoration: none;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 98, 51, 0.4);
+            background: var(--color-primary-dark);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(0, 98, 51, 0.2);
+        }
+
+        .host-card-premium {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .host-card-premium:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: var(--shadow-xl);
+            border-color: rgba(0, 98, 51, 0.15);
+        }
+        .host-card-premium .host-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .host-card-premium:hover .host-img {
+            transform: scale(1.03);
+        }
+
+        .verification-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .badge-tier1 { background: #e5e7eb; color: #4b5563; }
+        .badge-tier2 { background: #dbeafe; color: #1d4ed8; }
+        .badge-tier3 { background: #d1fae5; color: #065f46; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--color-primary);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1000;
+            font-weight: 500;
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            max-width: 520px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0 8px 8px;
+            z-index: 100;
+            transition: top 0.2s;
+        }
+        .skip-link:focus { top: 0; }
+
+        .filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--color-text-secondary);
+        }
+        .filter-chip:hover,
+        .filter-chip.active {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .host-card-premium .host-img { height: 180px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-modal="true">
+        <div class="modal-content">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+                <h3 id="modalTitle" style="font-size:1.5rem;font-weight:700;">Title</h3>
+                <button onclick="closeModal()" style="font-size:2rem;background:none;border:none;cursor:pointer;color:#4a4a5a;">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,0.04);">
+        <div style="max-width:1280px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;height:72px;">
+            <a href="/karibuboma/" style="display:flex;align-items:center;gap:0.5rem;text-decoration:none;">
+                <div style="width:36px;height:36px;border-radius:12px;background:var(--color-primary);display:flex;align-items:center;justify-content:center;">
+                    <i class="fas fa-home" style="color:white;font-size:1.2rem;"></i>
+                </div>
+                <span style="font-size:1.3rem;font-weight:800;color:var(--color-primary);">SmartMove</span>
+                <span style="font-size:0.65rem;font-weight:600;background:#f5e6c8;color:#8a7a4a;padding:0.2rem 0.7rem;border-radius:40px;">KaribuBoma</span>
+            </a>
+            <nav style="display:flex;align-items:center;gap:1.5rem;">
+                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:600;color:var(--color-primary);text-decoration:none;">Find a host</a>
+                <a href="/karibuboma/requests/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a>
+                <a href="/karibuboma/hangouts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Hangouts</a>
+                <a href="/karibuboma/verify/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Verify</a>
+                <button onclick="showAuthModal()" style="background:var(--color-primary);color:white;border:none;padding:0.6rem 1.6rem;border-radius:40px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:var(--transition);box-shadow:0 4px 16px rgba(0,98,51,0.25);">Become a host</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    MAIN CONTENT: HOSTS
+    ============================================================ -->
+    <main id="main-content" style="max-width:1280px;margin:0 auto;padding:2rem;">
+
+        <!-- Page Header -->
+        <div style="margin-bottom:2.5rem;">
+            <h1 style="font-size:2.8rem;font-weight:900;letter-spacing:-0.02em;">Find a host</h1>
+            <p style="font-size:1.2rem;color:var(--color-text-secondary);max-width:600px;">Discover verified hosts across Kenya. Search by county, read reviews, and connect with locals for free stays.</p>
+        </div>
+
+        <!-- Search & Filters -->
+        <div style="background:white;border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);margin-bottom:2rem;">
+            <form onsubmit="performSearch(); return false;" style="display:flex;flex-direction:column;gap:1rem;">
+                <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:1rem;">
+                    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;">
+                        <i class="fas fa-map-pin" style="color:#b8a78d;"></i>
+                        <input type="text" id="searchLocation" placeholder="County, town, or landmark" style="border:none;outline:none;width:100%;font-size:1rem;background:transparent;" value="Nairobi" />
+                    </div>
+                    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;">
+                        <i class="fas fa-calendar" style="color:#b8a78d;"></i>
+                        <input type="date" id="checkDate" style="border:none;outline:none;width:100%;font-size:1rem;background:transparent;" value="2026-07-15" />
+                    </div>
+                    <div style="display:flex;align-items:center;gap:0.75rem;padding:0.8rem 1.2rem;border:2px solid rgba(0,0,0,0.06);border-radius:16px;">
+                        <i class="fas fa-user" style="color:#b8a78d;"></i>
+                        <select id="guestCount" style="border:none;outline:none;width:100%;font-size:1rem;background:transparent;">
+                            <option value="1">1 guest</option>
+                            <option value="2">2 guests</option>
+                            <option value="3">3 guests</option>
+                            <option value="4">4 guests</option>
+                        </select>
+                    </div>
+                    <button type="submit" style="padding:0.8rem 2rem;background:var(--color-primary);color:white;font-weight:700;border:none;border-radius:16px;cursor:pointer;transition:var(--transition);">Search</button>
+                </div>
+                <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+                    <span style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);display:flex;align-items:center;">Filter:</span>
+                    <span class="filter-chip active" onclick="toggleFilter(this)">All hosts</span>
+                    <span class="filter-chip" onclick="toggleFilter(this)">Trusted</span>
+                    <span class="filter-chip" onclick="toggleFilter(this)">Verified</span>
+                    <span class="filter-chip" onclick="toggleFilter(this)">Basic</span>
+                    <span class="filter-chip" onclick="toggleFilter(this)">Has reviews</span>
+                    <span class="filter-chip" onclick="toggleFilter(this)">Offers meals</span>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results Count -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;">
+            <span style="font-weight:500;color:var(--color-text-secondary);">Showing <strong id="resultCount">6</strong> hosts</span>
+            <div style="display:flex;gap:0.5rem;">
+                <button onclick="prevHosts()" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,0.06);background:white;cursor:pointer;transition:var(--transition);">‹</button>
+                <button onclick="nextHosts()" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,0,0,0.06);background:white;cursor:pointer;transition:var(--transition);">›</button>
+            </div>
+        </div>
+
+        <!-- Hosts Grid -->
+        <div id="hostsGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;"></div>
+
+        <!-- Empty State (hidden by default) -->
+        <div id="emptyState" style="display:none;text-align:center;padding:4rem 2rem;background:white;border-radius:var(--radius-lg);border:1px solid rgba(0,0,0,0.04);">
+            <i class="fas fa-search" style="font-size:3rem;color:#b8a78d;margin-bottom:1rem;"></i>
+            <h3 style="font-size:1.5rem;font-weight:700;">No hosts found</h3>
+            <p style="color:var(--color-text-secondary);">Try adjusting your search or filters</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer style="border-top:1px solid rgba(0,0,0,0.04);padding:3rem 2rem 2rem;background:white;margin-top:2rem;">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;">
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">KaribuBoma</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/hosts/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a></li>
+                    <li><a href="/karibuboma/requests/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a></li>
+                    <li><a href="/karibuboma/community-guidelines/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Community guidelines</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Verification</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">M-Pesa verification</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">National ID match</a></li>
+                    <li><a href="/karibuboma/verify/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Address verification</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">SmartMove</h4>
+                <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:0.6rem;">
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Home services</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Movers &amp; cleaning</a></li>
+                    <li><a href="/" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Property search</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
+                <div style="display:flex;gap:1rem;font-size:1.6rem;">
+                    <a href="#" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div style="max-width:1280px;margin:2rem auto 0;border-top:1px solid rgba(0,0,0,0.04);padding-top:1.5rem;text-align:center;font-size:0.85rem;color:var(--color-text-secondary);">
+            © 2026 SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const WHATSAPP_NUMBER = "254115006628";
+
+        // ============================================================
+        // TOAST & MODAL
+        // ============================================================
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timeout);
+            t._timeout = setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        function showModal(title, body) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = body;
+            document.getElementById('modal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // ============================================================
+        // WHATSAPP INTEGRATION
+        // ============================================================
+        function openWhatsAppForm(subject, details = "") {
+            let message = `*KaribuBoma Inquiry*%0A%0A`;
+            message += `*Subject:* ${encodeURIComponent(subject)}%0A`;
+            message += `*Date:* ${new Date().toLocaleString()}%0A`;
+            if (details) message += `*Details:* ${encodeURIComponent(details)}%0A`;
+            message += `%0AAsante! 🙏`;
+            window.open(`https://wa.me/2540115006628?text=${message}`, '_blank');
+            showToast(`📱 Opening WhatsApp for ${subject}`);
+        }
+
+        // ============================================================
+        // AUTH MODAL
+        // ============================================================
+        function showAuthModal() {
+            showModal('Become a host', `
+                    <p style="margin-bottom:1.5rem;color:var(--color-text-secondary);">Share your space and welcome travelers to your home. Complete verification to get started.</p>
+                    <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                        <a href="/karibuboma/verify/" style="display:block;text-align:center;padding:0.9rem;border:2px solid var(--color-primary);border-radius:40px;font-weight:600;color:var(--color-primary);text-decoration:none;transition:var(--transition);">Get verified</a>
+                        <button onclick="openWhatsAppForm('Become a host', 'I want to become a KaribuBoma host. Please guide me.'); closeModal();" style="padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:600;font-size:1rem;cursor:pointer;transition:var(--transition);">List your space →</button>
+                    </div>
+                `);
+        }
+
+        // ============================================================
+        // FILTER CHIPS
+        // ============================================================
+        function toggleFilter(el) {
+            el.classList.toggle('active');
+            // In production, this would trigger a filter query
+            showToast(`Filter: ${el.textContent} ${el.classList.contains('active') ? 'applied' : 'removed'}`);
+        }
+
+        // ============================================================
+        // HOSTS DATA
+        // ============================================================
+        const hosts = [
+            { name: "Grace Wanjiru", location: "Kilimani, Nairobi", room: "Private room with garden view", rating: 4.9,
+                reviews: 124, languages: ["English", "Swahili"], interests: ["Cooking", "Music", "Hiking"], tier: 3,
+                offersMeals: true,
+                img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=300&fit=crop" },
+            { name: "David Ochieng", location: "Westlands, Nairobi", room: "Spare sofa + breakfast included", rating: 4.8,
+                reviews: 98, languages: ["English", "Luo"], interests: ["Football", "Tech", "Travel"], tier: 2,
+                offersMeals: true,
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" },
+            { name: "Faith Akinyi", location: "Kisumu CBD", room: "Guest wing near Lake Victoria", rating: 4.9,
+                reviews: 156, languages: ["English", "Swahili", "Luo"], interests: ["Fishing", "Dancing", "Food"],
+                tier: 3, offersMeals: false,
+                img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=300&fit=crop" },
+            { name: "James Mwangi", location: "Kileleshwa, Nairobi", room: "Cozy private room with WiFi", rating: 4.7,
+                reviews: 87, languages: ["English", "Kikuyu"], interests: ["Reading", "Chess", "Coffee"], tier: 2,
+                offersMeals: false,
+                img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=300&fit=crop" },
+            { name: "Amina Hassan", location: "Mombasa, Nyali", room: "Beach view room + cultural tours", rating: 4.9,
+                reviews: 203, languages: ["English", "Swahili", "Arabic"], interests: ["Swimming", "History",
+                    "Photography"
+                ], tier: 3, offersMeals: true,
+                img: "https://images.unsplash.com/photo-1494790108372-be9c29b29330?w=400&h=300&fit=crop" },
+            { name: "Peter Njoroge", location: "Nakuru CBD", room: "Quiet room near Lake Nakuru", rating: 4.6,
+                reviews: 67, languages: ["English", "Swahili"], interests: ["Bird watching", "Cycling"], tier: 1,
+                offersMeals: false,
+                img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" }
+        ];
+
+        let currentPage = 0;
+        const hostsPerPage = 3;
+
+        // ============================================================
+        // RENDER FUNCTIONS
+        // ============================================================
+        function getTierBadge(tier) {
+            if (tier === 3) return '<span class="verification-badge badge-tier3"><i class="fas fa-check-circle"></i> Trusted</span>';
+            if (tier === 2) return '<span class="verification-badge badge-tier2"><i class="fas fa-check-circle"></i> Verified</span>';
+            return '<span class="verification-badge badge-tier1"><i class="fas fa-user"></i> Basic</span>';
+        }
+
+        function renderHosts() {
+            const start = currentPage * hostsPerPage;
+            const end = Math.min(start + hostsPerPage, hosts.length);
+            const pageHosts = hosts.slice(start, end);
+            const grid = document.getElementById('hostsGrid');
+            const empty = document.getElementById('emptyState');
+            const count = document.getElementById('resultCount');
+
+            if (!grid) return;
+
+            if (pageHosts.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'block';
+                count.textContent = '0';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            empty.style.display = 'none';
+            count.textContent = hosts.length;
+
+            grid.innerHTML = pageHosts.map(h => `
+                    <div class="host-card-premium" onclick="viewHost('${h.name}','${h.location}','${h.room}',${h.rating},${h.reviews},'${h.languages.join(', ')}','${h.interests.join(', ')}',${h.tier},'${h.img}','${h.offersMeals}')">
+                        <img src="${h.img}" class="host-img" alt="${h.name}" loading="lazy" onerror="this.src='https://placehold.co/400x300/e8e0d5/006233?text=${h.name}'" />
+                        <div style="padding:1.5rem;">
+                            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                                <div>
+                                    <h3 style="font-size:1.2rem;font-weight:700;">${h.name}</h3>
+                                    <p style="font-size:0.9rem;color:var(--color-text-secondary);margin:0;"><i class="fas fa-map-pin" style="font-size:0.7rem;"></i> ${h.location}</p>
+                                </div>
+                                ${getTierBadge(h.tier)}
+                            </div>
+                            <p style="font-size:0.95rem;margin-top:0.5rem;">${h.room}</p>
+                            <div style="display:flex;gap:1.5rem;margin-top:0.8rem;font-size:0.9rem;flex-wrap:wrap;">
+                                <span><i class="fas fa-star" style="color:#fbbf24;"></i> ${h.rating} (${h.reviews})</span>
+                                <span><i class="fas fa-language"></i> ${h.languages[0]}</span>
+                                ${h.offersMeals ? '<span><i class="fas fa-utensils" style="color:var(--color-primary);"></i> Meals offered</span>' : ''}
+                            </div>
+                            <button onclick="event.stopPropagation(); openWhatsAppForm('Host Request: ${h.name}', 'I would like to stay with ${h.name} in ${h.location}. My dates are flexible.')" style="width:100%;margin-top:1rem;padding:0.7rem;border:2px solid var(--color-primary);background:transparent;color:var(--color-primary);border-radius:40px;font-weight:600;font-size:0.9rem;cursor:pointer;transition:var(--transition);">Request to stay</button>
+                        </div>
+                    </div>
+                `).join('');
+
+            // Update pagination buttons
+            const prevBtn = document.querySelector('[onclick="prevHosts()"]');
+            const nextBtn = document.querySelector('[onclick="nextHosts()"]');
+            if (prevBtn) prevBtn.style.opacity = currentPage === 0 ? '0.3' : '1';
+            if (nextBtn) nextBtn.style.opacity = end >= hosts.length ? '0.3' : '1';
+        }
+
+        function viewHost(name, location, room, rating, reviews, languages, interests, tier, img, offersMeals) {
+            showModal(name, `
+                    <img src="${img}" style="width:100%;border-radius:16px;margin-bottom:1.5rem;height:220px;object-fit:cover;" onerror="this.src='https://placehold.co/400x300/e8e0d5/006233?text=${name}'" />
+                    <div style="display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <p style="color:var(--color-text-secondary);margin:0;"><i class="fas fa-map-pin"></i> ${location}</p>
+                            <p style="margin-top:0.25rem;">${room}</p>
+                        </div>
+                        ${getTierBadge(tier)}
+                    </div>
+                    <div style="display:flex;gap:1.5rem;margin-top:0.8rem;font-size:0.95rem;flex-wrap:wrap;">
+                        <span><i class="fas fa-star" style="color:#fbbf24;"></i> ${rating} (${reviews} reviews)</span>
+                        <span><i class="fas fa-language"></i> ${languages}</span>
+                        ${offersMeals === 'true' ? '<span><i class="fas fa-utensils" style="color:var(--color-primary);"></i> Meals offered</span>' : ''}
+                    </div>
+                    <p style="margin-top:1rem;font-size:0.95rem;"><strong>Interests:</strong> ${interests}</p>
+                    <button onclick="openWhatsAppForm('Host Request: ${name}', 'I would like to stay with ${name} in ${location}. My dates are flexible.'); closeModal();" style="width:100%;margin-top:1.5rem;padding:1rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:700;font-size:1rem;cursor:pointer;transition:var(--transition);">Send request</button>
+                `);
+        }
+
+        // ============================================================
+        // PAGINATION
+        // ============================================================
+        function nextHosts() {
+            if ((currentPage + 1) * hostsPerPage < hosts.length) { currentPage++;
+                renderHosts(); }
+        }
+
+        function prevHosts() {
+            if (currentPage > 0) { currentPage--;
+                renderHosts(); }
+        }
+
+        // ============================================================
+        // SEARCH
+        // ============================================================
+        function performSearch() {
+            const loc = document.getElementById('searchLocation').value;
+            const date = document.getElementById('checkDate').value;
+            const guests = document.getElementById('guestCount').value;
+            openWhatsAppForm('Host Search',
+                `Location: ${loc}%0ADate: ${new Date(date).toLocaleDateString()}%0AGuests: ${guests}%0APlease help me find a host.`
+                );
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        document.addEventListener('DOMContentLoaded', renderHosts);
+    </script>
+
+</body>
+</html>

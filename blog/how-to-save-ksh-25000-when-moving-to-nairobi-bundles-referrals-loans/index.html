@@ -411,7 +411,7 @@
         function showToast(msg) { let t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); }
         function closeModal() { document.getElementById('modal').classList.remove('show'); }
         function updateCartCounter() { document.getElementById('cartCount').textContent = cartCount; }
-        function openWhatsAppForm(subject, details = "") { let message = `*SmartMove.Co.Ke Inquiry*%0A%0A*Subject:* ${encodeURIComponent(subject)}%0A*Date:* ${new Date().toLocaleString()}%0A${details ? `*Details:* ${encodeURIComponent(details)}%0A` : ''}`; window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank'); showToast(`📱 Opening WhatsApp`); }
+        function openWhatsAppForm(subject, details = "") { let message = `*SmartMove.Co.Ke Inquiry*%0A%0A*Subject:* ${encodeURIComponent(subject)}%0A*Date:* ${new Date().toLocaleString()}%0A${details ? `*Details:* ${encodeURIComponent(details)}%0A` : ''}`; window.open(`https://wa.me/2540115006628?text=${message}`, '_blank'); showToast(`📱 Opening WhatsApp`); }
         function showAuthModal() { openWhatsAppForm('Account Sign In'); }
         function showCart() { if(cartItems.length===0) return showToast('Cart empty'); let total = cartItems.reduce((s,i)=>s+i.price,0); let modal = document.getElementById('modal'); document.getElementById('modalTitle').textContent = 'Cart'; document.getElementById('modalBody').innerHTML = `<p>Total: KSh ${total}</p><button onclick="checkout()">Checkout</button>`; modal.classList.add('show'); }
         function checkout() { closeModal(); openWhatsAppForm('Checkout'); cartItems=[]; cartCount=0; updateCartCounter(); }
