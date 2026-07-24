@@ -6,7 +6,7 @@
     <title>KaribuBoma · Verify — SmartMove.Co.Ke</title>
     <meta name="description" content="Complete your KaribuBoma verification: M-Pesa ID match, National ID upload, and SmartMove Trusted address verification for secure and trusted hosting." />
     <link rel="canonical" href="https://smartmove.co.ke/karibuboma/verify/" />
-    <link rel="icon" type="image/png" href="/img/logo.png" />
+    <link rel="icon" type="image/png" href="../../img/logo.png" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="KaribuBoma — Verify" />
@@ -103,6 +103,28 @@
             transform: translateY(-2px);
         }
 
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--color-gold);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: var(--radius-xl);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+            text-decoration: none;
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);
+            background: #c49b2e;
+        }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(20px);
@@ -154,6 +176,27 @@
         }
         .step-number.done {
             background: #065f46;
+        }
+
+        .payment-card {
+            background: var(--color-white);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            cursor: pointer;
+            height: 100%;
+        }
+        .payment-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: rgba(0, 98, 51, 0.15);
+        }
+        .payment-card .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+            display: block;
         }
 
         .toast {
@@ -210,6 +253,23 @@
         }
         .skip-link:focus { top: 0; }
 
+        .copy-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--color-text-secondary);
+        }
+        .copy-btn:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
         @media (max-width: 768px) {
             .step-card {
                 flex-direction: column;
@@ -222,6 +282,9 @@
                 height: 40px;
                 min-width: 40px;
                 font-size: 1rem;
+            }
+            .payment-card {
+                padding: 1rem;
             }
         }
     </style>
@@ -253,7 +316,7 @@
                 <span style="font-size:0.65rem;font-weight:600;background:#f5e6c8;color:#8a7a4a;padding:0.2rem 0.7rem;border-radius:40px;">KaribuBoma</span>
             </a>
             <nav style="display:flex;align-items:center;gap:1.5rem;">
-                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Find a host</a>
+                <a href="/karibuboma/hosts/" style="font-size:0.9rem;font-weight:600;color:#1a1a2e;text-decoration:none;transition:var(--transition);">Find a host</a>
                 <a href="/karibuboma/requests/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Post a request</a>
                 <a href="/karibuboma/hangouts/" style="font-size:0.9rem;font-weight:500;color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);">Hangouts</a>
                 <a href="/karibuboma/verify/" style="font-size:0.9rem;font-weight:600;color:var(--color-primary);text-decoration:none;">Verify</a>
@@ -319,6 +382,95 @@
             </div>
         </div>
 
+        <!-- ============================================================
+        PAYMENT SECTION - ENTERPRISE GRADE
+        ============================================================ -->
+        <div style="background:white;border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow-md);border:1px solid rgba(0,0,0,0.04);margin-bottom:2.5rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
+                <div>
+                    <h2 style="font-weight:700;font-size:1.5rem;">Complete your payment</h2>
+                    <p style="color:var(--color-text-secondary);font-size:0.95rem;">Annual verification fee: <strong>KES 350 (~$2.70)</strong> via M-Pesa</p>
+                </div>
+                <div style="display:flex;gap:0.5rem;">
+                    <span style="background:var(--color-primary-light);color:var(--color-primary);padding:0.2rem 0.8rem;border-radius:40px;font-size:0.75rem;font-weight:600;"><i class="fas fa-lock"></i> Secure payment</span>
+                </div>
+            </div>
+
+            <!-- Payment Methods Grid -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));gap:1.5rem;">
+
+                <!-- Method 1: M-Pesa / Mobile Money -->
+                <div class="payment-card" onclick="showPaymentDetail('M-Pesa / Mobile Money')">
+                    <span class="payment-icon">📱</span>
+                    <h3 style="font-weight:700;font-size:1.1rem;">M-Pesa / Mobile Money</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.9rem;margin:0.5rem 0;">Pay directly via Safaricom M-Pesa</p>
+                    <div style="font-size:0.8rem;color:var(--color-text-secondary);">
+                        <p><strong>Name:</strong> GILBERT NAKIBOLI WALIUBA</p>
+                        <p><strong>Phone:</strong> +254 715 560 734</p>
+                        <p><strong>Provider:</strong> Safaricom</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); copyToClipboard('+254715560734', 'Phone number')" class="copy-btn" style="margin-top:0.5rem;"><i class="far fa-copy"></i> Copy number</button>
+                </div>
+
+                <!-- Method 2: Bank Transfer -->
+                <div class="payment-card" onclick="showPaymentDetail('Bank Transfer')">
+                    <span class="payment-icon">🏦</span>
+                    <h3 style="font-weight:700;font-size:1.1rem;">Bank Transfer</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.9rem;margin:0.5rem 0;">Pay via NCBA Bank Kenya PLC</p>
+                    <div style="font-size:0.8rem;color:var(--color-text-secondary);">
+                        <p><strong>Bank:</strong> NCBA Bank Kenya PLC</p>
+                        <p><strong>Account:</strong> NAKIBOLIS HEIRS LIMITED</p>
+                        <p><strong>Account No:</strong> 1002629654</p>
+                        <p><strong>Branch:</strong> Kitale (Code: 070)</p>
+                        <p><strong>SWIFT:</strong> CBAFKENX</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); copyToClipboard('1002629654', 'Account number')" class="copy-btn" style="margin-top:0.5rem;"><i class="far fa-copy"></i> Copy account</button>
+                </div>
+
+                <!-- Method 3: Card Payment -->
+                <div class="payment-card" onclick="window.open('https://paystack.shop/pay/vt_xh7lleq2', '_blank')">
+                    <span class="payment-icon">💳</span>
+                    <h3 style="font-weight:700;font-size:1.1rem;">Card Payment</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.9rem;margin:0.5rem 0;">Pay with Visa / Mastercard</p>
+                    <div style="display:flex;gap:0.5rem;margin-top:0.5rem;">
+                        <span style="background:#f0f0f0;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;"><i class="fab fa-cc-visa"></i> Visa</span>
+                        <span style="background:#f0f0f0;padding:0.2rem 0.6rem;border-radius:4px;font-size:0.7rem;"><i class="fab fa-cc-mastercard"></i> Mastercard</span>
+                    </div>
+                    <button onclick="event.stopPropagation(); window.open('https://paystack.shop/pay/vt_xh7lleq2', '_blank')" class="btn-gold" style="padding:0.5rem 1.5rem;font-size:0.85rem;margin-top:0.75rem;">
+                        <i class="fas fa-credit-card"></i> Pay now
+                    </button>
+                </div>
+
+                <!-- Method 4: Crypto (Binance) -->
+                <div class="payment-card" onclick="showPaymentDetail('Cryptocurrency')">
+                    <span class="payment-icon">₿</span>
+                    <h3 style="font-weight:700;font-size:1.1rem;">Cryptocurrency</h3>
+                    <p style="color:var(--color-text-secondary);font-size:0.9rem;margin:0.5rem 0;">Pay with USDT, ETH, BTC, USDC, SOL, BNB, XRP</p>
+                    <div style="font-size:0.8rem;color:var(--color-text-secondary);">
+                        <p><strong>Email:</strong> captainteknics@gmail.com</p>
+                        <p><strong>USDT (TRC20):</strong> TA4ZGoKP921j8A8kSxvn8HCfXwWEX88mc7</p>
+                        <p><strong>USDC (ERC20):</strong> 0x283e83fabee1898ab5955f03a665359c5b6119d1</p>
+                        <p><strong>AirTM:</strong> captainteknics@gmail.com</p>
+                    </div>
+                    <button onclick="event.stopPropagation(); copyToClipboard('TA4ZGoKP921j8A8kSxvn8HCfXwWEX88mc7', 'USDT address')" class="copy-btn" style="margin-top:0.5rem;"><i class="far fa-copy"></i> Copy USDT</button>
+                </div>
+            </div>
+
+            <!-- Payment Confirmation -->
+            <div style="margin-top:2rem;padding:1.5rem;background:var(--color-primary-light);border-radius:var(--radius-md);border:1px solid rgba(0,98,51,0.1);">
+                <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+                    <i class="fas fa-check-circle" style="color:var(--color-primary);font-size:1.5rem;"></i>
+                    <div style="flex:1;">
+                        <h4 style="font-weight:600;font-size:0.95rem;">After payment, confirm your verification</h4>
+                        <p style="color:var(--color-text-secondary);font-size:0.85rem;">Send payment confirmation via WhatsApp with your name and phone number. Your verification will be processed within 24 hours.</p>
+                    </div>
+                    <button onclick="openWhatsAppForm('Verification Confirmation', 'Hi, I have completed my verification payment. My name is: %0AMy phone number is: %0APayment method used: %0AReference number: %0APlease confirm my verification.')" class="btn-primary" style="padding:0.6rem 1.5rem;font-size:0.9rem;">
+                        <i class="fab fa-whatsapp"></i> Confirm via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+
         <!-- Verification Summary -->
         <div style="background:white;border-radius:var(--radius-lg);padding:2rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,0,0,0.04);">
             <h2 style="font-weight:700;font-size:1.2rem;margin-bottom:1rem;">Your verification status</h2>
@@ -338,9 +490,6 @@
             </div>
             <div style="margin-top:1.5rem;text-align:center;">
                 <p style="color:var(--color-text-secondary);font-size:0.95rem;">Annual verification fee: <strong>KES 350 (~$2.70)</strong> via M-Pesa</p>
-                <button onclick="openWhatsAppForm('Verification Payment', 'I want to complete my KaribuBoma verification. Please guide me through the payment.')" class="btn-primary" style="margin-top:1rem;">
-                    <i class="fas fa-mobile-alt"></i> Pay with M-Pesa
-                </button>
             </div>
         </div>
     </main>
@@ -373,30 +522,30 @@
                 </ul>
             </div>
             <div>
-    <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
-    
-    <!-- Contact Info -->
-    <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;font-size:0.9rem;">
-        <a href="mailto:business@haofinder.com" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);display:flex;align-items:center;gap:0.5rem;">
-            <i class="fas fa-envelope" style="width:1.2rem;"></i>
-            <span>business@haofinder.com</span>
-        </a>
-        <a href="tel:+2540115006628" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);display:flex;align-items:center;gap:0.5rem;">
-            <i class="fas fa-phone" style="width:1.2rem;"></i>
-            <span>+254 011 500 6628</span>
-        </a>
-    </div>
-    
-    <!-- Social Icons -->
-    <div style="display:flex;gap:1rem;font-size:1.6rem;">
-        <a href="https://api.whatsapp.com/send/?phone=254715560734" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
-        <a href="https://api.whatsapp.com/send/?phone=254715560734" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
-        <a href="https://api.whatsapp.com/send/?phone=254715560734" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
-    </div>
-</div>
+                <h4 style="font-weight:700;margin-bottom:1rem;">Connect</h4>
+
+                <!-- Contact Info -->
+                <div style="display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1rem;font-size:0.9rem;">
+                    <a href="mailto:business@haofinder.com" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);display:flex;align-items:center;gap:0.5rem;">
+                        <i class="fas fa-envelope" style="width:1.2rem;"></i>
+                        <span>business@haofinder.com</span>
+                    </a>
+                    <a href="tel:+2540115006628" style="color:var(--color-text-secondary);text-decoration:none;transition:var(--transition);display:flex;align-items:center;gap:0.5rem;">
+                        <i class="fas fa-phone" style="width:1.2rem;"></i>
+                        <span>+254 011 500 6628</span>
+                    </a>
+                </div>
+
+                <!-- Social Icons -->
+                <div style="display:flex;gap:1rem;font-size:1.6rem;">
+                    <a href="#" onclick="openWhatsAppForm('Social - Instagram')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-instagram"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - Twitter')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-x-twitter"></i></a>
+                    <a href="#" onclick="openWhatsAppForm('Social - WhatsApp')" style="color:var(--color-text-secondary);transition:var(--transition);"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
         </div>
         <div style="max-width:1280px;margin:2rem auto 0;border-top:1px solid rgba(0,0,0,0.04);padding-top:1.5rem;text-align:center;font-size:0.85rem;color:var(--color-text-secondary);">
-            © 2026 SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
+             © <script>document.write(new Date().getFullYear())</script>  SmartMove.Co.Ke · KaribuBoma · #TukoPamoja
         </div>
     </footer>
 
@@ -450,6 +599,24 @@
         }
 
         // ============================================================
+        // COPY TO CLIPBOARD
+        // ============================================================
+        function copyToClipboard(text, label) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`✅ ${label} copied to clipboard!`);
+            }).catch(() => {
+                // Fallback
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast(`✅ ${label} copied to clipboard!`);
+            });
+        }
+
+        // ============================================================
         // AUTH MODAL
         // ============================================================
         function showAuthModal() {
@@ -490,6 +657,54 @@
                     <p style="font-weight:600;">Status: <span style="color:${d.status === 'Completed' ? '#065f46' : '#1d4ed8'};">${d.status}</span></p>
                     <button onclick="openWhatsAppForm('${step}', 'I want to complete ${step} for KaribuBoma. Please guide me.'); closeModal();" style="width:100%;margin-top:1.5rem;padding:0.9rem;background:var(--color-primary);color:white;border:none;border-radius:40px;font-weight:700;font-size:1rem;cursor:pointer;transition:var(--transition);">${d.action} →</button>
                 `);
+        }
+
+        // ============================================================
+        // PAYMENT DETAILS MODAL
+        // ============================================================
+        function showPaymentDetail(method) {
+            const details = {
+                'M-Pesa / Mobile Money': `
+                    <h3 style="font-weight:700;margin-bottom:1rem;">📱 M-Pesa Payment</h3>
+                    <div style="background:#f5f5f5;padding:1rem;border-radius:12px;margin-bottom:1rem;">
+                        <p><strong>Name:</strong> GILBERT NAKIBOLI WALIUBA</p>
+                        <p><strong>Phone:</strong> <span id="mpesaNumber">+254 715 560 734</span></p>
+                        <p><strong>Provider:</strong> Safaricom</p>
+                        <p><strong>Amount:</strong> KES 350</p>
+                    </div>
+                    <button onclick="copyToClipboard('+254715560734', 'Phone number')" class="copy-btn" style="margin-bottom:1rem;"><i class="far fa-copy"></i> Copy phone number</button>
+                    <button onclick="openWhatsAppForm('M-Pesa Payment', 'I have sent KES 350 for verification via M-Pesa to +254715560734. My name is: %0AMy phone number is: %0ATransaction reference: '); closeModal();" class="btn-primary" style="width:100%;justify-content:center;">Confirm payment →</button>
+                `,
+                'Bank Transfer': `
+                    <h3 style="font-weight:700;margin-bottom:1rem;">🏦 Bank Transfer Details</h3>
+                    <div style="background:#f5f5f5;padding:1rem;border-radius:12px;margin-bottom:1rem;">
+                        <p><strong>Bank:</strong> NCBA Bank Kenya PLC</p>
+                        <p><strong>Account Name:</strong> NAKIBOLIS HEIRS LIMITED</p>
+                        <p><strong>Account Number:</strong> <span id="bankAccount">1002629654</span></p>
+                        <p><strong>Bank Code:</strong> 07000</p>
+                        <p><strong>Branch Code:</strong> 070 (Kitale Branch)</p>
+                        <p><strong>SWIFT Code:</strong> CBAFKENX</p>
+                        <p><strong>Amount:</strong> KES 350</p>
+                    </div>
+                    <button onclick="copyToClipboard('1002629654', 'Account number')" class="copy-btn" style="margin-bottom:1rem;"><i class="far fa-copy"></i> Copy account number</button>
+                    <button onclick="openWhatsAppForm('Bank Transfer Payment', 'I have sent KES 350 for verification via bank transfer. Account: 1002629654. My name is: %0AMy phone number is: %0ATransaction reference: '); closeModal();" class="btn-primary" style="width:100%;justify-content:center;">Confirm payment →</button>
+                `,
+                'Cryptocurrency': `
+                    <h3 style="font-weight:700;margin-bottom:1rem;">₿ Cryptocurrency Payment</h3>
+                    <div style="background:#f5f5f5;padding:1rem;border-radius:12px;margin-bottom:1rem;">
+                        <p><strong>Email:</strong> captainteknics@gmail.com</p>
+                        <p><strong>USDT (TRC20):</strong> <span id="usdtAddress">TA4ZGoKP921j8A8kSxvn8HCfXwWEX88mc7</span></p>
+                        <p><strong>USDC (ERC20):</strong> 0x283e83fabee1898ab5955f03a665359c5b6119d1</p>
+                        <p><strong>AirTM:</strong> captainteknics@gmail.com</p>
+                        <p><strong>Supported:</strong> USDT, ETH, BTC, USDC, SOL, BNB, XRP</p>
+                        <p><strong>Amount:</strong> ~$2.70 (USDT equivalent)</p>
+                    </div>
+                    <button onclick="copyToClipboard('TA4ZGoKP921j8A8kSxvn8HCfXwWEX88mc7', 'USDT address')" class="copy-btn" style="margin-bottom:1rem;"><i class="far fa-copy"></i> Copy USDT address</button>
+                    <button onclick="openWhatsAppForm('Crypto Payment', 'I have sent payment for verification via crypto. My name is: %0AMy phone number is: %0ATransaction hash: '); closeModal();" class="btn-primary" style="width:100%;justify-content:center;">Confirm payment →</button>
+                `
+            };
+
+            showModal('Payment Details', details[method] || '<p>Payment details not available</p>');
         }
     </script>
 </body>
